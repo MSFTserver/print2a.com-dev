@@ -155,6 +155,8 @@ class Component extends React.PureComponent {
   getDuration () {
     const { theme, duration } = this.props;
     console.log(this.props);
+    console.log(this.props.duration);
+    console.log(this.props.theme);
     const settingDeration = theme.animation.time;
     const settingStagger = theme.animation.stagger;
 
