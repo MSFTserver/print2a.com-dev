@@ -28,7 +28,7 @@ class Links extends React.Component {
           <p><Text>Rsync: print2a.com:1776/print2a</Text></p>
           <p><Text>rsync is a utility for efficiently transfering and synchronizing files between a computer and an external hard drive and across networked computers by comparing the modification times and sizes of files.</Text></p>
           <p><Link href='https://linux.die.net/man/1/rsync' target='rsync'><Text>Read More About rsync</Text></Link></p>
-          <h3><Text>Install:</Text></h3>
+          <h3><Text>Install: (do not copy the # part of the command)</Text></h3>
           <p><Text># yum install rsync (On Red Hat based Linux systems)</Text></p>
           <p><Text># apt-get install rsync (On Debian based Linux systems)</Text></p>
           <p><Text>Windows Install (!ADV USERS!) :</Text></p>
@@ -36,11 +36,9 @@ class Links extends React.Component {
           <p><Text>the package selection will be set to "default". You need to click on the top-level circular arrow picture until it says "Full" youll need this for rsync.</Text></p>
           <p><Text>Copy Files From Print2a Server:</Text></p>
           <p><Text># rsync -avzh rsync://print2a.com:1776/print2a /Copy-To-This/Dir</Text></p>
+          <p><Text>to access you windows system inside cygwin you must use the path "/cydrive/c/" c being the drive letter you want to access like normal</Text></p>
           <Fader>
           <h1><Text>Alternative Download Links</Text></h1>
-          <p><Link href='http://dropbox.print2a.com' target='dropbox'><Text>Dropbox</Text></Link></p>
-          <p><Link href='http://drive.print2a.com' target='drive'><Text>Google Drive</Text></Link></p>
-          <p><Link href='http://mega.print2a.com' target='megaupload'><Text>Mega Upload</Text></Link></p>
           <p><Link href='http://lbry.print2a.com' target='lbry'><Text>lbry</Text></Link></p>
           </Fader>
         </div>

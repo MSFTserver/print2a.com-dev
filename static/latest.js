@@ -11,9 +11,7 @@ const GetLatest = () => {
     if (typeof window !== "undefined"){
       async function getLatest(){
         const req = await fetch(`${print2aApiEndpoint}/LatestProjects`);
-        console.log(req)
         const res = await req.json();
-        console.log(res)
         setLatest(res);
       }
       getLatest();

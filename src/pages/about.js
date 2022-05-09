@@ -30,10 +30,6 @@ class About extends React.Component {
           <div style={{lineHeight:"5px"}}>
           <p><Text>PayPal:</Text></p><p><Link href="http://donate.print2a.com" target="PayPal"><Text>http://donate.print2a.com</Text></Link></p><br style={{lineHeight:'20px'}}></br>
           <p><Text>BTC Address:</Text></p><p><Text>34CnFqMvsrmhZA1kDyV6iD91GV9Vn3dd94</Text></p><br style={{lineHeight:'20px'}}></br>
-          <p><Text>XLM Address (copy both lines):</Text></p><p><Text>GDQP2KPQGKIHYJGXNUIYOMHARU</Text>
-          <br style={{lineHeight:'20px'}}></br><Text>ARCA7DJT5FO2FFOOKY3B2WSQHG4W37</Text></p><br style={{lineHeight:'10px'}}></br>
-          <p><Text>XLM Must be sent with memo ID below</Text></p><br style={{lineHeight:'10px'}}></br>
-          <p><Text>XLM Memo ID:</Text></p><p><Text>3556957568</Text></p><br style={{lineHeight:'20px'}}></br>
           </div>
           <Fader>
           <h2><Text>Github?</Text></h2>

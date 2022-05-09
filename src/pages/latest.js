@@ -24,7 +24,7 @@ class Latest extends React.Component {
       <Main className={classes.root}>
         <Secuence stagger>
           <header>
-            <h1><Text>Latest Files</Text></h1>
+            <h1><Text>Latest Files and Stats</Text></h1>
           </header>
           <GetLatest />
         </Secuence>
