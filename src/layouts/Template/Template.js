@@ -42,6 +42,7 @@ class Component extends React.Component {
   }
 
   onEnter = () => {
+    console.log(this.props);
     const { theme } = this.props;
 
     setTimeout(
