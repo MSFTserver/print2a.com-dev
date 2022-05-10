@@ -12,16 +12,15 @@ function withStyles (styles) {
 
       render () {
         const { forwardedRef, ...etc } = this.props;
+        console.log(etc);
         return <Inner {...etc} ref={forwardedRef} />;
       }
     }
-
     const WithStylesInside = injectStyles(styles)(InsideStyles);
 
     const WithStyles = React.forwardRef((props, ref) => (
       <WithStylesInside {...props} forwardedRef={ref} />
     ));
-
     return hoistNonReactStatics(WithStyles, Inner);
   };
 }
