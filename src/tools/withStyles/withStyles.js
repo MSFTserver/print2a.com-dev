@@ -12,7 +12,6 @@ function withStyles (styles) {
 
       render () {
         const { forwardedRef, ...etc } = this.props;
-        console.log(etc);
         return <Inner {...etc} ref={forwardedRef} />;
       }
     }
