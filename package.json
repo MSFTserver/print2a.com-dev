@@ -22,7 +22,7 @@
     "@material-ui/utils": "4.11.2",
     "animejs": "^3.0.1",
     "chonky": "2.1.0",
-    "chonky-icon-fontawesome": "^2.1.0",
+    "chonky-icon-fontawesome": "2.1.0",
     "classnames": "^2.2.6",
     "express": "4.16.4",
     "gatsby": "2.30.1",
@@ -52,7 +52,7 @@
     "react-append-head": "^1.0.16",
     "react-dom": "16.8.6",
     "react-helmet": "^5.2.0",
-    "react-jss": "^8.6.1",
+    "react-jss": "8.6.1",
     "remark-mdx": "2.0.0-next.8",
     "serve-index": "^1.9.1"
   },
