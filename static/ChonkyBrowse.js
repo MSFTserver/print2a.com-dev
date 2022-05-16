@@ -144,7 +144,7 @@ const ChonkyBrowse = () => {
                 text: `Completed<br>if a window does not automatically open you can find the file available for 4 hours here:<br><br> ${response.link}`,
                 type: "notification",
                 theme: "relax",
-                timeout: 10000
+                timeout: 100000
               }).show();
               window.open(`${response.link}`, "_blank");
             } else {

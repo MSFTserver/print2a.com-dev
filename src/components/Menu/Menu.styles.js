@@ -17,16 +17,16 @@ const styles = theme => ({
     fontSize: 20,
     textAlign: 'center',
     textTransform: 'uppercase',
-    textShadow: `0 0 5px ${theme.color.link.main}`,
+    textShadow: `0 0 5px ${theme.color.text.main}`,
     fontFamily: theme.typography.primary,
-    color: theme.color.link.main,
+    color: theme.color.text.main,
     whiteSpace: 'nowrap'
   },
   divisor: {
     display: 'none',
     width: 0,
-    color: theme.color.tertiary.main,
-    textShadow: `0 0 5px ${theme.color.tertiary.main}`,
+    color: theme.color.text.main,
+    textShadow: `0 0 5px ${theme.color.text.main}`,
     fontWeight: 'normal',
     transform: 'scale(1, 0)',
     transformOrigin: 'center center'

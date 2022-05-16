@@ -42,14 +42,6 @@ class Links extends React.Component {
           <p><Link href='http://lbry.print2a.com' target='lbry'><Text>lbry</Text></Link></p>
           </Fader>
         </div>
-        <div className='communityLinks'>
-        <h1><Text>Communities</Text></h1>
-        <p><Link href='https://matrix.to/#/#Waitingroommobilelist:matrix.org?via=matrix.org' target='AWCY?'><Text>AWCY? | Matrix |</Text></Link></p>
-        <p><Link href='https://fosscad.org/fc/chat/' target='fosscad'><Text>fosscad | IRC |</Text></Link></p>
-        <p><Link href='https://matrix.to/#/#_oftc_#fosscad:matrix.org?via=matrix.org' target='fosscad'><Text>fosscad | Matrix Bridge to IRC |</Text></Link></p>
-        <p><Link href='https://chat.deterrencedispensed.com/home' target='det-disp'><Text>Deterrence Dispensed | Rocket Chat |</Text></Link></p>
-        <p><Text>Add Your Community Here Contact HostsServer (Formerly MSFTserver) on Matrix</Text></p>
-        </div>
       </Main>
     );
   }

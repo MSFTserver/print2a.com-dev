@@ -57,7 +57,7 @@ class Component extends React.PureComponent {
     // Because we are re-rendering animated elements every time the component
     // is updated, we need to re-start the animations or reset the elements.
     this.startStandByAnimation();
-    anime.set(this.dotLinesContainer.childNodes, { strokeDasharray: '3 7' });
+    anime.set(this.dotLinesContainer.childNodes, { strokeDasharray: '3 15' });
   }
 
   componentWillUnmount () {
@@ -88,13 +88,13 @@ class Component extends React.PureComponent {
   }
 
   getLine1Length () {
-    const line1Height = 10;
+    const line1Height = 1;
     const { height } = this.getPatternsElementSize();
     return Math.ceil(height / line1Height);
   }
 
   getLine2ItemsPositions () {
-    const lineSpace = 100;
+    const lineSpace = 450;
     const { width } = this.getPatternsElementSize();
     const length = Math.floor(width / lineSpace);
 
@@ -151,18 +151,6 @@ class Component extends React.PureComponent {
       [[34, 610], [63, 560], [147, 560], [173, 520]],
       [[1010, 176], [658, 176]]
     ];
-
-    if (isLargeScreen) {
-      linesOriginal = [
-        ...linesOriginal,
-        [[520, 131], [572, 64]],
-        [[27, 174], [275, 174], [314, 135]],
-        [[1010, 207], [561, 207], [528, 251], [312, 251]],
-        [[971, 243], [615, 243]],
-        [[146, 400], [490, 400], [624, 226]],
-        [[851, 498], [600, 498], [585, 479], [-10, 479]]
-      ];
-    }
 
     const lines = linesOriginal.map(line => {
       return line.map(([x, y]) => [x * widthScale, y * heightScale]);
@@ -249,7 +237,7 @@ class Component extends React.PureComponent {
     // Dot lines
     this.animate(this.dotLinesContainer, { opacity: 0, duration });
     this.animate([...this.dotLinesContainer.childNodes], {
-      strokeDasharray: ['3 7', '3 35'],
+      strokeDasharray: ['3 15', '3 35'],
       duration
     });
 
@@ -329,7 +317,7 @@ class Component extends React.PureComponent {
       paths.forEach((path, index) => {
         const length = path.getTotalLength();
         const circuitDuration = this.getPathAnimationDuration(length);
-        const size = 20;
+        const size = 50;
 
         longestDuration = Math.max(longestDuration, circuitDuration);
 
@@ -415,7 +403,7 @@ class Component extends React.PureComponent {
             {Array(line1Length).fill().map((value, index) => (
               <div
                 key={index}
-                style={{ top: `${index * 10}px` }}
+                style={{ top: `${index * 20}px` }}
                 className={classes.line1}
               />
             ))}

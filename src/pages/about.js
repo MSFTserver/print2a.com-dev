@@ -31,15 +31,9 @@ class About extends React.Component {
           <p><Text>PayPal:</Text></p><p><Link href="http://donate.print2a.com" target="PayPal"><Text>http://donate.print2a.com</Text></Link></p><br style={{lineHeight:'20px'}}></br>
           <p><Text>BTC Address:</Text></p><p><Text>34CnFqMvsrmhZA1kDyV6iD91GV9Vn3dd94</Text></p><br style={{lineHeight:'20px'}}></br>
           </div>
-          <Fader>
-          <h2><Text>Github?</Text></h2>
-          <p><Text>This repo has been removed from github due to issues with the large files and my ever increasing bandwidth from you CHADS cloning the repo. Due to some GitHub oversights everytime someone clones or downloads this repo it adds to my bandwidth, additionally everytime the cloned repo is changed on the user end it adds to the Main repo owner's bandwidth and storage wich was hell to find out so alas this repo is gone from github.</Text></p>
-          </Fader>
           <h2><Text>License</Text></h2>
           <li> These files are released open source.</li>
           <li> Fuck COPYRIGHTS.</li><br style={{lineHeight:'20px'}}></br>
-          <h2><Text>Site Admin</Text></h2>
-          <li>HostsServer (Formerly MSFTserver)</li>
         </div>
       </Main>
     );
