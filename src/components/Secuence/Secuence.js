@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+const theme = require('../../settings/theme');
 import { isNumber } from '../../tools/general';
 import { ENTERING, ENTERED, EXITING, EXITED } from '../../tools/animationStatus';
 import { AnimationContext } from '../AnimationContext';
@@ -9,7 +9,7 @@ class Component extends React.PureComponent {
   static displayName = 'Secuence';
 
   static propTypes = {
-    theme: PropTypes.object.isRequired,
+    theme: PropTypes.object,
     stagger: PropTypes.oneOfType([
       PropTypes.bool,
       PropTypes.number
@@ -90,7 +90,7 @@ class Component extends React.PureComponent {
   }
 
   enter () {
-    const { theme, stagger } = this.props;
+    const { stagger } = this.props;
 
     let lastTime = 0;
 
@@ -125,7 +125,7 @@ class Component extends React.PureComponent {
   }
 
   exit () {
-    const duration = this.props.theme.animation.time;
+    const duration = theme.animation.time;
 
     this.subscribers.forEach((subscriber, index) => {
       this.updateSubscriber(subscriber, EXITING);

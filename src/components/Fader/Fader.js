@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import anime from 'animejs';
-
+const theme = require('../../settings/theme');
 class Component extends React.PureComponent {
   static displayName = 'Fader';
 
   static propTypes = {
-    theme: PropTypes.any.isRequired,
+    theme: PropTypes.any,
     classes: PropTypes.any.isRequired,
     energy: PropTypes.any.isRequired,
     audio: PropTypes.any.isRequired,
@@ -74,7 +74,6 @@ class Component extends React.PureComponent {
 
   render () {
     const {
-      theme,
       classes,
       energy,
       audio,

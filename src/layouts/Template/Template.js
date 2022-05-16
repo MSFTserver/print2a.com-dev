@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+const theme = require('../../settings/theme');
 import { Layout } from '../../components/Layout';
 import { Background } from '../../components/Background';
 import { App } from '../../components/App';
@@ -12,7 +12,7 @@ class Component extends React.Component {
 
   static propTypes = {
     location: PropTypes.object.isRequired,
-    theme: PropTypes.object.isRequired,
+    theme: PropTypes.object,
     classes: PropTypes.object.isRequired,
     layout: PropTypes.object,
     background: PropTypes.object,
@@ -33,7 +33,6 @@ class Component extends React.Component {
   }
 
   componentDidMount () {
-    const { theme } = this.props;
 
     setTimeout(
       () => this.setState({ enterShow: true }),
@@ -42,7 +41,6 @@ class Component extends React.Component {
   }
 
   onEnter = () => {
-    const { theme } = this.props;
 
     setTimeout(
       () => this.setState({ show: true }),
@@ -53,7 +51,7 @@ class Component extends React.Component {
   render () {
     const { show, enterShow } = this.state;
     const { location, classes, layout, background, children } = this.props;
-
+    
     const isURLContent = paths.find(path => {
       return location.pathname.indexOf(path) === 0;
     });

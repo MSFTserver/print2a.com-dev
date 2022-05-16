@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import anime from 'animejs';
-
+const theme = require('../../settings/theme');
 import { Link } from '../Link';
 import { Text } from '../Text';
 import { Fader } from '../Fader';
@@ -12,7 +12,7 @@ class Component extends React.Component {
   static displayName = 'Post';
 
   static propTypes = {
-    theme: PropTypes.object.isRequired,
+    theme: PropTypes.object,
     classes: PropTypes.object.isRequired,
     energy: PropTypes.object.isRequired,
     audio: PropTypes.object.isRequired,
@@ -59,7 +59,6 @@ class Component extends React.Component {
 
   render () {
     const {
-      theme,
       classes,
       energy,
       audio,

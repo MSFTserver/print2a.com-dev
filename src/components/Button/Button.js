@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import anime from 'animejs';
-
+const theme = require('../../settings/theme');
 import { Text } from '../Text';
 import { getPathLength } from '../../tools/general';
 
@@ -10,7 +10,7 @@ class Component extends React.Component {
   static displayName = 'Button';
 
   static propTypes = {
-    theme: PropTypes.object.isRequired,
+    theme: PropTypes.object,
     classes: PropTypes.object.isRequired,
     energy: PropTypes.object.isRequired,
     audio: PropTypes.object.isRequired,
@@ -63,7 +63,6 @@ class Component extends React.Component {
 
   render () {
     const {
-      theme,
       classes,
       energy,
       audio,
