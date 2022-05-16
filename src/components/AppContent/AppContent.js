@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+const theme = require('../../settings/theme');
 import { getViewportRange } from '../../tools/viewport';
 
 class Component extends React.Component {
   static displayName = 'Header';
 
   static propTypes = {
-    theme: PropTypes.object.isRequired,
+    theme: PropTypes.object,
     energy: PropTypes.object.isRequired,
     children: PropTypes.any
   };
@@ -22,7 +22,6 @@ class Component extends React.Component {
   }
 
   getDuration () {
-    const { theme } = this.props;
     const { small, medium } = getViewportRange();
 
     const enterFrame = (small || medium ? 2 : 4) * theme.animation.time;

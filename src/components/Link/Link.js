@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { navigate } from 'gatsby';
 import cx from 'classnames';
-
+const theme = require('../../settings/theme');
 const checkURLExternal = /^https?:\/\//;
 
 let globalLinkTimeout = null;
@@ -11,7 +11,7 @@ class Component extends React.PureComponent {
   static displayName = 'Link';
 
   static propTypes = {
-    theme: PropTypes.object.isRequired,
+    theme: PropTypes.object,
     classes: PropTypes.object.isRequired,
     audio: PropTypes.object.isRequired,
     sounds: PropTypes.object.isRequired,
@@ -33,7 +33,6 @@ class Component extends React.PureComponent {
 
   render () {
     const {
-      theme,
       classes,
       audio,
       sounds,

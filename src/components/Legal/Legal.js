@@ -9,7 +9,7 @@ class Component extends React.Component {
   static displayName = 'Legal';
 
   static propTypes = {
-    theme: PropTypes.object.isRequired,
+    theme: PropTypes.object,
     classes: PropTypes.object.isRequired,
     energy: PropTypes.object.isRequired,
     audio: PropTypes.object.isRequired,
