@@ -48,7 +48,7 @@ const styles = ({ color }) => ({
     opacity: props => props.energy.exited ? 0 : 1
   },
   dotLine: {
-    stroke: color.background.light,
+    stroke: color.background.main,
     strokeWidth: 1
   },
   line2: {},
@@ -64,12 +64,12 @@ const styles = ({ color }) => ({
   },
   circuitLineLight: {
     fill: 'none',
-    stroke: color.text.main,
+    stroke: color.link.main,
     strokeWidth: 5,
     opacity: 0
   },
   circuitDot: {
-    fill: lighten(color.accent / 4, color.text.main),
+    fill: lighten(color.accent / 4, color.background.light),
     opacity: props => props.energy.entered ? 1 : 0
   },
   circuitDotStart: {},
