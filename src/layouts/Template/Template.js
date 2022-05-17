@@ -5,7 +5,7 @@ import { Layout } from '../../components/Layout';
 import { Background } from '../../components/Background';
 import { App } from '../../components/App';
 
-let paths = ['/latest', '/links', '/browse', '/about'];
+let paths = ['/latest', '/links', '/about'];
 
 class Component extends React.Component {
   static displayName = 'Template';
