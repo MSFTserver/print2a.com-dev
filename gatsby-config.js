@@ -5,10 +5,6 @@ module.exports = {
     siteUrl: `http://dev.print2a.com`,
   },
   plugins: [
-    {
-      resolve: 'gatsby-plugin-jss',
-      options: { theme }
-    },
     'gatsby-plugin-react-helmet',
     {
       resolve: 'gatsby-plugin-manifest',
