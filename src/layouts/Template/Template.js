@@ -41,7 +41,6 @@ class Component extends React.Component {
   }
 
   onEnter = () => {
-
     setTimeout(
       () => this.setState({ show: true }),
       theme.animation.time + theme.animation.stagger
@@ -51,13 +50,14 @@ class Component extends React.Component {
   render () {
     const { show, enterShow } = this.state;
     const { location, classes, layout, background, children } = this.props;
-    
+
     const isURLContent = paths.find(path => {
       return location.pathname.indexOf(path) === 0;
     });
     const isBrowserPath = paths.includes("/"+location.pathname.replace("/","").split("/")[0])
     if (isURLContent || isBrowserPath){
       return (
+        <React.StrictMode>
         <Layout {...layout}>
           <Background
             {...background}
@@ -66,6 +66,7 @@ class Component extends React.Component {
             {<App>{children}</App>}
           </Background>
         </Layout>
+        </React.StrictMode>
       );
     } else {
       return (
