@@ -4,10 +4,10 @@ module.exports = {
   siteMetadata: {
     siteUrl: `http://dev.print2a.com`,
   },
-  flags: {
-    DEV_SSR: true
-  },
   plugins: [
+    {
+      resolve: `gatsby-plugin-styled-components`
+    },
     {
       resolve: 'gatsby-plugin-jss',
       options: { theme }
