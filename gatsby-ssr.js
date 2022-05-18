@@ -13,7 +13,7 @@ exports.wrapRootElement = ({ element, pathname }, { theme = {} }) => {
 
   return (
     <JssProvider registry={sheets}>
-      <Layout {...props}><ThemeProvider theme={theme}>{element}</ThemeProvider></Layout>
+      <ThemeProvider theme={theme}>{element}</ThemeProvider>
     </JssProvider>
   )
 }
