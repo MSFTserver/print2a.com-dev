@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import anime from 'animejs';
 import { getViewportSize } from '@helcor/window-sizes';
-const theme = require('../../settings/theme');
+
 import { getRandomNumber } from '../../tools/general';
 
 class Component extends React.PureComponent {
   static displayName = 'Background';
 
   static propTypes = {
-    theme: PropTypes.object,
+    theme: PropTypes.object.isRequired,
     classes: PropTypes.object.isRequired,
     energy: PropTypes.object.isRequired,
     audio: PropTypes.object.isRequired,
@@ -384,6 +384,7 @@ class Component extends React.PureComponent {
       circuitLines
     } = this.state;
     const {
+      theme,
       classes,
       energy,
       audio,

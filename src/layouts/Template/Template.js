@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-const theme = require('../../settings/theme');
+
 import { Layout } from '../../components/Layout';
 import { Background } from '../../components/Background';
 import { App } from '../../components/App';
@@ -12,7 +12,7 @@ class Component extends React.Component {
 
   static propTypes = {
     location: PropTypes.object.isRequired,
-    theme: PropTypes.object,
+    theme: PropTypes.object.isRequired,
     classes: PropTypes.object.isRequired,
     layout: PropTypes.object,
     background: PropTypes.object,
@@ -33,6 +33,7 @@ class Component extends React.Component {
   }
 
   componentDidMount () {
+    const { theme } = this.props;
 
     setTimeout(
       () => this.setState({ enterShow: true }),
@@ -41,6 +42,8 @@ class Component extends React.Component {
   }
 
   onEnter = () => {
+    const { theme } = this.props;
+
     setTimeout(
       () => this.setState({ show: true }),
       theme.animation.time + theme.animation.stagger
@@ -57,7 +60,6 @@ class Component extends React.Component {
     const isBrowserPath = paths.includes("/"+location.pathname.replace("/","").split("/")[0])
     if (isURLContent || isBrowserPath){
       return (
-        <React.StrictMode>
         <Layout {...layout}>
           <Background
             {...background}
@@ -66,7 +68,6 @@ class Component extends React.Component {
             {<App>{children}</App>}
           </Background>
         </Layout>
-        </React.StrictMode>
       );
     } else {
       return (

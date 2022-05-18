@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { rgba } from 'polished';
 import anime from 'animejs';
-const theme = require('../../settings/theme');
+
 import { getViewportRange } from '../../tools/viewport';
 import { Secuence } from '../Secuence';
 import { Legal } from '../Legal';
@@ -12,7 +12,7 @@ class Component extends React.PureComponent {
   static displayName = 'Footer';
 
   static propTypes = {
-    theme: PropTypes.object,
+    theme: PropTypes.object.isRequired,
     classes: PropTypes.object.isRequired,
     energy: PropTypes.object.isRequired,
     audio: PropTypes.object.isRequired,
@@ -53,6 +53,7 @@ class Component extends React.PureComponent {
   }
 
   draw () {
+    const { theme } = this.props;
     const { small } = getViewportRange();
     const width = this.element.offsetWidth;
     const height = this.element.offsetHeight;
@@ -111,6 +112,7 @@ class Component extends React.PureComponent {
   }
 
   getDurationEnter () {
+    const { theme } = this.props;
     const { small, medium } = getViewportRange();
     return (small || medium ? 2 : 4) * theme.animation.time;
   }
@@ -278,6 +280,7 @@ class Component extends React.PureComponent {
 
   render () {
     const {
+      theme,
       classes,
       energy,
       audio,

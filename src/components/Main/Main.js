@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-const theme = require('../../settings/theme');
+
 import { Fader } from '../Fader';
 
 class Component extends React.Component {
   static displayName = 'Main';
 
   static propTypes = {
-    theme: PropTypes.object,
+    theme: PropTypes.object.isRequired,
     classes: PropTypes.object.isRequired,
     className: PropTypes.any,
     children: PropTypes.any
@@ -29,7 +29,7 @@ class Component extends React.Component {
   }
 
   render () {
-    const { classes, className, children, ...etc } = this.props;
+    const { theme, classes, className, children, ...etc } = this.props;
 
     return (
       <Fader

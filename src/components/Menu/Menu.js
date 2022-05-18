@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import anime from 'animejs';
-const theme = require('../../settings/theme');
+
 import { getViewportRange } from '../../tools/viewport';
 import { Link } from '../Link';
 import { Text } from '../Text';
@@ -13,7 +13,7 @@ class Component extends React.PureComponent {
   static displayName = 'Menu';
 
   static propTypes = {
-    theme: PropTypes.object,
+    theme: PropTypes.object.isRequired,
     classes: PropTypes.object.isRequired,
     energy: PropTypes.object.isRequired,
     audio: PropTypes.object.isRequired,
@@ -156,6 +156,7 @@ class Component extends React.PureComponent {
 
   render () {
     const {
+      theme,
       classes,
       energy,
       audio,

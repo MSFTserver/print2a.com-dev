@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-const theme = require('../../settings/theme');
+
 import { Header } from '../Header';
 import { Footer } from '../Footer';
 import { AppContent } from '../AppContent';
@@ -10,7 +10,7 @@ class Component extends React.Component {
   static displayName = 'Header';
 
   static propTypes = {
-    theme: PropTypes.object,
+    theme: PropTypes.object.isRequired,
     classes: PropTypes.object.isRequired,
     className: PropTypes.any,
     children: PropTypes.any
@@ -39,6 +39,7 @@ class Component extends React.Component {
 
   render () {
     const {
+      theme,
       classes,
       className,
       children,

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-const theme = require('../../settings/theme');
+
 import { getRandomCharacters } from '../../tools/general';
 import { createAnimationTick } from '../../tools/animationTick';
 import { SCHEME_TRANSITION, SCHEME_TRANSFORM, RANDOM_CHARACTERS } from './Text.constants';
@@ -10,7 +10,7 @@ class Component extends React.PureComponent {
   static displayName = 'Text';
 
   static propTypes = {
-    theme: PropTypes.object,
+    theme: PropTypes.object.isRequired,
     classes: PropTypes.object.isRequired,
     energy: PropTypes.object.isRequired,
     audio: PropTypes.object.isRequired,
@@ -80,7 +80,7 @@ class Component extends React.PureComponent {
   }
 
   getDuration () {
-    const { children, stableTime } = this.props;
+    const { theme, children, stableTime } = this.props;
 
     if (stableTime) {
       return theme.animation.time;
@@ -166,6 +166,7 @@ class Component extends React.PureComponent {
 
   render () {
     const {
+      theme,
       classes,
       energy,
       audio,

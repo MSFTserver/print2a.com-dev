@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-const theme = require('../../settings/theme');
+
 import { isNumber } from '../../tools/general';
 import {
   ENTERING,
@@ -15,7 +15,7 @@ class Component extends React.PureComponent {
   static displayName = 'Animation';
 
   static propTypes = {
-    theme: PropTypes.any,
+    theme: PropTypes.any.isRequired,
     animate: PropTypes.bool,
     show: PropTypes.bool,
     independent: PropTypes.bool,
@@ -153,7 +153,7 @@ class Component extends React.PureComponent {
   }
 
   getDuration () {
-    const { duration } = this.props;
+    const { theme, duration } = this.props;
     const settingDeration = theme.animation.time;
     const settingStagger = theme.animation.stagger;
 
