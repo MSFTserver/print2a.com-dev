@@ -1,14 +1,8 @@
-const theme = require('./src/settings/theme');
-
 module.exports = {
   siteMetadata: {
     siteUrl: `http://dev.print2a.com`,
   },
   plugins: [
-    {
-      resolve: 'gatsby-plugin-jss',
-      options: { theme }
-    },
     'gatsby-plugin-react-helmet',
     {
       resolve: 'gatsby-plugin-manifest',
@@ -21,12 +15,6 @@ module.exports = {
         display: 'standalone',
         orientation: 'portrait',
         icon: 'src/images/favicon.png'
-      }
-    },
-    {
-      resolve: `gatsby-plugin-layout`,
-      options: {
-        component: require.resolve(`./src/layouts/Template`)
       }
     },
     {
