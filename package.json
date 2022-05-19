@@ -5,14 +5,15 @@
   "scripts": {
     "lint": "eslint ./src",
     "lintfix": "eslint ./src --fix",
-    "develop": "gatsby develop --host 0.0.0.0 --port 14000",
-    "develop-i": "gatsby develop --host 0.0.0.0 --port 14000 --inspect",
+    "dev": "gatsby develop --host 0.0.0.0 --port 14000",
+    "devi": "gatsby develop --host 0.0.0.0 --port 14000 --inspect --verbose",
     "build": "gatsby build",
     "server": "NODE_ENV=production PORT=14000 HOST=127.0.0.1 node server.js",
     "clean": "gatsby clean",
     "ginfo": "gatsby info -C"
   },
   "dependencies": {
+    "@babel/runtime": "^7.15.4",
     "@helcor/window-sizes": "^1.0.0-beta.8",
     "animejs": "^3.0.1",
     "classnames": "^2.2.6",
