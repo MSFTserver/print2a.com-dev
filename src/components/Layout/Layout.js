@@ -39,7 +39,7 @@ const Component = ({ children }) => (
       />
       <link
         rel='stylesheet'
-        href='//cdn.materialdesignicons.com/3.0.39/css/materialdesignicons.min.css'
+        href='https://cdn.materialdesignicons.com/3.0.39/css/materialdesignicons.min.css'
       />
     </Helmet>
     <SoundsProvider sounds={sounds}>

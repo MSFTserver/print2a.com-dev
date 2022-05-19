@@ -1,5 +1,4 @@
 const React = require(`react`)
-const theme = require('/src/settings/theme')
 const preferDefault = m => (m && m.default) || m
 let Layout
 try {
@@ -19,10 +18,7 @@ try {
 }
 // eslint-disable-next-line react/prop-types,react/display-name
 module.exports = ({ element, props }) => {
-    console.log("props1: ", props)
-    console.log("layout: ", Layout)
-    console.log("Element: ", element)
-    props.theme = theme
+    console.log("Element2: ", element)
     console.log("props2: ", props)
     return <Layout {...props}>{element}</Layout>
 }

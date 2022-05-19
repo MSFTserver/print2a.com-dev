@@ -10,7 +10,8 @@ module.exports.onInitialClientRender = () => {
 // eslint-disable-next-line react/prop-types
 module.exports.wrapRootElement = ({ element }) => {
   const theme = require('/src/settings/theme')
-  console.log("Theme: ", theme)
+  console.log("Element1: ", element)
+  console.log("Theme1: ", theme)
   return <ThemeProvider theme={theme}>{element}</ThemeProvider>
 }
 

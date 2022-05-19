@@ -18,7 +18,7 @@ exports.wrapRootElement = ({ element, pathname }, { theme = {} }) => {
     )
 }
 
-exports.wrapPageElement = require(`./wrap-page`)
+//exports.wrapPageElement = require(`./wrap-page`)
 
 exports.onRenderBody = ({ setHeadComponents, pathname }) => {
     const sheets = sheetsRegistryManager.get(pathname)
