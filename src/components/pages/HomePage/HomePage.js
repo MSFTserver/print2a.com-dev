@@ -19,9 +19,16 @@ class HomePage extends React.Component {
     return (
       <div className="HomePage">
         <Frame animate level={3} corners={8} layer='primary' show={this.props.anim.entered} style={{ marginBottom: '5em' }}>
+          <div className="homePageBox">
           <h2>
+          <Heading animate show={this.props.anim.entered}>2nd Amendment</Heading>
             <Words animate show={this.props.anim.entered}>
               “A well regulated Militia, being necessary to the security of a free State, the right of the people to keep and bear Arms, shall not be infringed.”
+            </Words>
+            <br></br><br></br>
+            <Heading animate show={this.props.anim.entered}>Andrew Ford</Heading>
+            <Words animate show={this.props.anim.entered}>
+            "Without either the first or second amendment, we would have no liberty; the first allows us to find out what's happening, the second allows us to do something about it! The second will be taken away first, followed by the first and then the rest of our freedoms."
             </Words>
           </h2>
           <div className="homePageContents">
@@ -68,6 +75,7 @@ class HomePage extends React.Component {
                 </p>
               </div>
             </Row>
+          </div>
           </div>
         </Frame>
       </div>

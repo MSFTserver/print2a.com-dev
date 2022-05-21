@@ -1,7 +1,8 @@
 .Browse {
-    width: 60%;
-    display: inline-block;
-    padding: 30px;
+  padding: 30px;
+  position: fixed;
+  left: 10%;
+  right: 10%;
   
     .browseContents {
       border-radius: 2em;

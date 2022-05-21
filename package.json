@@ -22,12 +22,10 @@
     "sass": "^1.52.0"
   },
   "scripts": {
-    "start": "react-scripts start -l 8888",
-    "build": "react-scripts build -l 8888",
+    "dev": "react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "deploy": "npm run build",
-    "dev": "http-server -p 8888"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
