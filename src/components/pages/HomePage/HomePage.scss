@@ -1,0 +1,39 @@
+.HomePage {
+  
+  width: 75%;
+  display: inline-block;
+  padding: 30px;
+
+  .homePageContents {
+    border-radius: 2em;
+    padding: 1em;
+    padding-left: 2em;
+    margin: 1em;
+  
+    .myInfo {
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: space-between;
+    }
+
+    .myInfo p::first-letter {
+      font-size: 120%;
+    }
+
+    .homePageText {
+      font-size: 18px;
+    }
+
+  
+    @media only screen and (max-width: 800px) {
+
+      padding: 0;
+      margin: 5px;
+
+      .homePageContents {
+        margin: 0;
+        padding: 0;
+      }
+    }
+  }
+}

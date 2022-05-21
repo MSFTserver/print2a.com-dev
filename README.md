@@ -20,20 +20,3 @@
 ## Contributing
 
 this repo is for development of the main [print2a.com](https://github.com/MSFTserver/print2a.com) site
-
-#### changes
-
-Main URL Locations
-  - gatsby-browser.js
-  - gatsby-config.js
-  - src/settings/meta.js
-  
-code changes
-  - server.js
-     - `const env = process.env.NODE_ENV || 'development';`
-     - `const port = process.env.PORT || 14001;`
-     - `const host = process.env.HOST || '0.0.0.0';`
-
-The website was powered by the **[Arwes](https://arwes.dev)** project.
-
-This is a fork of the [Soul Extract](https://github.com/soulextract/soulextract.com) Website
