@@ -22,7 +22,7 @@
     "sass": "^1.52.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts start -l 8888",
     "build": "react-scripts build -l 8888",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
