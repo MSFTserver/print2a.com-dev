@@ -2,12 +2,10 @@
 
 # [print2a.com](https://print2a.com)
 
-<a href="https://github.com/MSFTserver/print2a.com/blob/master/LICENSE">
-  <img src="https://img.shields.io/github/license/MSFTserver/print2a.com.svg?maxAge=2592000" alt="license" />
-</a>
-<a href="https://arwes.dev">
-  <img src="https://img.shields.io/badge/powered%20by-arwes-02b2d4.svg" alt="arwes" />
-</a>
+
+<a href="https://www.npmjs.com/package/arwes"><img src="https://img.shields.io/badge/dependency-arwes-blue" alt="dependency - arwes"></a>
+
+<a href="https://www.npmjs.com/package/arwes"><img src="https://img.shields.io/github/package-json/dependency-version/MSFTserver/print2a.com-dev/arwes?color=blue" alt="Package - arwes"></a>
 
 # Dev site for the print2a repo
 
