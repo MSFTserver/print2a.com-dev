@@ -24,7 +24,9 @@
     "build": "react-scripts build",
     "lint": "eslint ./ --ignore-path .gitignore",
     "lint:fix": "eslint ./ --ignore-path .gitignore --fix",
-    "format": "prettier --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\" --config ./.prettierrc"
+    "prettier": "prettier --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\" --config ./.prettierrc",
+    "format": "npm run prettier && npm run lint:fix",
+    "publish": "npm run format && npm run build"
   },
   "browserslist": {
     "production": [

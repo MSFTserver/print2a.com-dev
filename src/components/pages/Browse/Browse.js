@@ -10,8 +10,9 @@ class Browse extends React.Component {
         <Frame
           animate
           level={3}
-          corners={8}
+          corners={6}
           layer="primary"
+          sounds={this.sounds}
           timeout={1000}
           appear
           style={{ marginBottom: '6em' }}

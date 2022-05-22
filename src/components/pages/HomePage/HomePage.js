@@ -10,15 +10,14 @@ class HomePage extends React.Component {
         <Frame
           animate
           level={3}
-          corners={8}
+          corners={6}
           layer="primary"
+          sounds={this.sounds}
           show={this.props.anim.entered}
           style={{ marginBottom: '5em' }}
         >
           <div className="homePageBox">
-            <Heading animate show={this.props.anim.entered}>
-              2nd Amendment
-            </Heading>
+            <Heading node="h3">2nd Amendment</Heading>
             <Words animate show={this.props.anim.entered}>
               “A well regulated Militia, being necessary to the security of a
               free State, the right of the people to keep and bear Arms, shall
@@ -26,9 +25,7 @@ class HomePage extends React.Component {
             </Words>
             <br></br>
             <br></br>
-            <Heading animate show={this.props.anim.entered}>
-              Andrew Ford
-            </Heading>
+            <Heading node="h3">Andrew Ford</Heading>
             <Words animate show={this.props.anim.entered}>
               "Without either the first or second amendment, we would have no
               liberty; the first allows us to find out what's happening, the
@@ -37,9 +34,7 @@ class HomePage extends React.Component {
               freedoms."
             </Words>
             <div className="homePageContents">
-              <Heading animate show={this.props.anim.entered}>
-                <h1>About Print2a</h1>
-              </Heading>
+              <Heading node="h1">About Print2a</Heading>
               <div className="homePageText">
                 <p>
                   <Words animate show={this.props.anim.entered}>
@@ -50,9 +45,7 @@ class HomePage extends React.Component {
                   </Words>
                 </p>
               </div>
-              <Heading animate show={this.props.anim.entered}>
-                <h2>Donate</h2>
-              </Heading>
+              <Heading node="h2">Donate</Heading>
               <p>
                 <Words animate show={this.props.anim.entered}>
                   If you like the site and what I have put together, please
