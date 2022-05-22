@@ -1,33 +1,14 @@
-<img width="550" src="./src/images/NotFound.gif" alt="print2a">
+<img width="550" src="https://raw.githubusercontent.com/MSFTserver/print2a.com/main/src/images/NotFound.gif" alt="print2a">
 
 # [print2a.com](https://print2a.com)
 
+<a href="https://www.npmjs.com/package/arwes"><img src="https://img.shields.io/static/v1?label=Powered+by&message=Arwes&color=lightblue&logo=Circle&logoColor=blue" alt="Powered by - Arwes"></a>
+<a href="https://www.npmjs.com/package/react"><img src="https://img.shields.io/static/v1?label=Mainted+with&message=React&color=2ea44f&logo=React" alt="React"></a>
+<a href="https://github.com/imaginary-cloud/eslint-config-react"><img src="https://img.shields.io/static/v1?label=Code+Style&message=Custom+%7C+Airbnb+%7C+%3Ces2022&color=red" alt="Code Style - Custom | Airbnb | &lt;es2022"></a>
 
-[//]: <> (start placeholder for auto-badger)
+<br>
 
-
-[![version](https://img.shields.io/npm/v/print2a.svg?style=flat-square)](https://npmjs.org/print2a)
-[![min size](https://img.shields.io/bundlephobia/min/print2a?style=flat-square)](https://bundlephobia.com/result?p=print2a)
-[![mingzip size](https://img.shields.io/bundlephobia/minzip/print2a)](https://bundlephobia.com/result?p=print2a)
-[![license](https://img.shields.io/npm/l/print2a?color=%23007a1f&style=flat-square)](https://github.com//MSFTserver/blob/master/LICENSE)
-
-[![dependancies](https://img.shields.io/librariesio/release/npm/print2a?color=%23007a1f&style=flat-square)](https://libraries.io/npm/print2a)
-[![downloads](https://img.shields.io/npm/dm/print2a?style=flat-square&color=%23007a1f)](https://npmcharts.com/compare/print2a)
-[![all contributors](https://img.shields.io/github/all-contributors//MSFTserver?style=flat-square)](https://github.com//MSFTserver/graphs/contributors)
-[![code of conduct](https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square)](https://github.com//MSFTserver/blob/master/CODE_OF_CONDUCT.md)
-
-[![stargazers](https://img.shields.io/github/stars//MSFTserver?style=social)](https://github.com//MSFTserver/stargazers)
-[![number of forks](https://img.shields.io/github/forks//MSFTserver?style=social)](https://github.com//MSFTserver/fork)
-
-###### :clap: & :heart: to [auto badger](https://github.com/technikhil314/auto-badger) for making badging simple
-
-[//]: <> (end placeholder for auto-badger)
-
-
-
-<a href="https://www.npmjs.com/package/arwes"><img src="https://img.shields.io/badge/dependency-arwes-blue" alt="dependency - arwes"></a>
-
-<a href="https://www.npmjs.com/package/arwes"><img src="https://img.shields.io/github/package-json/dependency-version/MSFTserver/print2a.com-dev/arwes?color=blue" alt="Package - arwes"></a>
+<a href="https://www.npmjs.com/package/react"><img src="https://img.shields.io/github/package-json/dependency-version/MSFTserver/print2a.com-dev/react?color=blue" alt="Package - react"></a><a href="https://www.npmjs.com/package/sass"><img src="https://img.shields.io/github/package-json/dependency-version/MSFTserver/print2a.com-dev/sass?color=blue" alt="Package - sass"></a><a href="https://www.npmjs.com/package/prettier"><img src="https://img.shields.io/github/package-json/dependency-version/MSFTserver/print2a.com-dev/dev/prettier?color=blue" alt="Package - prettier"></a><a href="https://www.npmjs.com/package/eslint"><img src="https://img.shields.io/github/package-json/dependency-version/MSFTserver/print2a.com-dev/dev/eslint?color=blue" alt="Package - eslint"></a><a href="https://www.npmjs.com/package/arwes"><img src="https://img.shields.io/github/package-json/dependency-version/MSFTserver/print2a.com-dev/arwes?color=blue" alt="Package - arwes"></a>
 
 # Dev site for the print2a repo
 
@@ -40,5 +21,3 @@ Setup:
 1. `npm i`
 2. `npx install-peerdeps --dev @imaginary-cloud/eslint-config-react`
 3. `npm run dev`
-
-
