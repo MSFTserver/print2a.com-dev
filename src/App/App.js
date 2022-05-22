@@ -106,7 +106,7 @@ class App extends React.Component {
   }
 
   render() {
-    let { props } = this
+    const { props } = this
     return (
       <ThemeProvider theme={createTheme(theme)}>
         <SoundsProvider sounds={createSounds(mySounds)}>
@@ -139,22 +139,46 @@ class App extends React.Component {
                       <Route
                         path="/"
                         exact
-                        element={<HomePage {...props} anim={anim} sounds={createSounds(mySounds)}/>}
+                        element={
+                          <HomePage
+                            {...props}
+                            anim={anim}
+                            sounds={createSounds(mySounds)}
+                          />
+                        }
                       />
                       <Route
                         path="/latest"
                         exact
-                        element={<Latest {...props} anim={anim} sounds={createSounds(mySounds)}/>}
+                        element={
+                          <Latest
+                            {...props}
+                            anim={anim}
+                            sounds={createSounds(mySounds)}
+                          />
+                        }
                       />
                       <Route
                         path="/links"
                         exact
-                        element={<Links {...props} anim={anim} sounds={createSounds(mySounds)}/>}
+                        element={
+                          <Links
+                            {...props}
+                            anim={anim}
+                            sounds={createSounds(mySounds)}
+                          />
+                        }
                       />
                       <Route
                         path="/browse"
                         exact
-                        element={<Browse {...props} anim={anim} sounds={createSounds(mySounds)}/>}
+                        element={
+                          <Browse
+                            {...props}
+                            anim={anim}
+                            sounds={createSounds(mySounds)}
+                          />
+                        }
                       />
                     </Routes>
                   </Puffs>

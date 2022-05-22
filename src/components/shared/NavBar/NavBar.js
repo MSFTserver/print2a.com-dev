@@ -11,7 +11,7 @@ class NavBar extends React.Component {
       <div className="NavBar">
         <Header animate show={this.props.anim.entered}>
           <nav className="container-fluid navbar">
-              <Heading>Print2a</Heading>
+            <Heading>Print2a</Heading>
             <Row className="row wrap mr-1" id="navLinks" col s={12}>
               <Link to="/" id="navToHomePage">
                 <Button
