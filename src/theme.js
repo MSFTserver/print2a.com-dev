@@ -1,20 +1,19 @@
-import { darken, lighten } from 'polished';
+import { darken, lighten } from 'polished'
 
-const accent = 0.2;
-const generateColor = color => ({
+const accent = 0.2
+const generateColor = (color) => ({
   base: color,
   light: lighten(accent, color),
   dark: darken(accent, color),
-});
-const generateBackground = color => ({
+})
+const generateBackground = (color) => ({
   level0: color,
   level1: lighten(0.015, color),
-  level2: lighten(0.030, color),
+  level2: lighten(0.03, color),
   level3: lighten(0.045, color),
-});
+})
 
 export default {
-
   margin: 20,
   padding: 20,
 
@@ -70,7 +69,8 @@ export default {
 
   code: {
     fontSize: 14,
-    fontFamily: 'Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace',
+    fontFamily:
+      'Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace',
     background: '#000000',
     color: '#3aafff',
     comment: '#4a5f78',
@@ -93,4 +93,4 @@ export default {
     medium: 992,
     large: 1200,
   },
-};
+}

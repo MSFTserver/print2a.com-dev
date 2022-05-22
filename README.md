@@ -15,8 +15,8 @@
 
 this repo is for development of the main [print2a.com](https://github.com/MSFTserver/print2a.com) site
 
-
 Setup:
+
 1. `npm i`
 2. `npx install-peerdeps --dev @imaginary-cloud/eslint-config-react`
 3. `npm run dev`
