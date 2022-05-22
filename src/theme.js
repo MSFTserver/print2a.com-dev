@@ -21,7 +21,7 @@ export default {
   shadowLength: 4,
 
   // Base animation duration in ms.
-  animTime: 250,
+  animTime: 600,
 
   // The opacity to apply to elements when needed.
   alpha: 0.65,

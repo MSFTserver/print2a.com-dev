@@ -5,6 +5,7 @@ import { Frame, Heading, Words, Link } from 'arwes'
 
 class HomePage extends React.Component {
   render() {
+    console.log(this)
     return (
       <div className="HomePage">
         <Frame
@@ -12,7 +13,7 @@ class HomePage extends React.Component {
           level={3}
           corners={6}
           layer="primary"
-          sounds={this.sounds}
+          timeout={10000}
           show={this.props.anim.entered}
           style={{ marginBottom: '5em' }}
         >

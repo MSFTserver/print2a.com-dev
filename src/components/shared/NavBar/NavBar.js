@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom'
 
 class NavBar extends React.Component {
   render() {
-    console.log(this.props.sounds)
     return (
       <div className="NavBar">
         <Header animate show={this.props.anim.entered}>
@@ -18,7 +17,6 @@ class NavBar extends React.Component {
                   animate
                   show={this.props.anim.entered}
                   onClick={this.props.setShowHomePage}
-                  sounds={this.props.sounds}
                 >
                   Home
                 </Button>
@@ -28,7 +26,6 @@ class NavBar extends React.Component {
                   animate
                   show={this.props.anim.entered}
                   onClick={this.props.setShowLatest}
-                  sounds={this.props.sounds}
                 >
                   Latest
                 </Button>
@@ -38,7 +35,6 @@ class NavBar extends React.Component {
                   animate
                   show={this.props.anim.entered}
                   onClick={this.props.setShowLinks}
-                  sounds={this.props.sounds}
                 >
                   Links
                 </Button>
@@ -48,7 +44,6 @@ class NavBar extends React.Component {
                   animate
                   show={this.props.anim.entered}
                   onClick={this.props.setShowBrowse}
-                  sounds={this.props.sounds}
                 >
                   Browse
                 </Button>
