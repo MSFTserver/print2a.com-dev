@@ -11,7 +11,7 @@ class Latest extends React.Component {
       <Frame animate level={3} corners={8} layer='primary' timeout={1000} appear={true} style={{ marginBottom: '6em' }}>
       <div className="latestContents">
         <Heading animate show={this.props.anim.entered}>
-          <h2 className="title">Latest Files and Stats</h2>
+          <h2>Latest Files and Stats</h2>
         </Heading>
       </div>
       </Frame>

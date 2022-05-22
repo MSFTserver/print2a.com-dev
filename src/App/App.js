@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   BrowserRouter as Router,
-  Switch,
+  Routes,
   Route,
 } from 'react-router-dom';
 import {
@@ -95,14 +95,14 @@ class App extends React.Component {
                 <Router>
                 <NavBar anim={anim} setShowHomePage={this.setShowHomePage} setShowLatest={this.setShowLatest} setShowLinks={this.setShowLinks}
                 setShowBrowse={this.setShowBrowse} />
-                  <Switch>
+                  <Routes>
                     <Puffs>
                       <Route path="/" exact render={(props) => <HomePage {...props} anim={anim} />}/>
                       <Route path="/latest" exact render={(props) => <Latest {...props} anim={anim}/>} />
                       <Route path="/links" exact render={(props) => <Links {...props} anim={anim}/>} />
                       <Route path="/browse" exact render={(props) => <Browse {...props} anim={anim}/>} />
                     </Puffs>
-                  </Switch>
+                  </Routes>
                 <Footer style={{position:'fixed',bottom: 0,width:'100%'}}>
                   <div className="footerContents d-flex row justify-content-between">
                   <Link animate show={anim.entered} href="https://github.com/MSFTserver/print2a.com" alt="Arwes theme">- Open Source -</Link>

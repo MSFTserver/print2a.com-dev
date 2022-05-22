@@ -1,8 +1,14 @@
 .Latest {
+  
   padding: 30px;
   position: fixed;
   left: 10%;
   right: 10%;
+
+  .latestBox {
+    height: 75vh;
+    overflow: hidden auto;
+  }
 
   .latestContents {
     border-radius: 2em;

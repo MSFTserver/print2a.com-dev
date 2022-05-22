@@ -15,19 +15,5 @@
     padding: 1em;
     padding-left: 2em;
     margin: 1em;
-  
-    .myInfo {
-      display: flex;
-      flex-direction: row-reverse;
-      justify-content: space-between;
-    }
-
-    .myInfo p::first-letter {
-      font-size: 120%;
-    }
-
-    .homePageText {
-      font-size: 18px;
-    }
   }
 }

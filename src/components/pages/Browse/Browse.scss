@@ -1,13 +1,19 @@
 .Browse {
+  
   padding: 30px;
   position: fixed;
   left: 10%;
   right: 10%;
-  
-    .browseContents {
-      border-radius: 2em;
-      padding: 1em;
-      padding-left: 2em;
-      margin: 1em;
-    }
+
+  .browseBox {
+    height: 75vh;
+    overflow: hidden auto;
   }
+
+  .browseContents {
+    border-radius: 2em;
+    padding: 1em;
+    padding-left: 2em;
+    margin: 1em;
+  }
+}
