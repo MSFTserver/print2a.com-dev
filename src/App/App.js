@@ -19,42 +19,8 @@ import Latest from '../components/pages/Latest/Latest'
 import Links from '../components/pages/Links/Links'
 import background from '../helpers/assets/images/background.gif'
 import glow from '../helpers/assets/images/glow.png'
-import startSound from '../helpers/assets/sounds/start.mp3'
-import clickSound from '../helpers/assets/sounds/click.mp3'
-import typingSound from '../helpers/assets/sounds/typing.mp3'
-import deploySound from '../helpers/assets/sounds/deploy.mp3'
-import hoverSound from '../helpers/assets/sounds/hover.mp3'
-import expandSound from '../helpers/assets/sounds/expand.mp3'
-import fadeSound from '../helpers/assets/sounds/fade.mp3'
-import theme from '../theme'
-
-const mySounds = {
-  shared: { volume: 0.3 },
-  players: {
-    start: {
-      sound: { src: [startSound] },
-      volume: 0.15,
-    },
-    click: {
-      sound: { src: [clickSound] },
-    },
-    typing: {
-      sound: { src: [typingSound] },
-    },
-    deploy: {
-      sound: { src: [deploySound] },
-    },
-    hover: {
-      sound: { src: [hoverSound] },
-    },
-    expand: {
-      sound: { src: [expandSound] },
-    },
-    fade: {
-      sound: { src: [fadeSound] },
-    },
-  },
-}
+import theme from '../helpers/Theme'
+import mySounds from '../helpers/Sounds'
 
 class App extends React.Component {
   resources = {
@@ -63,7 +29,7 @@ class App extends React.Component {
   }
 
   state = {
-    showHomePage: false,
+    showHomePage: true,
     showLatest: false,
     showLinks: false,
     showBrowse: false,
@@ -133,6 +99,7 @@ class App extends React.Component {
                     setShowLatest={this.setShowLatest}
                     setShowLinks={this.setShowLinks}
                     setShowBrowse={this.setShowBrowse}
+                    state={this.state}
                   />
                   <Puffs>
                     <Routes>
@@ -182,24 +149,26 @@ class App extends React.Component {
                       />
                     </Routes>
                   </Puffs>
-                  <Footer
-                    style={{ position: 'fixed', bottom: 0, width: '100%' }}
-                  >
-                    <div className="footerContents">
-                      <Link
-                        href="https://github.com/MSFTserver/print2a.com"
-                        alt="Arwes theme"
-                      >
-                        - Open Source -
-                      </Link>
-                      <Link
-                        href="https://github.com/arwesjs/arwes"
-                        alt="Arwes theme"
-                      >
-                        Powered By Arwes
-                      </Link>
-                    </div>
-                  </Footer>
+                  <div className="footer">
+                    <Footer
+                      style={{ position: 'fixed', bottom: 0, width: '100%' }}
+                    >
+                      <div className="footerContents">
+                        <Link
+                          href="https://github.com/MSFTserver/print2a.com"
+                          alt="Arwes theme"
+                        >
+                          - Open Source -
+                        </Link>
+                        <Link
+                          href="https://github.com/arwesjs/arwes"
+                          alt="Arwes theme"
+                        >
+                          Powered By Arwes
+                        </Link>
+                      </div>
+                    </Footer>
+                  </div>
                 </Router>
               </div>
             )}

@@ -5,7 +5,6 @@ import { Frame, Heading, Words, Link } from 'arwes'
 
 class HomePage extends React.Component {
   render() {
-    console.log(this)
     return (
       <div className="HomePage">
         <Frame
