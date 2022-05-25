@@ -17,7 +17,7 @@ class HomePage extends React.Component {
           style={{ marginBottom: '5em' }}
         >
           <div className="homePageBox">
-            <Heading node="h3">2nd Amendment</Heading>
+            <Heading node="h3"><div className="h3">2nd Amendment</div></Heading>
             <Words animate show={this.props.anim.entered}>
               “A well regulated Militia, being necessary to the security of a
               free State, the right of the people to keep and bear Arms, shall
@@ -25,7 +25,7 @@ class HomePage extends React.Component {
             </Words>
             <br></br>
             <br></br>
-            <Heading node="h3">Andrew Ford</Heading>
+            <Heading node="h3"><div className="h3">Andrew Ford</div></Heading>
             <Words animate show={this.props.anim.entered}>
               "Without either the first or second amendment, we would have no
               liberty; the first allows us to find out what's happening, the
@@ -34,7 +34,7 @@ class HomePage extends React.Component {
               freedoms."
             </Words>
             <div className="homePageContents">
-              <Heading node="h1">About Print2a</Heading>
+              <Heading node="h1"><div className="h1">About Print2a</div></Heading>
               <div className="homePageText">
                 <p>
                   <Words animate show={this.props.anim.entered}>
@@ -45,12 +45,12 @@ class HomePage extends React.Component {
                   </Words>
                 </p>
               </div>
-              <Heading node="h2">Donate</Heading>
+              <Heading node="h2"><div className="h2">Donate</div></Heading>
               <p>
                 <Words animate show={this.props.anim.entered}>
                   If you like the site and what I have put together, please
                   consider donating to help with server costs to keep this site
-                  running. Anything helps as costs are quite low right now.
+                  running.
                 </Words>
               </p>
               <p>
@@ -75,7 +75,7 @@ class HomePage extends React.Component {
                 </Words>
                 <br></br>
                 <Words
-                  style={{ textShadow: '0 0 4px rgba(215, 24, 24, 0.65)' }}
+                  style={{ fontSize: '12px', textShadow: '0 0 4px rgba(215, 24, 24, 0.65)' }}
                   animate
                   layer="alert"
                   show={this.props.anim.entered}

@@ -19,7 +19,7 @@ class Links extends React.Component {
         >
           <div className="linksContents">
             <Heading animate show={this.props.anim.entered}>
-              <h2>Links</h2>
+              <h2 className="h2">Links</h2>
             </Heading>
           </div>
         </Frame>

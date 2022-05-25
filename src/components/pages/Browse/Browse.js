@@ -18,7 +18,7 @@ class Browse extends React.Component {
         >
           <div className="browseContents">
             <Heading animate show={this.props.anim.entered}>
-              <h2 className="title">Browse</h2>
+              <h2 className="h2">Browse</h2>
             </Heading>
           </div>
         </Frame>

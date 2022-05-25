@@ -19,7 +19,7 @@ class Latest extends React.Component {
         >
           <div className="latestContents">
             <Heading animate show={this.props.anim.entered}>
-              <h2>Latest Files and Stats</h2>
+              <h2 className="h2">Latest Files and Stats</h2>
             </Heading>
           </div>
         </Frame>
