@@ -37,7 +37,7 @@ export default {
     control: generateColor('#18d736'),
     success: generateColor('#00ff00'),
     alert: generateColor('#ff0000'),
-    disabled: generateColor('#470004'),
+    disabled: generateColor('#808080'),
   },
 
   // Every background color has level colors from 0 until 3
@@ -49,7 +49,7 @@ export default {
     control: generateBackground('#000000'),
     success: generateBackground('#081402'),
     alert: generateBackground('#140202'),
-    disabled: generateBackground('#2e0000'),
+    disabled: generateBackground('#7f0000'),
   },
 
   typography: {

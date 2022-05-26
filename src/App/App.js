@@ -29,7 +29,7 @@ class App extends React.Component {
   }
 
   state = {
-    showHomePage: true,
+    showHomePage: false,
     showLatest: false,
     showLinks: false,
     showBrowse: false,
@@ -73,6 +73,19 @@ class App extends React.Component {
 
   render() {
     const { props } = this
+    const location = window.location.pathname
+    if (location === '/') {
+      this.state.showHomePage = true
+    } else if (location === '/latest') {
+      this.state.showLatest = true
+    } else if (location === '/links') {
+      this.state.showLinks = true
+    } else if (location === '/browse') {
+      this.state.showBrowse = true
+    } else {
+      this.state.showHomePage = true
+    }
+    console.log(this.state)
     return (
       <ThemeProvider theme={createTheme(theme)}>
         <SoundsProvider sounds={createSounds(mySounds)}>

@@ -12,9 +12,8 @@ class Browse extends React.Component {
           level={3}
           corners={6}
           layer="primary"
-          timeout={1000}
-          appear
-          style={{ marginBottom: '6em' }}
+          timeout={10000}
+          show={this.props.anim.entered}
         >
           <div className="browseContents">
             <Heading animate show={this.props.anim.entered}>

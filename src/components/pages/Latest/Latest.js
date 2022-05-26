@@ -12,10 +12,8 @@ class Latest extends React.Component {
           level={3}
           corners={6}
           layer="primary"
-          sounds={this.sounds}
-          timeout={1000}
-          appear
-          style={{ marginBottom: '6em' }}
+          timeout={10000}
+          show={this.props.anim.entered}
         >
           <div className="latestContents">
             <Heading animate show={this.props.anim.entered}>
