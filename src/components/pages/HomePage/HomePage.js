@@ -14,7 +14,6 @@ class HomePage extends React.Component {
           layer="primary"
           timeout={10000}
           show={this.props.anim.entered}
-          style={{ marginBottom: '5em' }}
         >
           <div className="homePageBox">
             <Heading node="h3">

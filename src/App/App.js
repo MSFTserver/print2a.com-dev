@@ -169,6 +169,22 @@ class App extends React.Component {
                       </div>
                     </Footer>
                   </div>
+                  <div className="mobileFooter">
+                    <div className="footerContents">
+                      <Link
+                        href="https://github.com/MSFTserver/print2a.com"
+                        alt="Arwes theme"
+                      >
+                        - Open Source -
+                      </Link>
+                      <Link
+                        href="https://github.com/arwesjs/arwes"
+                        alt="Arwes theme"
+                      >
+                        Powered By Arwes
+                      </Link>
+                    </div>
+                  </div>
                 </Router>
               </div>
             )}

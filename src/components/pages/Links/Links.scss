@@ -20,11 +20,14 @@
   @media only screen and (max-width: 700px) {
 
     padding: 0;
-    position: fixed;
+    position: initial;
     left: 1%;
     right: 1%;
     font-size: 16px;
     text-align: left;
+    .linksBox {
+      height: 100%;
+    }
     .linksContents {
       border-radius: 0;
       padding: 0;

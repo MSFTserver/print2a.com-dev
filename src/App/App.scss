@@ -1,6 +1,10 @@
 .App {
   text-align: center;
   margin-top: -10px;
+  display: block;
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
 }
 
 .App-logo {
@@ -24,6 +28,10 @@
   color: white;
 }
 
+.footer {
+  visibility: visible;
+}
+
 .footerContents {
   width: 100%;
   display: flex;
@@ -31,8 +39,18 @@
   padding: 1vh;
 }
 
+.mobileFooter{
+  visibility: hidden;
+}
+
 @media only screen and (max-width: 700px) {
   .footer {
-    font-size: 12px;
+    visibility:hidden;
+  }
+  .mobileFooter {
+    visibility:visible;
+  }
+  .footerContents {
+    font-size: 12px; 
   }
 }
