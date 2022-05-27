@@ -74,6 +74,94 @@ class HomePage extends React.Component {
                 </Words>
               </p>
               <Line animate />
+              <Heading node="h2">
+                <div className="h2">Communities</div>
+              </Heading>
+              <Link
+                href="https://matrix.to/#/#Waitingroommobilelist:matrix.org?via=matrix.org"
+                target="AWCY?"
+              >
+                <Words
+                  style={{ textShadow: '0 0 4px rgba(215, 24, 24, 0.65)' }}
+                  animate
+                  layer="alert"
+                  show={this.props.anim.entered}
+                >
+                  AWCY?
+                </Words>{' '}
+                <i className="fa-solid fa-gun"></i>{' '}
+                <Words
+                  style={{ textShadow: '0 0 4px rgba(215, 24, 24, 0.65)' }}
+                  layer="alert"
+                  show={this.props.anim.entered}
+                >
+                  Matrix
+                </Words>
+              </Link>
+              <br />
+              <Link href="https://fosscad.org/fc/chat/" target="fosscad">
+                <Words
+                  style={{ textShadow: '0 0 4px rgba(215, 24, 24, 0.65)' }}
+                  animate
+                  layer="alert"
+                  show={this.props.anim.entered}
+                >
+                  fosscad
+                </Words>{' '}
+                <i className="fa-solid fa-gun"></i>{' '}
+                <Words
+                  style={{ textShadow: '0 0 4px rgba(215, 24, 24, 0.65)' }}
+                  layer="alert"
+                  show={this.props.anim.entered}
+                >
+                  IRC
+                </Words>
+              </Link>
+              <br />
+              <Link
+                href="https://matrix.to/#/#_oftc_#fosscad:matrix.org?via=matrix.org"
+                target="fosscad"
+              >
+                <Words
+                  style={{ textShadow: '0 0 4px rgba(215, 24, 24, 0.65)' }}
+                  animate
+                  layer="alert"
+                  show={this.props.anim.entered}
+                >
+                  fosscad
+                </Words>{' '}
+                <i className="fa-solid fa-gun"></i>{' '}
+                <Words
+                  style={{ textShadow: '0 0 4px rgba(215, 24, 24, 0.65)' }}
+                  layer="alert"
+                  show={this.props.anim.entered}
+                >
+                  Matrix Bridge to IRC
+                </Words>
+              </Link>
+              <br />
+              <Link
+                href="https://chat.deterrencedispensed.com/home"
+                target="det-disp"
+              >
+                <Words
+                  style={{ textShadow: '0 0 4px rgba(215, 24, 24, 0.65)' }}
+                  animate
+                  layer="alert"
+                  show={this.props.anim.entered}
+                >
+                  Deterrence Dispensed
+                </Words>{' '}
+                <i className="fa-solid fa-gun"></i>{' '}
+                <Words
+                  style={{ textShadow: '0 0 4px rgba(215, 24, 24, 0.65)' }}
+                  layer="alert"
+                  show={this.props.anim.entered}
+                >
+                  Rocket Chat
+                </Words>
+              </Link>
+              <Line animate />
               <Heading node="h3">
                 <div className="h3">2nd Amendment</div>
               </Heading>
