@@ -2,6 +2,7 @@
 import './Browse.scss'
 import React from 'react'
 import { Frame, Heading, Appear } from 'arwes'
+import ChonkyBrowse from './ChonkyBrowse'
 
 class Browse extends React.Component {
   render() {
@@ -14,10 +15,10 @@ class Browse extends React.Component {
           layer="primary"
           show={this.props.anim.entered}
         >
-          <div className="browseContents">
-            <Heading node="h2">
-              <div className="h2">Browse</div>
-            </Heading>
+          <div className="browseBox">
+            <div className="browseContents">
+              <ChonkyBrowse />
+            </div>
           </div>
         </Frame>
       </div>
