@@ -19,5 +19,5 @@ this repo is for development of the main [print2a.com](https://github.com/MSFTse
 Setup:
 
 1. `npm i`
-2. `npx install-peerdeps --dev @imaginary-cloud/eslint-config-react`
+2. `npm run getdep`
 3. `npm run dev`

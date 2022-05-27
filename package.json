@@ -23,6 +23,7 @@
     "sass": "^1.52.1"
   },
   "scripts": {
+    "getdep": "npx install-peerdeps --dev @imaginary-cloud/eslint-config-react",
     "dev": "react-scripts start",
     "build": "react-scripts build",
     "lint": "eslint ./ --ignore-path .gitignore",
