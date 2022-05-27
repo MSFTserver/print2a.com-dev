@@ -15,27 +15,21 @@ export default {
     },
     click: {
       sound: { src: [clickSound] },
-      settings: { oneAtATime: true },
     },
     typing: {
       sound: { src: [typingSound] },
-      settings: { oneAtATime: true },
     },
     deploy: {
       sound: { src: [deploySound] },
-      settings: { oneAtATime: true },
     },
     hover: {
       sound: { src: [hoverSound] },
-      settings: { oneAtATime: true },
     },
     expand: {
       sound: { src: [expandSound] },
-      settings: { oneAtATime: true },
     },
     fade: {
       sound: { src: [fadeSound] },
-      settings: { oneAtATime: true },
     },
   },
 }

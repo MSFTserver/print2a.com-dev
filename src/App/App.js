@@ -9,6 +9,7 @@ import {
   createSounds,
   Link,
   Footer,
+  withSounds,
 } from 'arwes'
 import './App.scss'
 
@@ -72,7 +73,6 @@ class App extends React.Component {
   }
 
   render() {
-    const { props } = this
     const location = window.location.pathname
     if (location === '/') {
       this.state.showHomePage = true
@@ -85,10 +85,13 @@ class App extends React.Component {
     } else {
       this.state.showHomePage = true
     }
-    console.log(this.state)
+    const createdTheme = createTheme(theme)
+    const createdSounds = createSounds(mySounds)
+    const MyNav = withSounds()((props) => <NavBar {...props} />)
+    const { props } = this
     return (
-      <ThemeProvider theme={createTheme(theme)}>
-        <SoundsProvider sounds={createSounds(mySounds)}>
+      <ThemeProvider theme={createdTheme}>
+        <SoundsProvider sounds={createdSounds}>
           <Arwes
             resources={this.resources}
             animate
@@ -105,9 +108,8 @@ class App extends React.Component {
             {(anim) => (
               <div className="App">
                 <Router>
-                  <NavBar
+                  <MyNav
                     anim={anim}
-                    sounds={createSounds(mySounds)}
                     setShowHomePage={this.setShowHomePage}
                     setShowLatest={this.setShowLatest}
                     setShowLinks={this.setShowLinks}
@@ -119,46 +121,22 @@ class App extends React.Component {
                       <Route
                         path="/"
                         exact
-                        element={
-                          <HomePage
-                            {...props}
-                            anim={anim}
-                            sounds={createSounds(mySounds)}
-                          />
-                        }
+                        element={<HomePage {...props} anim={anim} />}
                       />
                       <Route
                         path="/latest"
                         exact
-                        element={
-                          <Latest
-                            {...props}
-                            anim={anim}
-                            sounds={createSounds(mySounds)}
-                          />
-                        }
+                        element={<Latest {...props} anim={anim} />}
                       />
                       <Route
                         path="/links"
                         exact
-                        element={
-                          <Links
-                            {...props}
-                            anim={anim}
-                            sounds={createSounds(mySounds)}
-                          />
-                        }
+                        element={<Links {...props} anim={anim} />}
                       />
                       <Route
                         path="/browse"
                         exact
-                        element={
-                          <Browse
-                            {...props}
-                            anim={anim}
-                            sounds={createSounds(mySounds)}
-                          />
-                        }
+                        element={<Browse {...props} anim={anim} />}
                       />
                     </Routes>
                   </Puffs>

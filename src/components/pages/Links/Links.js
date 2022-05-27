@@ -12,7 +12,6 @@ class Links extends React.Component {
           level={3}
           corners={6}
           layer="primary"
-          timeout={10000}
           show={this.props.anim.entered}
         >
           <div className="linksBox">
@@ -27,7 +26,7 @@ class Links extends React.Component {
                 </Heading>
                 <Link href="http://lbry.print2a.com/">
                   <Words
-                    style={{ WordsShadow: '0 0 4px rgba(215, 24, 24, 0.65)' }}
+                    style={{ textShadow: '0 0 4px rgba(215, 24, 24, 0.65)' }}
                     animate
                     layer="alert"
                     show={this.props.anim.entered}
@@ -41,7 +40,7 @@ class Links extends React.Component {
                   <div className="h3">RSYNC:&nbsp;</div>
                 </Heading>
                 <Words
-                  style={{ WordsShadow: '0 0 4px rgba(215, 24, 24, 0.65)' }}
+                  style={{ textShadow: '0 0 4px rgba(215, 24, 24, 0.65)' }}
                   animate
                   layer="alert"
                   show={this.props.anim.entered}

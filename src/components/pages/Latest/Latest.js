@@ -12,12 +12,11 @@ class Latest extends React.Component {
           level={3}
           corners={6}
           layer="primary"
-          timeout={10000}
           show={this.props.anim.entered}
         >
           <div className="latestContents">
-            <Heading animate show={this.props.anim.entered}>
-              <h2 className="h2">Latest Files and Stats</h2>
+            <Heading node="h2">
+              <div className="h2">Latest Files and Stats</div>
             </Heading>
           </div>
         </Frame>

@@ -12,12 +12,11 @@ class Browse extends React.Component {
           level={3}
           corners={6}
           layer="primary"
-          timeout={10000}
           show={this.props.anim.entered}
         >
           <div className="browseContents">
-            <Heading animate show={this.props.anim.entered}>
-              <h2 className="h2">Browse</h2>
+            <Heading node="h2">
+              <div className="h2">Browse</div>
             </Heading>
           </div>
         </Frame>

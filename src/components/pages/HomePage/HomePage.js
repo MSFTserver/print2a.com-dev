@@ -12,7 +12,6 @@ class HomePage extends React.Component {
           level={3}
           corners={6}
           layer="primary"
-          timeout={10000}
           show={this.props.anim.entered}
         >
           <div className="homePageBox">
