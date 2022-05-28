@@ -20,7 +20,7 @@ const print2aApiPort = '5757'
 const print2aApiEndpoint = `${print2aApiHost}:${print2aApiPort}`
 
 // Render the file browser
-function ChonkyBrowse() {
+function ChonkyBrowse(props) {
   let newPath = `${print2aApiEndpoint}/print2a`
   const newChain = {
     id: 'print2a',

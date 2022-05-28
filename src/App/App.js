@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import {
   ThemeProvider,
@@ -12,6 +12,7 @@ import {
   withSounds,
 } from 'arwes'
 import { Toaster } from 'react-hot-toast'
+import ControlledPopup from '../components/shared/ControlledPopup/ControlledPopup'
 import './App.scss'
 
 import NavBar from '../components/shared/NavBar/NavBar'
@@ -35,6 +36,7 @@ class App extends React.Component {
     showLatest: false,
     showLinks: false,
     showBrowse: false,
+    showPopup: false,
   }
 
   setShowHomePage = () => {
@@ -71,6 +73,12 @@ class App extends React.Component {
       showLatest: false,
       showHomePage: false,
     })
+  }
+
+  setShowPopup = () => {
+    this.setState((previousState) => ({
+      showPopup: !previousState.showPopup,
+    }))
   }
 
   render() {
@@ -133,6 +141,11 @@ class App extends React.Component {
                     setShowLinks={this.setShowLinks}
                     setShowBrowse={this.setShowBrowse}
                     state={this.state}
+                  />
+                  <ControlledPopup
+                    setShowPopup={this.setShowPopup}
+                    state={this.state}
+                    value="TESTING!"
                   />
                   <Puffs>
                     <Routes>
