@@ -12,7 +12,6 @@ import {
   withSounds,
 } from 'arwes'
 import { Toaster } from 'react-hot-toast'
-import ControlledPopup from '../components/shared/ControlledPopup/ControlledPopup'
 import './App.scss'
 
 import NavBar from '../components/shared/NavBar/NavBar'
@@ -37,6 +36,7 @@ class App extends React.Component {
     showLinks: false,
     showBrowse: false,
     showPopup: false,
+    popupFile: null,
   }
 
   setShowHomePage = () => {
@@ -78,6 +78,12 @@ class App extends React.Component {
   setShowPopup = () => {
     this.setState((previousState) => ({
       showPopup: !previousState.showPopup,
+    }))
+  }
+
+  setPopupFile = (fileName) => {
+    this.setState((prev) => ({
+      popupFile: fileName,
     }))
   }
 
@@ -142,11 +148,6 @@ class App extends React.Component {
                     setShowBrowse={this.setShowBrowse}
                     state={this.state}
                   />
-                  <ControlledPopup
-                    setShowPopup={this.setShowPopup}
-                    state={this.state}
-                    value="TESTING!"
-                  />
                   <Puffs>
                     <Routes>
                       <Route
@@ -167,7 +168,15 @@ class App extends React.Component {
                       <Route
                         path="/browse"
                         exact
-                        element={<Browse {...props} anim={anim} />}
+                        element={
+                          <Browse
+                            {...props}
+                            anim={anim}
+                            state={this.state}
+                            setShowPopup={this.setShowPopup}
+                            setPopupFile={this.setPopupFile}
+                          />
+                        }
                       />
                     </Routes>
                   </Puffs>

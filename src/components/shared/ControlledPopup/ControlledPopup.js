@@ -7,17 +7,17 @@ import 'reactjs-popup/dist/index.css'
 class ControlledPopup extends React.Component {
   render() {
     const { setShowPopup, state } = this.props
-    console.log('STATE: ', state.showPopup)
+    const { popupFile, showPopup } = state
+    const fileExt = popupFile ? popupFile.split('.').pop() : 'none'
     return (
       <div>
-        <button type="button" className="button" onClick={setShowPopup}>
-          Testing Popup for file viewer
-        </button>
-        <Popup open={state.showPopup} onClose={!setShowPopup}>
+        <Popup open={showPopup} onClose={!setShowPopup}>
           <button type="button" className="close" onClick={setShowPopup}>
             &times;
           </button>
-          {this.props.value}
+          {fileExt === 'md'
+            ? popupFile
+            : 'File Not Supported\nRight Click to Download'}
         </Popup>
       </div>
     )

@@ -13,6 +13,7 @@ import {
   ChonkyActions,
 } from 'chonky'
 import { ChonkyIconFA } from 'chonky-icon-fontawesome'
+import ControlledPopup from '../../shared/ControlledPopup/ControlledPopup'
 setChonkyDefaults({ iconComponent: ChonkyIconFA })
 
 const print2aApiHost = 'https://print2a.com'
@@ -22,6 +23,7 @@ const print2aApiEndpoint = `${print2aApiHost}:${print2aApiPort}`
 // Render the file browser
 function ChonkyBrowse(props) {
   let newPath = `${print2aApiEndpoint}/print2a`
+  let fileName = null
   const newChain = {
     id: 'print2a',
     name: 'print2a',
@@ -43,8 +45,11 @@ function ChonkyBrowse(props) {
       setCurrentPath(`${print2aApiEndpoint}/${folder.id}`)
     } else if (node.id === 'open_files' && !node.payload.files[0].isDir) {
       const folder = node.payload.files[0]
-      toast(`Sending file: \n ${folder.id.replace(/^.*[\\/]/, '')}`)
-      window.open(`${print2aApiEndpoint}/${folder.id}`, '_blank')
+      fileName = folder.id.replace(/^.*[\\/]/, '')
+      toast(`Opening file: \n ${fileName}`)
+      props.setPopupFile(fileName)
+      props.setShowPopup()
+      // window.open(`${print2aApiEndpoint}/${folder.id}`, '_blank')
     } else if (
       node.id === 'download_files' &&
       node.state.selectedFiles[0].isDir
@@ -177,6 +182,11 @@ function ChonkyBrowse(props) {
       <FileToolbar />
       <FileList />
       <FileContextMenu />
+      <ControlledPopup
+        setPopupFile={props.setPopupFile}
+        setShowPopup={props.setShowPopup}
+        state={props.state}
+      />
     </FileBrowser>
   )
 }
