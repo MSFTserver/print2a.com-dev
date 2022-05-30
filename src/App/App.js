@@ -36,7 +36,10 @@ class App extends React.Component {
     showLinks: false,
     showBrowse: false,
     showPopup: false,
-    popupFile: null,
+    popupFile: {
+      path: null,
+      name: null,
+    },
   }
 
   setShowHomePage = () => {
@@ -81,9 +84,13 @@ class App extends React.Component {
     }))
   }
 
-  setPopupFile = (fileName) => {
+  setPopupFile = (fileName, filePath, data) => {
     this.setState((prev) => ({
-      popupFile: fileName,
+      popupFile: {
+        path: filePath,
+        name: fileName,
+        data,
+      },
     }))
   }
 
@@ -175,6 +182,7 @@ class App extends React.Component {
                             state={this.state}
                             setShowPopup={this.setShowPopup}
                             setPopupFile={this.setPopupFile}
+                            theme={createdTheme}
                           />
                         }
                       />

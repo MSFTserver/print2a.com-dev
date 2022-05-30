@@ -47,7 +47,11 @@ function ChonkyBrowse(props) {
       const folder = node.payload.files[0]
       fileName = folder.id.replace(/^.*[\\/]/, '')
       toast(`Opening file: \n ${fileName}`)
-      props.setPopupFile(fileName)
+      let data = await fetch(
+        `${print2aApiEndpoint}/GetmdFile?fileLocation=${folder.id}`,
+      )
+      data = await data.text()
+      props.setPopupFile(fileName, folder.id, data)
       props.setShowPopup()
       // window.open(`${print2aApiEndpoint}/${folder.id}`, '_blank')
     } else if (
@@ -166,7 +170,6 @@ function ChonkyBrowse(props) {
     }
     getData()
   }, [currentPath])
-
   // Chonky file browser docs: https://timbokz.github.io/Chonky/
   return (
     <FileBrowser
@@ -186,6 +189,7 @@ function ChonkyBrowse(props) {
         setPopupFile={props.setPopupFile}
         setShowPopup={props.setShowPopup}
         state={props.state}
+        theme={props.theme}
       />
     </FileBrowser>
   )
