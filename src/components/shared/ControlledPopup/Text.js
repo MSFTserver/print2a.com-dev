@@ -3,8 +3,8 @@ import Markdown from 'marked-react'
 import { Button, Frame } from 'arwes'
 import Popup from 'reactjs-popup'
 import { Document, pdfjs } from 'react-pdf'
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 import 'reactjs-popup/dist/index.css'
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
 
 // eslint-disable-next-line react/prefer-stateless-function
 class TextPopup extends React.Component {
@@ -33,7 +33,9 @@ class TextPopup extends React.Component {
       )
     } else {
       console.log(`data:application/pdf;base64,${popupFile.data}`)
-      fileToRender = <Document file={`data:application/pdf;base64,${popupFile.data}`} />
+      fileToRender = (
+        <Document file={`data:application/pdf;base64,${popupFile.data}`} />
+      )
     }
     return (
       <Popup
