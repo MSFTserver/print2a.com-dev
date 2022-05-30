@@ -7,15 +7,25 @@ import 'reactjs-popup/dist/index.css'
 // eslint-disable-next-line react/prefer-stateless-function
 class TextPopup extends React.Component {
   render() {
-    const { setShowPopup, state, theme, overlayStyle, contentStyle } =
-      this.props
+    const { setShowPopup, state, theme } = this.props
     const { popupFile, showPopup } = state
+    const contentStyle = {
+      background: 'none',
+      color: theme.color.primary.base,
+      border: 'none',
+      display: 'block',
+      overflow: 'hidden auto',
+      width: '95vw'
+    }
+    const overlayStyle = {
+      background: 'rgba(0,0,0,0.5)',
+    }
     let fileToRender
-    console.log(popupFile.data)
     if (popupFile.ext === 'md') {
       fileToRender = <Markdown value={popupFile.data} gfm />
     } else {
-      fileToRender = popupFile.data
+      fileToRender = <pre style={{overflow: 'hidden',
+        whiteSpace: 'pre-wrap'}}>{popupFile.data}</pre>
     }
     return (
       <Popup
@@ -29,10 +39,13 @@ class TextPopup extends React.Component {
           corners={6}
           layer="primary"
           show
+          noBackground
           theme={theme}
           style={{
             backgroundColor: theme.background.primary.level0,
             padding: '1vh',
+            height: '80vh',
+            display: 'flex'
           }}
         >
           <Button type="button" className="close" onClick={setShowPopup}>
@@ -50,7 +63,8 @@ class TextPopup extends React.Component {
           >
             <i className="fa-solid fa-circle-arrow-down"></i>Download
           </Button>
-          <div className="popupContents">
+          <div className="popupContents" style={{overflow: 'hidden auto',
+height: '74vh'}}>
             {fileToRender}
           </div>
         </Frame>

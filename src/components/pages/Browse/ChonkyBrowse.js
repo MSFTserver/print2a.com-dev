@@ -51,9 +51,10 @@ function ChonkyBrowse(props) {
       toast(`Opening file: \n ${fileName}`)
       if (['md', 'txt'].includes(fileExt)) {
         data = await fetch(
-          `${print2aApiEndpoint}/GetTextFile?fileLocation=${folder.id}`,
+          `${print2aApiEndpoint}/GetTextFile?fileLocation=${folder.id}`
         )
         data = await data.text()
+        console.log("DATA2",data)
       }
       props.setPopupFile(fileName, folder.id, fileExt, data)
       props.setShowPopup()

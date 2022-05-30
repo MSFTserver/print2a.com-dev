@@ -24,8 +24,6 @@ class ControlledPopup extends React.Component {
       return (
         <TextPopup
           {...this.props}
-          contentStyle={contentStyle}
-          overlayStyle={overlayStyle}
         />
       )
     }
