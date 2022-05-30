@@ -2,14 +2,13 @@ import React, { useState } from 'react'
 import Popup from 'reactjs-popup'
 import 'reactjs-popup/dist/index.css'
 import { Button, Frame } from 'arwes'
-import MarkdownPopup from './Markdown'
+import TextPopup from './Text'
 
 // eslint-disable-next-line react/prefer-stateless-function
 class ControlledPopup extends React.Component {
   render() {
     const { setShowPopup, state, theme } = this.props
     const { popupFile, showPopup } = state
-    const fileExt = popupFile.name ? popupFile.name.split('.').pop() : 'none'
     const contentStyle = {
       background: 'none',
       color: theme.color.primary.base,
@@ -21,9 +20,9 @@ class ControlledPopup extends React.Component {
     const overlayStyle = {
       background: 'rgba(0,0,0,0.5)',
     }
-    if (fileExt === 'md') {
+    if (['md', 'txt'].includes(popupFile.ext)) {
       return (
-        <MarkdownPopup
+        <TextPopup
           {...this.props}
           contentStyle={contentStyle}
           overlayStyle={overlayStyle}

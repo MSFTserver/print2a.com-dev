@@ -38,6 +38,7 @@ class App extends React.Component {
     showPopup: false,
     popupFile: {
       path: null,
+      ext: null,
       name: null,
     },
   }
@@ -84,11 +85,12 @@ class App extends React.Component {
     }))
   }
 
-  setPopupFile = (fileName, filePath, data) => {
+  setPopupFile = (fileName, filePath, fileExt, data) => {
     this.setState((prev) => ({
       popupFile: {
         path: filePath,
         name: fileName,
+        ext: fileExt,
         data,
       },
     }))

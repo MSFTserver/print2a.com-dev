@@ -46,12 +46,16 @@ function ChonkyBrowse(props) {
     } else if (node.id === 'open_files' && !node.payload.files[0].isDir) {
       const folder = node.payload.files[0]
       fileName = folder.id.replace(/^.*[\\/]/, '')
+      const fileExt = fileName.split('.').pop()
+      let data
       toast(`Opening file: \n ${fileName}`)
-      let data = await fetch(
-        `${print2aApiEndpoint}/GetmdFile?fileLocation=${folder.id}`,
-      )
-      data = await data.text()
-      props.setPopupFile(fileName, folder.id, data)
+      if (['md', 'txt'].includes(fileExt)) {
+        data = await fetch(
+          `${print2aApiEndpoint}/GetTextFile?fileLocation=${folder.id}`,
+        )
+        data = await data.text()
+      }
+      props.setPopupFile(fileName, folder.id, fileExt, data)
       props.setShowPopup()
       // window.open(`${print2aApiEndpoint}/${folder.id}`, '_blank')
     } else if (

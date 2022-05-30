@@ -5,7 +5,7 @@ import Popup from 'reactjs-popup'
 import 'reactjs-popup/dist/index.css'
 
 // eslint-disable-next-line react/prefer-stateless-function
-class MarkdownPopup extends React.Component {
+class TextPopup extends React.Component {
   render() {
     const { setShowPopup, state, theme, overlayStyle, contentStyle } =
       this.props
@@ -52,4 +52,4 @@ class MarkdownPopup extends React.Component {
   }
 }
 
-export default MarkdownPopup
+export default TextPopup
