@@ -10,6 +10,13 @@ class TextPopup extends React.Component {
     const { setShowPopup, state, theme, overlayStyle, contentStyle } =
       this.props
     const { popupFile, showPopup } = state
+    let fileToRender
+    console.log(popupFile.data)
+    if (popupFile.ext === 'md') {
+      fileToRender = <Markdown value={popupFile.data} gfm />
+    } else {
+      fileToRender = popupFile.data
+    }
     return (
       <Popup
         open={showPopup}
@@ -44,7 +51,7 @@ class TextPopup extends React.Component {
             <i className="fa-solid fa-circle-arrow-down"></i>Download
           </Button>
           <div className="popupContents">
-            <Markdown className="popupContents" value={popupFile.data} gfm />
+            {fileToRender}
           </div>
         </Frame>
       </Popup>
