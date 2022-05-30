@@ -6,7 +6,6 @@ import { Document, pdfjs } from 'react-pdf/dist/esm/entry.webpack5'
 import 'reactjs-popup/dist/index.css'
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
 
-
 // eslint-disable-next-line react/prefer-stateless-function
 class TextPopup extends React.Component {
   render() {
