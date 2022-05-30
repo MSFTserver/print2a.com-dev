@@ -15,7 +15,7 @@ class TextPopup extends React.Component {
       border: 'none',
       display: 'block',
       overflow: 'hidden auto',
-      width: '95vw'
+      width: '95vw',
     }
     const overlayStyle = {
       background: 'rgba(0,0,0,0.5)',
@@ -24,8 +24,11 @@ class TextPopup extends React.Component {
     if (popupFile.ext === 'md') {
       fileToRender = <Markdown value={popupFile.data} gfm />
     } else {
-      fileToRender = <pre style={{overflow: 'hidden',
-        whiteSpace: 'pre-wrap'}}>{popupFile.data}</pre>
+      fileToRender = (
+        <pre style={{ overflow: 'hidden', whiteSpace: 'pre-wrap' }}>
+          {popupFile.data}
+        </pre>
+      )
     }
     return (
       <Popup
@@ -45,7 +48,7 @@ class TextPopup extends React.Component {
             backgroundColor: theme.background.primary.level0,
             padding: '1vh',
             height: '80vh',
-            display: 'flex'
+            display: 'flex',
           }}
         >
           <Button type="button" className="close" onClick={setShowPopup}>
@@ -63,8 +66,10 @@ class TextPopup extends React.Component {
           >
             <i className="fa-solid fa-circle-arrow-down"></i>Download
           </Button>
-          <div className="popupContents" style={{overflow: 'hidden auto',
-height: '74vh'}}>
+          <div
+            className="popupContents"
+            style={{ overflow: 'hidden auto', height: '74vh' }}
+          >
             {fileToRender}
           </div>
         </Frame>

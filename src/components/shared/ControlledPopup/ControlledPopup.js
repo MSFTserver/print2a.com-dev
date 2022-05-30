@@ -21,11 +21,7 @@ class ControlledPopup extends React.Component {
       background: 'rgba(0,0,0,0.5)',
     }
     if (['md', 'txt'].includes(popupFile.ext)) {
-      return (
-        <TextPopup
-          {...this.props}
-        />
-      )
+      return <TextPopup {...this.props} />
     }
     return (
       <div className="ControlledPopup">
