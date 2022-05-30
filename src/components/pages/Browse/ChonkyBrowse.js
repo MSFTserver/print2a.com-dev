@@ -49,7 +49,7 @@ function ChonkyBrowse(props) {
       const fileExt = fileName.split('.').pop()
       let data
       toast(`Opening file: \n ${fileName}`)
-      if (['md', 'txt'].includes(fileExt)) {
+      if (['md', 'txt', 'pdf'].includes(fileExt)) {
         data = await fetch(
           `${print2aApiEndpoint}/GetTextFile?fileLocation=${folder.id}`,
         )

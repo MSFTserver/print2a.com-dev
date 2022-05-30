@@ -17,6 +17,7 @@
     "react-dom": "^16.14.0",
     "react-hot-toast": "^2.2.0",
     "react-image-lightbox": "^5.1.4",
+    "react-pdf": "^5.7.2",
     "react-photo-gallery": "^8.0.0",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.3.0",

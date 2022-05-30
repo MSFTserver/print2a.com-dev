@@ -20,7 +20,7 @@ class ControlledPopup extends React.Component {
     const overlayStyle = {
       background: 'rgba(0,0,0,0.5)',
     }
-    if (['md', 'txt'].includes(popupFile.ext)) {
+    if (['md', 'txt', 'pdf'].includes(popupFile.ext)) {
       return <TextPopup {...this.props} />
     }
     return (

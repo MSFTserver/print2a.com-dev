@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import Markdown from 'marked-react'
 import { Button, Frame } from 'arwes'
 import Popup from 'reactjs-popup'
+import { Document, pdfjs } from 'react-pdf'
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 import 'reactjs-popup/dist/index.css'
 
 // eslint-disable-next-line react/prefer-stateless-function
@@ -23,12 +25,15 @@ class TextPopup extends React.Component {
     let fileToRender
     if (popupFile.ext === 'md') {
       fileToRender = <Markdown value={popupFile.data} gfm />
-    } else {
+    } else if (popupFile.ext === 'txt') {
       fileToRender = (
         <pre style={{ overflow: 'hidden', whiteSpace: 'pre-wrap' }}>
           {popupFile.data}
         </pre>
       )
+    } else {
+      console.log(`data:application/pdf;base64,${popupFile.data}`)
+      fileToRender = <Document file={`data:application/pdf;base64,${popupFile.data}`} />
     }
     return (
       <Popup

@@ -85,13 +85,13 @@ class App extends React.Component {
     }))
   }
 
-  setPopupFile = (fileName, filePath, fileExt, data) => {
+  setPopupFile = (fileName, filePath, fileExt, fileData) => {
     this.setState((prev) => ({
       popupFile: {
         path: filePath,
         name: fileName,
         ext: fileExt,
-        data,
+        data: fileData,
       },
     }))
   }
