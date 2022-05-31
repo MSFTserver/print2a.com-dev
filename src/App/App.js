@@ -31,52 +31,32 @@ class App extends React.Component {
   }
 
   state = {
-    showHomePage: false,
-    showLatest: false,
-    showLinks: false,
-    showBrowse: false,
+    showPage: 'home',
     showPopup: false,
     popupFile: {
       path: null,
       ext: null,
       name: null,
     },
+    pdfPage: 1,
   }
 
-  setShowHomePage = () => {
+  setShowPage = (page) => {
     this.setState({
-      showHomePage: true,
-      showLatest: false,
-      showLinks: false,
-      showBrowse: false,
+      showPage: page,
     })
   }
 
-  setShowLatest = () => {
-    this.setState({
-      showLatest: true,
-      showHomePage: false,
-      showLinks: false,
-      showBrowse: false,
-    })
+  upPage = () => {
+    this.setState((prev) => ({
+      pdfPage: prev.pdfPage + 1,
+    }))
   }
 
-  setShowLinks = () => {
-    this.setState({
-      showLinks: true,
-      showLatest: false,
-      showHomePage: false,
-      showBrowse: false,
-    })
-  }
-
-  setShowBrowse = () => {
-    this.setState({
-      showBrowse: true,
-      showLinks: false,
-      showLatest: false,
-      showHomePage: false,
-    })
+  downPage = () => {
+    this.setState((prev) => ({
+      pdfPage: prev.pdfPage - 1,
+    }))
   }
 
   setShowPopup = () => {
@@ -99,15 +79,15 @@ class App extends React.Component {
   render() {
     const location = window.location.pathname
     if (location === '/') {
-      this.state.showHomePage = true
+      this.state.showPage = 'home'
     } else if (location === '/latest') {
-      this.state.showLatest = true
+      this.state.showPage = 'latest'
     } else if (location === '/links') {
-      this.state.showLinks = true
+      this.state.showPage = 'links'
     } else if (location === '/browse') {
-      this.state.showBrowse = true
+      this.state.showPage = 'browse'
     } else {
-      this.state.showHomePage = true
+      this.state.showPage = 'home'
     }
     const createdTheme = createTheme(theme)
     const createdSounds = createSounds(mySounds)
@@ -151,10 +131,7 @@ class App extends React.Component {
                 <Router>
                   <MyNav
                     anim={anim}
-                    setShowHomePage={this.setShowHomePage}
-                    setShowLatest={this.setShowLatest}
-                    setShowLinks={this.setShowLinks}
-                    setShowBrowse={this.setShowBrowse}
+                    setShowPage={this.setShowPage}
                     state={this.state}
                   />
                   <Puffs>
@@ -184,6 +161,8 @@ class App extends React.Component {
                             state={this.state}
                             setShowPopup={this.setShowPopup}
                             setPopupFile={this.setPopupFile}
+                            upPage={this.upPage}
+                            downPage={this.downPage}
                             theme={createdTheme}
                           />
                         }

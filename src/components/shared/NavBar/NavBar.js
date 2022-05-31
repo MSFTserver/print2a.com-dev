@@ -15,9 +15,9 @@ class NavBar extends React.Component {
               <Link to="/" id="navToHomePage">
                 <Button
                   animate
-                  disabled={this.props.state.showHomePage}
+                  disabled={this.props.state.showPage === 'home'}
                   show={this.props.anim.entered}
-                  onClick={this.props.setShowHomePage}
+                  onClick={this.props.setShowPage}
                   onMouseEnter={() => this.props.sounds.hover.play()}
                 >
                   Home
@@ -26,9 +26,9 @@ class NavBar extends React.Component {
               <Link to="/latest" id="navToLatest">
                 <Button
                   animate
-                  disabled={this.props.state.showLatest}
+                  disabled={this.props.state.showPage === 'latest'}
                   show={this.props.anim.entered}
-                  onClick={this.props.setShowLatest}
+                  onClick={this.props.setShowPage}
                   onMouseEnter={() => this.props.sounds.hover.play()}
                 >
                   Latest
@@ -37,9 +37,9 @@ class NavBar extends React.Component {
               <Link to="/links" id="navToLinks">
                 <Button
                   animate
-                  disabled={this.props.state.showLinks}
+                  disabled={this.props.state.showPage === 'links'}
                   show={this.props.anim.entered}
-                  onClick={this.props.setShowLinks}
+                  onClick={this.props.setShowPage}
                   onMouseEnter={() => this.props.sounds.hover.play()}
                 >
                   Links
@@ -48,9 +48,9 @@ class NavBar extends React.Component {
               <Link to="/browse" id="navToBrowse">
                 <Button
                   animate
-                  disabled={this.props.state.showBrowse}
+                  disabled={this.props.state.showPage === 'browse'}
                   show={this.props.anim.entered}
-                  onClick={this.props.setShowBrowse}
+                  onClick={this.props.setShowPage}
                   onMouseEnter={() => this.props.sounds.hover.play()}
                 >
                   Browse
