@@ -192,6 +192,8 @@ function ChonkyBrowse(props) {
       <ControlledPopup
         setPopupFile={props.setPopupFile}
         setShowPopup={props.setShowPopup}
+        upPage={props.upPage}
+        downPage={props.downPage}
         state={props.state}
         theme={props.theme}
       />

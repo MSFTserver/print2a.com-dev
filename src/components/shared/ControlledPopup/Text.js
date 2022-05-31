@@ -2,15 +2,15 @@ import React, { useState } from 'react'
 import Markdown from 'marked-react'
 import { Button, Frame } from 'arwes'
 import Popup from 'reactjs-popup'
-import { Document, pdfjs } from 'react-pdf/dist/esm/entry.webpack5'
+import { Document, Page, pdfjs } from 'react-pdf/dist/esm/entry.webpack5'
 import 'reactjs-popup/dist/index.css'
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
 
 // eslint-disable-next-line react/prefer-stateless-function
 class TextPopup extends React.Component {
   render() {
-    const { setShowPopup, state, theme } = this.props
-    const { popupFile, showPopup } = state
+    const { setShowPopup, upPage, downPage, state, theme } = this.props
+    const { popupFile, showPopup, pdfPage } = state
     const contentStyle = {
       background: 'none',
       color: theme.color.primary.base,
@@ -23,6 +23,7 @@ class TextPopup extends React.Component {
       background: 'rgba(0,0,0,0.5)',
     }
     let fileToRender
+    let pdfButtons
     if (popupFile.ext === 'md') {
       fileToRender = <Markdown value={popupFile.data} gfm />
     } else if (popupFile.ext === 'txt') {
@@ -32,9 +33,32 @@ class TextPopup extends React.Component {
         </pre>
       )
     } else {
-      console.log(`data:application/pdf;base64,${popupFile.data}`)
       fileToRender = (
-        <Document file={`data:application/pdf;base64,${popupFile.data}`} />
+        <Document file={`data:application/pdf;base64,${popupFile.data}`}>
+          <Page canvasBackground="transparent" pageNumber={pdfPage} />
+        </Document>
+      )
+      pdfButtons = (
+        <>
+          <Button
+            style={{ padding: '1vh' }}
+            disabled={pdfPage === 1}
+            type="button"
+            className="backwards"
+            onClick={downPage}
+          >
+            ⁻⁻⁻<i className="fa-solid fa-gun fa-flip-horizontal"></i>
+          </Button>
+          Pg.{pdfPage}
+          <Button
+            style={{ padding: '1vh' }}
+            type="button"
+            className="forwards"
+            onClick={upPage}
+          >
+            <i className="fa-solid fa-gun"></i>⁻⁻⁻
+          </Button>
+        </>
       )
     }
     return (
@@ -58,10 +82,16 @@ class TextPopup extends React.Component {
             display: 'flex',
           }}
         >
-          <Button type="button" className="close" onClick={setShowPopup}>
+          <Button
+            style={{ padding: '1vh' }}
+            type="button"
+            className="close"
+            onClick={setShowPopup}
+          >
             <i className="fa-solid fa-xmark"></i>
           </Button>
           <Button
+            style={{ padding: '1vh' }}
             type="button"
             className="download"
             onClick={() =>
@@ -73,9 +103,10 @@ class TextPopup extends React.Component {
           >
             <i className="fa-solid fa-circle-arrow-down"></i>Download
           </Button>
+          {pdfButtons}
           <div
             className="popupContents"
-            style={{ overflow: 'hidden auto', height: '74vh' }}
+            style={{ overflow: 'hidden auto', height: '74vh', padding: '1vh' }}
           >
             {fileToRender}
           </div>
