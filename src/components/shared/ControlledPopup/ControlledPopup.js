@@ -3,6 +3,7 @@ import Popup from 'reactjs-popup'
 import 'reactjs-popup/dist/index.css'
 import { Button, Frame } from 'arwes'
 import TextPopup from './Text'
+import ImagePopup from './Image'
 
 // eslint-disable-next-line react/prefer-stateless-function
 class ControlledPopup extends React.Component {
@@ -22,6 +23,9 @@ class ControlledPopup extends React.Component {
     }
     if (['md', 'txt', 'pdf'].includes(popupFile.ext)) {
       return <TextPopup {...this.props} />
+    }
+    if (['png', 'jpg'].includes(popupFile.ext)) {
+      return <ImagePopup {...this.props} />
     }
     return (
       <div className="ControlledPopup">

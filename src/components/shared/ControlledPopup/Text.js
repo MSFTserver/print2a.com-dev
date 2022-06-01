@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Markdown from 'marked-react'
 import { Button, Frame } from 'arwes'
 import Popup from 'reactjs-popup'
