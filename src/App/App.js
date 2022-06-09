@@ -19,6 +19,7 @@ import HomePage from '../components/pages/HomePage/HomePage'
 import Browse from '../components/pages/Browse/Browse'
 import Latest from '../components/pages/Latest/Latest'
 import Links from '../components/pages/Links/Links'
+import ModelViewer from '../components/pages/ModelViewer/ModelViewer'
 import background from '../helpers/assets/images/background.gif'
 import glow from '../helpers/assets/images/glow.png'
 import theme from '../helpers/Theme'
@@ -86,6 +87,8 @@ class App extends React.Component {
       this.state.showPage = 'links'
     } else if (location === '/browse') {
       this.state.showPage = 'browse'
+    } else if (location === '/modelViewer') {
+      this.state.showPage = 'modelViewer'
     } else {
       this.state.showPage = 'home'
     }
@@ -166,6 +169,11 @@ class App extends React.Component {
                             theme={createdTheme}
                           />
                         }
+                      />
+                      <Route
+                        path="/modelViewer"
+                        exact
+                        element={<ModelViewer {...props} anim={anim} />}
                       />
                     </Routes>
                   </Puffs>
