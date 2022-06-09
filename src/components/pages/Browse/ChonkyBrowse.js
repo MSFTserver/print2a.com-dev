@@ -51,7 +51,7 @@ function ChonkyBrowse(props) {
       toast(`Opening file: \n ${fileName}`)
       if (['md', 'txt', 'pdf', 'png', 'jpg'].includes(fileExt)) {
         data = await fetch(
-          `${print2aApiEndpoint}/GetTextFile?fileLocation=${folder.id}`,
+          `${print2aApiEndpoint}/GetFile?fileLocation=${folder.id}`,
         )
         data = await data.text()
       }
