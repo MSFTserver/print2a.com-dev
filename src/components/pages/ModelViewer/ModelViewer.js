@@ -41,7 +41,7 @@ class ModelViewer extends React.Component {
             <input
               type="submit"
               className="buttonChanger"
-              onClick="moreDensity(false);"
+              onClick={moreDensity(false)}
               value="-"
             />
             <br />
