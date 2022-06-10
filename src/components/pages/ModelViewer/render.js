@@ -21,10 +21,6 @@ let filamentCost = parseFloat('20')
 let filamentDiameter = parseFloat('1.75')
 let printingSpeed = parseFloat('150')
 
-const print2aApiHost = 'https://print2a.com'
-const print2aApiPort = '5757'
-const print2aApiEndpoint = `${print2aApiHost}:${print2aApiPort}`
-
 document.getElementById('densityLabel').innerHTML = 'Density'
 document.getElementById('weightLabel').innerHTML = 'Weight'
 document.getElementById('volumeLabel').innerHTML = 'Volume'
@@ -39,7 +35,157 @@ document.getElementById('timeLabel').innerHTML = 'Build time'
 document.getElementById('hoursLabel').innerHTML = 'hours'
 document.getElementById('minutesLabel').innerHTML = 'minutes'
 
-function init(fileExt, fileData) {
+export function animateSpin() {
+  controls.update()
+  requestAnimationFrame(animateSpin)
+  renderer.render(scene, camera)
+}
+
+export function animate() {
+  requestAnimationFrame(animate)
+  light.position.copy(camera.getWorldPosition())
+  renderer.render(scene, camera)
+}
+
+export function onWindowResize() {
+  camera.aspect = window.innerWidth / window.innerHeight
+  camera.updateProjectionMatrix()
+  renderer.setSize(window.innerWidth, window.innerHeight)
+}
+
+export function updateCost() {
+  let volumeFinal = vol / 1000
+  volumeFinal = volumeFinal.toFixed(2)
+  let weightFinal = volumeFinal * density
+  weightFinal = weightFinal.toFixed(2)
+  let finalCost = (weightFinal * filamentCost) / 1000
+  finalCost = parseFloat(finalCost).toFixed(2)
+  document.getElementById('costValue').innerHTML = finalCost
+}
+
+export function moreDensity(a) {
+  let result
+  if (a === true) {
+    result = parseFloat(density) + parseFloat('0.05')
+    if (result <= 10000) {
+      density = result
+    }
+  } else {
+    result = parseFloat(density) - parseFloat('0.05')
+    if (result > 0) {
+      density = result
+    }
+  }
+
+  density = parseFloat(density).toFixed(2)
+
+  let newHeightFinal = height / 10
+  newHeightFinal = heightFinal.toFixed(2)
+  let newWidthFinal = width / 10
+  newWidthFinal = newWidthFinal.toFixed(2)
+  let newDepthFinal = depth / 10
+  newDepthFinal = newDepthFinal.toFixed(2)
+  let newVolumeFinal = vol / 1000
+  newVolumeFinal = newVolumeFinal.toFixed(2)
+  let newWeightFinal = newVolumeFinal * density
+  newWeightFinal = newWeightFinal.toFixed(2)
+
+  document.getElementById('densityValue').innerHTML = density
+  document.getElementById('weightValue').innerHTML = newWeightFinal
+  document.getElementById('volumeValue').innerHTML = newVolumeFinal
+  document.getElementById('widthValue').innerHTML = newWidthFinal
+  document.getElementById('depthValue').innerHTML = newDepthFinal
+  document.getElementById('heightValue').innerHTML = newHeightFinal
+  updateCost()
+}
+
+export function moreCost(a) {
+  let result
+  if (a === true) {
+    result = parseFloat(filamentCost) + parseFloat('5')
+    if (result <= 10000) {
+      filamentCost = result
+    }
+  } else {
+    result = parseFloat(filamentCost) - parseFloat('5')
+    if (result > 0) {
+      filamentCost = result
+    }
+  }
+  document.getElementById('costKilogramValue').innerHTML = filamentCost
+
+  updateCost()
+}
+
+export function moreDiameter(a) {
+  let result
+  if (a === true) {
+    result = parseFloat(filamentDiameter) + parseFloat('0.05')
+    if (result <= 10000) {
+      filamentDiameter = result
+    }
+  } else {
+    result = parseFloat(filamentDiameter) - parseFloat('0.05')
+    if (result > 0) {
+      filamentDiameter = result
+    }
+  }
+
+  filamentDiameter = parseFloat(filamentDiameter).toFixed(2)
+
+  let filamentLength = parseFloat(
+    (((vol / (filamentDiameter / 2)) ^ (2 / Math.PI)) * 2) / 10,
+  ).toFixed(2)
+  filamentLength = parseFloat(filamentLength).toFixed(0)
+
+  let hours = Math.floor(filamentLength / printingSpeed / 60)
+  hours = parseFloat(hours).toFixed(0)
+
+  let minutes = (filamentLength / printingSpeed) % 60
+  minutes = parseFloat(minutes).toFixed(0)
+
+  if (minutes === 0) {
+    minutes = 1
+  }
+
+  document.getElementById('diameterValue').innerHTML = filamentDiameter
+  document.getElementById('lengthValue').innerHTML = filamentLength
+  document.getElementById('hoursValue').innerHTML = hours
+  document.getElementById('minutesValue').innerHTML = minutes
+}
+
+export function moreSpeed(a) {
+  let result
+  if (a === true) {
+    result = parseFloat(printingSpeed) + parseFloat('5')
+    if (result <= 10000) {
+      printingSpeed = result
+    }
+  } else {
+    result = parseFloat(printingSpeed) - parseFloat('5')
+    if (result > 0) {
+      printingSpeed = result
+    }
+  }
+
+  printingSpeed = parseFloat(printingSpeed).toFixed(0)
+
+  const filamentLength = parseFloat(
+    (((vol / (filamentDiameter / 2)) ^ (2 / Math.PI)) * 2) / 10,
+  ).toFixed(2)
+
+  let hours = Math.floor(filamentLength / printingSpeed / 60)
+  hours = parseFloat(hours).toFixed(0)
+
+  let minutes = (filamentLength / printingSpeed) % 60
+  minutes = parseFloat(minutes).toFixed(0)
+
+  document.getElementById('speedValue').innerHTML = printingSpeed
+  document.getElementById('hoursValue').innerHTML = hours
+  document.getElementById('minutesValue').innerHTML = minutes
+}
+
+export function init(fileExt, fileData) {
   container = document.getElementById('container')
   container.innerHTML = ''
 
@@ -227,167 +373,4 @@ function init(fileExt, fileData) {
   requestAnimationFrame(animate)
 
   window.addEventListener('resize', onWindowResize, false)
-}
-
-function animateSpin() {
-  controls.update()
-  requestAnimationFrame(animateSpin)
-  renderer.render(scene, camera)
-}
-
-function animate() {
-  requestAnimationFrame(animate)
-  light.position.copy(camera.getWorldPosition())
-  renderer.render(scene, camera)
-}
-
-function onWindowResize() {
-  camera.aspect = window.innerWidth / window.innerHeight
-  camera.updateProjectionMatrix()
-  renderer.setSize(window.innerWidth, window.innerHeight)
-}
-
-export function moreDensity(a) {
-  let result
-  if (a === true) {
-    result = parseFloat(density) + parseFloat('0.05')
-    if (result <= 10000) {
-      density = result
-    }
-  } else {
-    result = parseFloat(density) - parseFloat('0.05')
-    if (result > 0) {
-      density = result
-    }
-  }
-
-  density = parseFloat(density).toFixed(2)
-
-  let newHeightFinal = height / 10
-  newHeightFinal = heightFinal.toFixed(2)
-  let newWidthFinal = width / 10
-  newWidthFinal = newWidthFinal.toFixed(2)
-  let newDepthFinal = depth / 10
-  newDepthFinal = newDepthFinal.toFixed(2)
-  let newVolumeFinal = vol / 1000
-  newVolumeFinal = newVolumeFinal.toFixed(2)
-  let newWeightFinal = newVolumeFinal * density
-  newWeightFinal = newWeightFinal.toFixed(2)
-
-  document.getElementById('densityValue').innerHTML = density
-  document.getElementById('weightValue').innerHTML = newWeightFinal
-  document.getElementById('volumeValue').innerHTML = newVolumeFinal
-  document.getElementById('widthValue').innerHTML = newWidthFinal
-  document.getElementById('depthValue').innerHTML = newDepthFinal
-  document.getElementById('heightValue').innerHTML = newHeightFinal
-  updateCost()
-}
-
-export function moreCost(a) {
-  let result
-  if (a === true) {
-    result = parseFloat(filamentCost) + parseFloat('5')
-    if (result <= 10000) {
-      filamentCost = result
-    }
-  } else {
-    result = parseFloat(filamentCost) - parseFloat('5')
-    if (result > 0) {
-      filamentCost = result
-    }
-  }
-  document.getElementById('costKilogramValue').innerHTML = filamentCost
-
-  updateCost()
-}
-
-function updateCost() {
-  let volumeFinal = vol / 1000
-  volumeFinal = volumeFinal.toFixed(2)
-  let weightFinal = volumeFinal * density
-  weightFinal = weightFinal.toFixed(2)
-  let finalCost = (weightFinal * filamentCost) / 1000
-  finalCost = parseFloat(finalCost).toFixed(2)
-  document.getElementById('costValue').innerHTML = finalCost
-}
-
-export function moreDiameter(a) {
-  let result
-  if (a === true) {
-    result = parseFloat(filamentDiameter) + parseFloat('0.05')
-    if (result <= 10000) {
-      filamentDiameter = result
-    }
-  } else {
-    result = parseFloat(filamentDiameter) - parseFloat('0.05')
-    if (result > 0) {
-      filamentDiameter = result
-    }
-  }
-
-  filamentDiameter = parseFloat(filamentDiameter).toFixed(2)
-
-  let filamentLength = parseFloat(
-    (((vol / (filamentDiameter / 2)) ^ (2 / Math.PI)) * 2) / 10,
-  ).toFixed(2)
-  filamentLength = parseFloat(filamentLength).toFixed(0)
-
-  let hours = Math.floor(filamentLength / printingSpeed / 60)
-  hours = parseFloat(hours).toFixed(0)
-
-  let minutes = (filamentLength / printingSpeed) % 60
-  minutes = parseFloat(minutes).toFixed(0)
-
-  if (minutes === 0) {
-    minutes = 1
-  }
-
-  document.getElementById('diameterValue').innerHTML = filamentDiameter
-  document.getElementById('lengthValue').innerHTML = filamentLength
-  document.getElementById('hoursValue').innerHTML = hours
-  document.getElementById('minutesValue').innerHTML = minutes
-}
-
-export function moreSpeed(a) {
-  let result
-  if (a === true) {
-    result = parseFloat(printingSpeed) + parseFloat('5')
-    if (result <= 10000) {
-      printingSpeed = result
-    }
-  } else {
-    result = parseFloat(printingSpeed) - parseFloat('5')
-    if (result > 0) {
-      printingSpeed = result
-    }
-  }
-
-  printingSpeed = parseFloat(printingSpeed).toFixed(0)
-
-  const filamentLength = parseFloat(
-    (((vol / (filamentDiameter / 2)) ^ (2 / Math.PI)) * 2) / 10,
-  ).toFixed(2)
-
-  let hours = Math.floor(filamentLength / printingSpeed / 60)
-  hours = parseFloat(hours).toFixed(0)
-
-  let minutes = (filamentLength / printingSpeed) % 60
-  minutes = parseFloat(minutes).toFixed(0)
-
-  document.getElementById('speedValue').innerHTML = printingSpeed
-  document.getElementById('hoursValue').innerHTML = hours
-  document.getElementById('minutesValue').innerHTML = minutes
-}
-
-window.onload = async function () {
-  const queryString = window.location.search
-  const urlParams = new URLSearchParams(queryString)
-  const filePath = urlParams.get('fileLocation')
-  const fileName = filePath.split('/').pop()
-  const fileExt = fileName.split('.').pop().toLowerCase()
-  const data = await fetch(
-    `${print2aApiEndpoint}/GetFile?fileLocation=print2a/${filePath}`,
-  )
-  const fileData = await data.arrayBuffer()
-  init(fileExt, fileData)
 }
