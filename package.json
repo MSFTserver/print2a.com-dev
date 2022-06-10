@@ -23,7 +23,8 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "^5.0.1",
     "reactjs-popup": "^2.0.5",
-    "sass": "^1.52.1"
+    "sass": "^1.52.1",
+    "three": "^0.141.0"
   },
   "scripts": {
     "getdep": "npx install-peerdeps --dev @imaginary-cloud/eslint-config-react",

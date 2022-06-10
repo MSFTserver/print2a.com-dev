@@ -3,7 +3,8 @@ import './ModelViewer.scss'
 import React from 'react'
 import { Frame, Heading, Link, Words } from 'arwes'
 // import { moreDensity, moreCost, moreDiameter, moreSpeed, init } from './render'
-import { THREE, signedVolumeOfTriangle } from './three'
+import * as THREE from 'three'
+import './three'
 
 const STRING_ERROR =
   'ERROR: Please check that the model is a STL, OBJ or 3DS model.'
@@ -13,7 +14,7 @@ let scene
 let renderer
 let controls
 let light
-let vol
+let vol = 0
 let mesh
 let height
 let heightFinal
@@ -27,7 +28,12 @@ let filamentCost = parseFloat('20')
 let filamentDiameter = parseFloat('1.75')
 let printingSpeed = parseFloat('150')
 
-console.log("test")
+console.log('test')
+
+// PART OF THE VOLUME CALCULATOR SCRIPT
+// eslint-disable-next-line
+// prettier-ignore
+function signedVolumeOfTriangle(p1,p2,p3){const v321 = p3.x*p2.y*p1.z;const v231 = p2.x*p3.y*p1.z;const v312 = p3.x*p1.y*p2.z;const v132 = p1.x*p3.y*p2.z;const v213 = p2.x*p1.y*p3.z;const v123 = p1.x*p2.y*p3.z;return (-v321 + v231 + v312 - v132 - v213 + v123)/6;}
 
 function animateSpin() {
   controls.update()
@@ -372,6 +378,9 @@ function init(fileExt, fileData) {
 class ModelViewer extends React.Component {
   async componentDidMount() {
     console.log('MOUNTED!')
+    const print2aApiHost = 'https://print2a.com'
+    const print2aApiPort = '5757'
+    const print2aApiEndpoint = `${print2aApiHost}:${print2aApiPort}`
     const queryString = window.location.search
     const urlParams = new URLSearchParams(queryString)
     const filePath = urlParams.get('fileLocation')
@@ -381,9 +390,6 @@ class ModelViewer extends React.Component {
       `${print2aApiEndpoint}/GetFile?fileLocation=print2a/${filePath}`,
     )
     const fileData = await data.arrayBuffer()
-    const print2aApiHost = 'https://print2a.com'
-    const print2aApiPort = '5757'
-    const print2aApiEndpoint = `${print2aApiHost}:${print2aApiPort}`
     document.getElementById('densityLabel').innerHTML = 'Density'
     document.getElementById('weightLabel').innerHTML = 'Weight'
     document.getElementById('volumeLabel').innerHTML = 'Volume'
