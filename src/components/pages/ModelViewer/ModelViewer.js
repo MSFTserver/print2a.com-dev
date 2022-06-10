@@ -4,7 +4,14 @@ import React from 'react'
 import { Frame, Heading, Link, Words } from 'arwes'
 // import { moreDensity, moreCost, moreDiameter, moreSpeed, init } from './render'
 import * as THREE from 'three'
-import { STLLoader, STLExporter, OBJLoader, TDSLoader, OrbitControls, signedVolumeOfTriangle } from './three'
+import {
+  STLLoader,
+  STLExporter,
+  OBJLoader,
+  TDSLoader,
+  OrbitControls,
+  signedVolumeOfTriangle,
+} from './three'
 
 const STRING_ERROR =
   'ERROR: Please check that the model is a STL, OBJ or 3DS model.'
