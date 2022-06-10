@@ -4,7 +4,7 @@ import React from 'react'
 import { Frame, Heading, Link, Words } from 'arwes'
 // import { moreDensity, moreCost, moreDiameter, moreSpeed, init } from './render'
 import * as THREE from 'three'
-import './three'
+import { STLLoader, STLExporter, OBJLoader, TDSLoader, OrbitControls, signedVolumeOfTriangle } from './three'
 
 const STRING_ERROR =
   'ERROR: Please check that the model is a STL, OBJ or 3DS model.'
@@ -29,11 +29,6 @@ let filamentDiameter = parseFloat('1.75')
 let printingSpeed = parseFloat('150')
 
 console.log('test')
-
-// PART OF THE VOLUME CALCULATOR SCRIPT
-// eslint-disable-next-line
-// prettier-ignore
-function signedVolumeOfTriangle(p1,p2,p3){const v321 = p3.x*p2.y*p1.z;const v231 = p2.x*p3.y*p1.z;const v312 = p3.x*p1.y*p2.z;const v132 = p1.x*p3.y*p2.z;const v213 = p2.x*p1.y*p3.z;const v123 = p1.x*p2.y*p3.z;return (-v321 + v231 + v312 - v132 - v213 + v123)/6;}
 
 function animateSpin() {
   controls.update()
@@ -231,20 +226,20 @@ function init(fileExt, fileData) {
     let contents = fileData
     console.log('LOAD: ', contents)
     if (fileExt === 'obj') {
-      const object = new THREE.OBJLoader().parse(contents)
+      const object = new OBJLoader().parse(contents)
       const sceneConverter = new THREE.Scene()
       sceneConverter.add(object)
-      const exporter = new THREE.STLExporter()
+      const exporter = new STLExporter()
       contents = exporter.parse(sceneConverter)
     } else if (fileExt === '3ds') {
-      const object = new THREE.TDSLoader().parse(contents)
+      const object = new TDSLoader().parse(contents)
       const sceneConverter = new THREE.Scene()
       sceneConverter.add(object)
-      const exporter = new THREE.STLExporter()
+      const exporter = new STLExporter()
       contents = exporter.parse(sceneConverter)
     }
 
-    const geometry = new THREE.STLLoader().parse(contents)
+    const geometry = new STLLoader().parse(contents)
     geometry.computeFaceNormals()
     geometry.computeVertexNormals()
     geometry.center()
@@ -348,8 +343,8 @@ function init(fileExt, fileData) {
     camera.position.set(0, -distance, 0)
 
     // AN ALTERNATIVE FOR MOVING THE OBJECT USING THE MOUSE WITHIN THE RENDERER
-    controls = new THREE.OrbitControls(camera, renderer.domElement)
-    // controls = new THREE.OrbitControls(camera);
+    controls = new OrbitControls(camera, renderer.domElement)
+    // controls = new OrbitControls(camera);
     controls.update()
     scene.add(mesh)
     controls.autoRotate = true
