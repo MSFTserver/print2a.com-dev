@@ -3856,4 +3856,6 @@ class OBJLoader extends Loader {
 
 }
 
-export { OrbitControls, MapControls, STLExporter, STLLoader, TDSLoader, OBJLoader };
+function signedVolumeOfTriangle(p1,p2,p3){var v321 = p3.x*p2.y*p1.z;var v231 = p2.x*p3.y*p1.z;var v312 = p3.x*p1.y*p2.z;var v132 = p1.x*p3.y*p2.z;var v213 = p2.x*p1.y*p3.z;var v123 = p1.x*p2.y*p3.z;return (-v321 + v231 + v312 - v132 - v213 + v123)/6;}
+
+export { OrbitControls, MapControls, STLExporter, STLLoader, TDSLoader, OBJLoader,signedVolumeOfTriangle };
