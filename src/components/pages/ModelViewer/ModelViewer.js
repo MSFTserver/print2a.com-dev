@@ -2,17 +2,16 @@
 import './ModelViewer.scss'
 import React from 'react'
 import { Frame, Heading, Link, Words } from 'arwes'
-import './three'
+import * as THREE from 'three';
+import { OrbitControls, STLExporter, STLLoader, TDSLoader, OBJLoader } from './three.js'
 
 const STRING_ERROR =
   'ERROR: Please check that the model is a STL, OBJ or 3DS model.'
 
-const modalContainer = document.getElementById('modalContainer')
+const modelContainer = document.getElementById('modelContainer')
 
 const scene = new THREE.Scene()
 scene.background = new THREE.Color(0x000000)
-
-document.getElementById('calcContainer').style.display = 'block'
 
 const camera = new THREE.PerspectiveCamera(
   45,
@@ -41,10 +40,6 @@ let density = parseFloat('1.05')
 const filamentCost = parseFloat('20')
 const filamentDiameter = parseFloat('1.75')
 const printingSpeed = parseFloat('150')
-document.getElementById('densityValue').innerHTML = density
-document.getElementById('costKilogramValue').innerHTML = filamentCost
-document.getElementById('diameterValue').innerHTML = filamentDiameter
-document.getElementById('speedValue').innerHTML = printingSpeed
 
 function animate() {
   requestAnimationFrame(animate)
@@ -63,14 +58,14 @@ function updateCost() {
   volumeFinal = volumeFinal.toFixed(2)
   let weightFinal = volumeFinal * density
   weightFinal = weightFinal.toFixed(2)
-  let finalCost = (weightFinal * filament_cost) / 1000
+  let finalCost = (weightFinal * filamentCost) / 1000
   finalCost = parseFloat(finalCost).toFixed(2)
   document.getElementById('costValue').innerHTML = finalCost
 }
 
 function moreDensity(increaseDensity) {
   let result
-  if (increaseDensity == true) {
+  if (increaseDensity === true) {
     result = parseFloat(density) + parseFloat('0.01')
     if (result <= 10000) {
       density = result
@@ -106,7 +101,7 @@ function moreDensity(increaseDensity) {
 
 function moreCost(increaseCost) {
   let result
-  if (increaseCost == true) {
+  if (increaseCost === true) {
     result = parseFloat(filament_cost) + parseFloat('1')
     if (result <= 10000) {
       filament_cost = result
@@ -124,7 +119,7 @@ function moreCost(increaseCost) {
 
 function moreDiameter(increaseDiameter) {
   let result
-  if (increaseDiameter == true) {
+  if (increaseDiameter === true) {
     result = parseFloat(filament_diameter) + parseFloat('0.01')
     if (result <= 10000) {
       filament_diameter = result
@@ -208,18 +203,18 @@ function init(fileExt, fileData) {
   }
 
   const sceneConverter = new THREE.Scene()
-  const exporter = new THREE.STLExporter()
+  const exporter = new STLExporter()
   if (fileExt === 'obj') {
-    const object = new THREE.OBJLoader().parse(fileData)
+    const object = new OBJLoader().parse(fileData)
     sceneConverter.add(object)
     fileData = exporter.parse(sceneConverter)
   } else if (fileExt === '3ds') {
-    const object3ds = new THREE.TDSLoader().parse(fileData)
+    const object3ds = new TDSLoader().parse(fileData)
     sceneConverter.add(object3ds)
     fileData = exporter.parse(sceneConverter)
   }
 
-  const geometry = new THREE.STLLoader().parse(fileData)
+  const geometry = new STLLoader().parse(fileData)
   geometry.computeFaceNormals()
   geometry.computeVertexNormals()
   geometry.center()
@@ -320,8 +315,8 @@ function init(fileExt, fileData) {
   const division_y = Math.floor(y / 10)
 
   // AN ALTERNATIVE FOR MOVING THE OBJECT USING THE MOUSE WITHIN THE RENDERER
-  controls = new THREE.OrbitControls(camera, renderer.domElement)
-  // controls = new THREE.OrbitControls(camera);
+  controls = new OrbitControls(camera, renderer.domElement)
+  // controls = new OrbitControls(camera);
   function animateSpin() {
     controls.update()
     requestAnimationFrame(animateSpin)
@@ -339,7 +334,7 @@ function init(fileExt, fileData) {
   light.position.set(0, 1, 0)
   scene.add(light)
 
-  modalContainer.appendChild(renderer.domElement)
+  modelContainer.appendChild(renderer.domElement)
 
   requestAnimationFrame(animate)
 
@@ -361,13 +356,17 @@ class ModelViewer extends React.Component {
       `${print2aApiEndpoint}/GetFile?fileLocation=print2a/${filePath}`,
     )
     const fileData = await data.arrayBuffer()
+    document.getElementById('densityValue').innerHTML = density
+    document.getElementById('costKilogramValue').innerHTML = filamentCost
+    document.getElementById('diameterValue').innerHTML = filamentDiameter
+    document.getElementById('speedValue').innerHTML = printingSpeed
+    document.getElementById('calcContainer').style.display = 'block'
     init(fileExt, fileData)
   }
 
   render() {
     return (
       <div className="ModelViewer">
-        <script src="three.js"></script>
         <div id="loading" className="loading_splash">
           <div className="loading_splash_container">
             <div className="lds-spinner">
