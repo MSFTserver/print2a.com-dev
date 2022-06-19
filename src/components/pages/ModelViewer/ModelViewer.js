@@ -5,7 +5,7 @@ import { Frame, Heading, Link, Words } from 'arwes'
 import * as THREE from 'three';
 import { OrbitControls, STLExporter, STLLoader, TDSLoader, OBJLoader } from './three.js'
 
-const STRING_ERROR =
+const StringERROR =
   'ERROR: Please check that the model is a STL, OBJ or 3DS model.'
 
 const modelContainer = document.getElementById('modelContainer')
@@ -37,9 +37,9 @@ let width
 let depth
 
 let density = parseFloat('1.05')
-const filamentCost = parseFloat('20')
-const filamentDiameter = parseFloat('1.75')
-const printingSpeed = parseFloat('150')
+let filamentCost = parseFloat('20')
+let filamentDiameter = parseFloat('1.75')
+let printingSpeed = parseFloat('150')
 
 function animate() {
   requestAnimationFrame(animate)
@@ -89,7 +89,6 @@ function moreDensity(increaseDensity) {
   volumeFinal = volumeFinal.toFixed(2)
   let weightFinal = volumeFinal * density
   weightFinal = weightFinal.toFixed(2)
-
   document.getElementById('densityValue').innerHTML = density
   document.getElementById('weightValue').innerHTML = weightFinal
   document.getElementById('volumeValue').innerHTML = volumeFinal
@@ -102,17 +101,17 @@ function moreDensity(increaseDensity) {
 function moreCost(increaseCost) {
   let result
   if (increaseCost === true) {
-    result = parseFloat(filament_cost) + parseFloat('1')
+    result = parseFloat(filamentCost) + parseFloat('1')
     if (result <= 10000) {
-      filament_cost = result
+      filamentCost = result
     }
   } else {
-    result = parseFloat(filament_cost) - parseFloat('1')
+    result = parseFloat(filamentCost) - parseFloat('1')
     if (result > 0) {
-      filament_cost = result
+      filamentCost = result
     }
   }
-  document.getElementById('costKilogramValue').innerHTML = filament_cost
+  document.getElementById('costKilogramValue').innerHTML = filamentCost
 
   updateCost()
 }
@@ -120,36 +119,36 @@ function moreCost(increaseCost) {
 function moreDiameter(increaseDiameter) {
   let result
   if (increaseDiameter === true) {
-    result = parseFloat(filament_diameter) + parseFloat('0.01')
+    result = parseFloat(filamentDiameter) + parseFloat('0.01')
     if (result <= 10000) {
-      filament_diameter = result
+      filamentDiameter = result
     }
   } else {
-    result = parseFloat(filament_diameter) - parseFloat('0.01')
+    result = parseFloat(filamentDiameter) - parseFloat('0.01')
     if (result > 0) {
-      filament_diameter = result
+      filamentDiameter = result
     }
   }
 
-  filament_diameter = parseFloat(filament_diameter).toFixed(2)
+  filamentDiameter = parseFloat(filamentDiameter).toFixed(2)
 
-  let filament_length = parseFloat(
-    (((vol / (filament_diameter / 2)) ^ (2 / Math.PI)) * 2) / 10,
+  let filamentLength = parseFloat(
+    (((vol / (filamentDiameter / 2)) ^ (2 / Math.PI)) * 2) / 10,
   ).toFixed(2)
-  filament_length = parseFloat(filament_length).toFixed(0)
+  filamentLength = parseFloat(filamentLength).toFixed(0)
 
-  let hours = Math.floor(filament_length / printing_speed / 60)
+  let hours = Math.floor(filamentLength / printingSpeed / 60)
   hours = parseFloat(hours).toFixed(0)
 
-  let minutes = (filament_length / printing_speed) % 60
+  let minutes = (filamentLength / printingSpeed) % 60
   minutes = parseFloat(minutes).toFixed(0)
 
   if (minutes == 0) {
     minutes = 1
   }
 
-  document.getElementById('diameterValue').innerHTML = filament_diameter
-  document.getElementById('lengthValue').innerHTML = filament_length
+  document.getElementById('diameterValue').innerHTML = filamentDiameter
+  document.getElementById('lengthValue').innerHTML = filamentLength
   document.getElementById('hoursValue').innerHTML = hours
   document.getElementById('minutesValue').innerHTML = minutes
 }
@@ -157,30 +156,30 @@ function moreDiameter(increaseDiameter) {
 function moreSpeed(increaseSpeed) {
   let result
   if (increaseSpeed == true) {
-    result = parseFloat(printing_speed) + parseFloat('1')
+    result = parseFloat(printingSpeed) + parseFloat('1')
     if (result <= 10000) {
-      printing_speed = result
+      printingSpeed = result
     }
   } else {
-    result = parseFloat(printing_speed) - parseFloat('1')
+    result = parseFloat(printingSpeed) - parseFloat('1')
     if (result > 0) {
-      printing_speed = result
+      printingSpeed = result
     }
   }
 
-  printing_speed = parseFloat(printing_speed).toFixed(0)
+  printingSpeed = parseFloat(printingSpeed).toFixed(0)
 
-  const filament_length = parseFloat(
-    (((vol / (filament_diameter / 2)) ^ (2 / Math.PI)) * 2) / 10,
+  const filamentLength = parseFloat(
+    (((vol / (filamentDiameter / 2)) ^ (2 / Math.PI)) * 2) / 10,
   ).toFixed(2)
 
-  let hours = Math.floor(filament_length / printing_speed / 60)
+  let hours = Math.floor(filamentLength / printingSpeed / 60)
   hours = parseFloat(hours).toFixed(0)
 
-  let minutes = (filament_length / printing_speed) % 60
+  let minutes = (filamentLength / printingSpeed) % 60
   minutes = parseFloat(minutes).toFixed(0)
 
-  document.getElementById('speedValue').innerHTML = printing_speed
+  document.getElementById('speedValue').innerHTML = printingSpeed
   document.getElementById('hoursValue').innerHTML = hours
   document.getElementById('minutesValue').innerHTML = minutes
 }
@@ -199,7 +198,7 @@ function init(fileExt, fileData) {
     // HIDDING THE LOADING SPLASH
     document.getElementById('loading').style.display = 'none'
     console.log('EXT: ', fileExt)
-    alert(STRING_ERROR)
+    alert(StringERROR)
   }
 
   const sceneConverter = new THREE.Scene()
@@ -267,22 +266,22 @@ function init(fileExt, fileData) {
   let weightFinal = volumeFinal * density
   weightFinal = weightFinal.toFixed(2)
 
-  let filament_length = parseFloat(
-    (((vol / (filament_diameter / 2)) ^ (2 / Math.PI)) * 2) / 10,
+  let filamentLength = parseFloat(
+    (((vol / (filamentDiameter / 2)) ^ (2 / Math.PI)) * 2) / 10,
   ).toFixed(2)
-  filament_length = parseFloat(filament_length).toFixed(0)
+  filamentLength = parseFloat(filamentLength).toFixed(0)
 
-  let hours = Math.floor(filament_length / printing_speed / 60)
+  let hours = Math.floor(filamentLength / printingSpeed / 60)
   hours = parseFloat(hours).toFixed(0)
 
-  let minutes = (filament_length / printing_speed) % 60
+  let minutes = (filamentLength / printingSpeed) % 60
   minutes = parseFloat(minutes).toFixed(0)
 
   if (minutes == 0) {
     minutes = 1
   }
 
-  let finalCost = (weightFinal * filament_cost) / 1000
+  let finalCost = (weightFinal * filamentCost) / 1000
   finalCost = parseFloat(finalCost).toFixed(2)
 
   document.getElementById('weightValue').innerHTML = weightFinal
@@ -291,7 +290,7 @@ function init(fileExt, fileData) {
   document.getElementById('depthValue').innerHTML = depthFinal
   document.getElementById('heightValue').innerHTML = heightFinal
   document.getElementById('costValue').innerHTML = finalCost
-  document.getElementById('lengthValue').innerHTML = filament_length
+  document.getElementById('lengthValue').innerHTML = filamentLength
   document.getElementById('hoursValue').innerHTML = hours
   document.getElementById('minutesValue').innerHTML = minutes
 
@@ -311,8 +310,8 @@ function init(fileExt, fileData) {
 
   const x = distance + 200
   const y = distance + 200
-  const division_x = Math.floor(x / 10)
-  const division_y = Math.floor(y / 10)
+  const divisionX = Math.floor(x / 10)
+  const divisionY = Math.floor(y / 10)
 
   // AN ALTERNATIVE FOR MOVING THE OBJECT USING THE MOUSE WITHIN THE RENDERER
   controls = new OrbitControls(camera, renderer.domElement)
@@ -393,14 +392,14 @@ class ModelViewer extends React.Component {
             <input
               type="submit"
               className="buttonChanger"
-              onClick={moreDensity(true)}
+              onClick={() => moreDensity(true)}
               value="+"
             />
             &nbsp;
             <input
               type="submit"
               className="buttonChanger"
-              onClick={moreDensity(false)}
+              onClick={() => moreDensity(false)}
               value="-"
             />
             <br />
@@ -421,14 +420,14 @@ class ModelViewer extends React.Component {
             <input
               type="submit"
               className="buttonChanger"
-              onClick={moreCost(true)}
+              onClick={() => moreCost(true)}
               value="+"
             />
             &nbsp;
             <input
               type="submit"
               className="buttonChanger"
-              onClick={moreCost(false)}
+              onClick={() => moreCost(false)}
               value="-"
             />
             <br />
@@ -440,14 +439,14 @@ class ModelViewer extends React.Component {
             <input
               type="submit"
               className="buttonChanger"
-              onClick={moreDiameter(true)}
+              onClick={() => moreDiameter(true)}
               value="+"
             />
             &nbsp;
             <input
               type="submit"
               className="buttonChanger"
-              onClick={moreDiameter(false)}
+              onClick={() => moreDiameter(false)}
               value="-"
             />
             <br />
@@ -456,14 +455,14 @@ class ModelViewer extends React.Component {
             <input
               type="submit"
               className="buttonChanger"
-              onClick={moreSpeed(true)}
+              onClick={() => moreSpeed(true)}
               value="+"
             />
             &nbsp;
             <input
               type="submit"
               className="buttonChanger"
-              onClick={moreSpeed(false)}
+              onClick={() => moreSpeed(false)}
               value="-"
             />
             <br />
