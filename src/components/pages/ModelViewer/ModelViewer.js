@@ -3,12 +3,10 @@ import './ModelViewer.scss'
 import React from 'react'
 import { Frame, Heading, Link, Words } from 'arwes'
 import * as THREE from 'three';
-import { OrbitControls, STLExporter, STLLoader, TDSLoader, OBJLoader } from './three.js'
+import { OrbitControls, STLExporter, STLLoader, TDSLoader, OBJLoader, signedVolumeOfTriangle } from './three.js'
 
 const StringERROR =
   'ERROR: Please check that the model is a STL, OBJ or 3DS model.'
-
-const modelContainer = document.getElementById('modelContainer')
 
 const scene = new THREE.Scene()
 scene.background = new THREE.Color(0x000000)
@@ -214,7 +212,6 @@ function init(fileExt, fileData) {
   }
 
   const geometry = new STLLoader().parse(fileData)
-  geometry.computeFaceNormals()
   geometry.computeVertexNormals()
   geometry.center()
 
@@ -333,7 +330,7 @@ function init(fileExt, fileData) {
   light.position.set(0, 1, 0)
   scene.add(light)
 
-  modelContainer.appendChild(renderer.domElement)
+  document.getElementById('modelContainer').appendChild(renderer.domElement)
 
   requestAnimationFrame(animate)
 
