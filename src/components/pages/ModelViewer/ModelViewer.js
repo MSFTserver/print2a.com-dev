@@ -9,7 +9,7 @@ const StringERROR =
   'ERROR: Please check that the model is a STL, OBJ or 3DS model.'
 
 const scene = new THREE.Scene()
-scene.background = new THREE.Color(0x000000)
+//scene.background = new THREE.Color(0x000000)
 
 const camera = new THREE.PerspectiveCamera(
   45,
@@ -17,18 +17,24 @@ const camera = new THREE.PerspectiveCamera(
   1,
   100000,
 )
-camera.position.z = 300
-camera.position.y = -500
-camera.position.x = -500
-camera.up = new THREE.Vector3(0, 0, 1)
 
 let vol = 0
 
+function vh(v) {
+  var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+  return (v * h) / 100;
+}
+
+function vw(v) {
+  var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+  return (v * w) / 100;
+}
+
 const renderer = new THREE.WebGLRenderer({ antialias: false })
-renderer.setSize(window.innerWidth, window.innerHeight)
+renderer.setClearColor( 0x000000, 0 );
+renderer.setSize(vw(80), vh(80))
 
 let controls
-let light
 let mesh
 let height
 let width
@@ -38,12 +44,6 @@ let density = parseFloat('1.05')
 let filamentCost = parseFloat('20')
 let filamentDiameter = parseFloat('1.75')
 let printingSpeed = parseFloat('150')
-
-function animate() {
-  requestAnimationFrame(animate)
-  light.position.copy(camera.getWorldPosition())
-  renderer.render(scene, camera)
-}
 
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight
@@ -321,18 +321,17 @@ function init(fileExt, fileData) {
   controls.update()
   console.log(controls)
   scene.add(mesh)
-  controls.autoRotate = true
+  //controls.autoRotate = true
   animateSpin()
   // HIDDING THE LOADING SPLASH
   document.getElementById('loading').style.display = 'none'
 
-  light = new THREE.HemisphereLight(0xffffff, 0x000000, 1)
-  light.position.set(0, 1, 0)
+  let light = new THREE.HemisphereLight(0x000000, 0xffffff, 1)
+  light.position.set(1, 1, 0)
   scene.add(light)
 
-  document.getElementById('modelContainer').appendChild(renderer.domElement)
 
-  requestAnimationFrame(animate)
+  document.getElementById('modelContainer').appendChild(renderer.domElement)
 
   window.addEventListener('resize', onWindowResize, false)
 }
@@ -384,7 +383,7 @@ class ModelViewer extends React.Component {
         <div className="content">
           <div id="modelContainer"></div>
           <div id="calcContainer">
-            <span id="densityLabel"></span>:&nbsp;
+            <span id="densityLabel">Density</span>:&nbsp;
             <span id="densityValue"></span>&nbsp;g/cc&nbsp;
             <input
               type="submit"
@@ -400,19 +399,19 @@ class ModelViewer extends React.Component {
               value="-"
             />
             <br />
-            <span id="weightLabel"></span>:&nbsp;<span id="weightValue"></span>
+            <span id="weightLabel">Weight</span>:&nbsp;<span id="weightValue"></span>
             &nbsp;g
             <br />
-            <span id="volumeLabel"></span>:&nbsp;<span id="volumeValue"></span>
+            <span id="volumeLabel">Volume</span>:&nbsp;<span id="volumeValue"></span>
             &nbsp;cm3
             <br />
-            <span id="sizeLabel"></span>:&nbsp;<span id="widthValue"></span>
+            <span id="sizeLabel">Dimensions</span>:&nbsp;<span id="widthValue"></span>
             &nbsp;x&nbsp;
             <span id="heightValue"></span>&nbsp;x&nbsp;
             <span id="depthValue"></span>&nbsp;cm
             <br />
             <hr className="separator" />
-            <span id="costKilogramLabel"></span>:&nbsp;$
+            <span id="costKilogramLabel">Filament Cost</span>:&nbsp;$
             <span id="costKilogramValue"></span>&nbsp;
             <input
               type="submit"
@@ -428,10 +427,10 @@ class ModelViewer extends React.Component {
               value="-"
             />
             <br />
-            <span id="costLabel"></span>:&nbsp;$<span id="costValue"></span>
+            <span id="costLabel">Printing Cost</span>:&nbsp;$<span id="costValue"></span>
             <br />
             <hr className="separator" />
-            <span id="diameterLabel"></span>:&nbsp;
+            <span id="diameterLabel">Filament Diameter</span>:&nbsp;
             <span id="diameterValue"></span>&nbsp;mm&nbsp;
             <input
               type="submit"
@@ -447,7 +446,7 @@ class ModelViewer extends React.Component {
               value="-"
             />
             <br />
-            <span id="speedLabel"></span>:&nbsp;<span id="speedValue"></span>
+            <span id="speedLabel">Print Speed</span>:&nbsp;<span id="speedValue"></span>
             &nbsp;mm/s&nbsp;
             <input
               type="submit"
@@ -463,14 +462,14 @@ class ModelViewer extends React.Component {
               value="-"
             />
             <br />
-            <span id="lengthLabel"></span>:&nbsp;<span id="lengthValue"></span>
+            <span id="lengthLabel">Filament Length</span>:&nbsp;<span id="lengthValue"></span>
             &nbsp;mm
             <br />
-            <span id="timeLabel"></span>:&nbsp;<span id="hoursValue"></span>
+            <span id="timeLabel">Print Time</span>:&nbsp;<span id="hoursValue"></span>
             &nbsp;
-            <span id="hoursLabel"></span>&nbsp;<span id="minutesValue"></span>
+            <span id="hoursLabel">hrs</span>&nbsp;<span id="minutesValue"></span>
             &nbsp;
-            <span id="minutesLabel"></span>
+            <span id="minutesLabel">mins</span>
             <br />
           </div>
         </div>
