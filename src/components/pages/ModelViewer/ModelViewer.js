@@ -30,12 +30,6 @@ function vw(v) {
   return (v * w) / 100;
 }
 
-function resizeInput() {
-  console.log(this.value)
-  this.style.width = `${this.value.length + 2}ch`
-  moreDensity(0,this.value)
-}
-
 const renderer = new THREE.WebGLRenderer({ antialias: false })
 renderer.setClearColor( 0x000000, 0 );
 renderer.setSize(vw(100), vh(100))
@@ -71,23 +65,9 @@ function updateCost() {
   document.getElementById('costValue').innerHTML = finalCost
 }
 
-function moreDensity(increaseDensity, inputDensity=null) {
-  let result
-  if (inputDensity) {
-    density = inputDensity
-  } else if (increaseDensity === true) {
-    result = parseFloat(density) + parseFloat('0.01')
-    if (result <= 10000) {
-      density = result
-    }
-  } else {
-    result = parseFloat(density) - parseFloat('0.01')
-    if (result > 0) {
-      density = result
-    }
-  }
-
-  density = parseFloat(density).toFixed(2)
+function moreDensity(inputDensity) {
+  console.log(inputDensity)
+  density = inputDensity
 
   let heightFinal = height / 10
   heightFinal = heightFinal.toFixed(2)
@@ -99,7 +79,7 @@ function moreDensity(increaseDensity, inputDensity=null) {
   volumeFinal = volumeFinal.toFixed(2)
   let weightFinal = volumeFinal * density
   weightFinal = weightFinal.toFixed(2)
-  document.getElementById('densityValue').placeholder = density
+  document.getElementById('densityValue').value = density
   document.getElementById('weightValue').innerHTML = weightFinal
   document.getElementById('volumeValue').innerHTML = volumeFinal
   document.getElementById('widthValue').innerHTML = widthFinal
@@ -165,7 +145,7 @@ function moreDiameter(increaseDiameter) {
 
 function moreSpeed(increaseSpeed) {
   let result
-  if (increaseSpeed == true) {
+  if (increaseSpeed === true) {
     result = parseFloat(printingSpeed) + parseFloat('1')
     if (result <= 10000) {
       printingSpeed = result
@@ -382,8 +362,9 @@ class ModelViewer extends React.Component {
     )
     const fileData = await data.arrayBuffer()
     const densityValueInput = document.getElementById('densityValue')
-    densityValueInput.addEventListener('input', resizeInput)
-    densityValueInput.style.width = densityValueInput.value ? (`${densityValueInput.value.length+2}ch`) : (`${densityValueInput.placeholder.length+2}ch`)
+    densityValueInput.addEventListener('input', () => moreDensity(densityValueInput.value))
+    densityValueInput.style.width = "6ch"
+    densityValueInput.value = density
     document.getElementById('costKilogramValue').innerHTML = filamentCost
     document.getElementById('diameterValue').innerHTML = filamentDiameter
     document.getElementById('speedValue').innerHTML = printingSpeed
@@ -424,21 +405,8 @@ class ModelViewer extends React.Component {
           >
             <div id="calcContents">
             <label for="densityValue">Density:&nbsp;</label>
-            <input type="number" steps="0.01" id="densityValue" placeHolder={density}></input>
+            <input type="number" step="0.01" min="0" id="densityValue"></input>
             <span>&nbsp;g/cc&nbsp;</span>
-            {/* <input
-              type="submit"
-              className="buttonChanger"
-              onClick={() => moreDensity(true)}
-              value="+"
-            />
-            &nbsp;
-            <input
-              type="submit"
-              className="buttonChanger"
-              onClick={() => moreDensity(false)}
-              value="-"
-            /> */}
             <br />
             <span id="weightLabel">Weight</span>:&nbsp;<span id="weightValue"></span>
             &nbsp;g
