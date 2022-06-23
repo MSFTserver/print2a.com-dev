@@ -39,11 +39,15 @@ let mesh
 let height
 let width
 let depth
+let pauseSpin = 1
+let pauseSpinTimeout
 
 let density = parseFloat('1.05')
 let filamentCost = parseFloat('20')
 let filamentDiameter = parseFloat('1.75')
 let printingSpeed = parseFloat('150')
+
+const getRandomValue = (min, max) => Math.random() * (max - min) + min;
 
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight
@@ -195,7 +199,6 @@ function init(fileExt, fileData) {
   } else {
     // HIDDING THE LOADING SPLASH
     document.getElementById('loading').style.display = 'none'
-    console.log('EXT: ', fileExt)
     alert(StringERROR)
   }
 
@@ -305,11 +308,6 @@ function init(fileExt, fileData) {
 
   camera.position.set(0, -distance, 0)
 
-  const x = distance + 200
-  const y = distance + 200
-  const divisionX = Math.floor(x / 10)
-  const divisionY = Math.floor(y / 10)
-
   // AN ALTERNATIVE FOR MOVING THE OBJECT USING THE MOUSE WITHIN THE RENDERER
   controls = new OrbitControls(camera, renderer.domElement)
   // controls = new OrbitControls(camera);
@@ -323,21 +321,38 @@ function init(fileExt, fileData) {
   lightHolder.add(ambientLight)
   scene.add(lightHolder)
 
-  function animateSpin() {
+  const updateSpin = () => {
+    mesh.rotation.x += getRandomValue(0.003, 0.004)
+    mesh.rotation.y += getRandomValue(0.001, 0.002)
+    mesh.rotation.z += getRandomValue(0.003, 0.004)
+  }
+
+  controls.addEventListener('end', () => {
+    clearTimeout(pauseSpinTimeout)
+    pauseSpinTimeout = setTimeout(() => {
+      pauseSpin = 1
+    }, 30000)
+  })
+
+  controls.addEventListener('start', () => {
+    clearTimeout(pauseSpinTimeout)
+    pauseSpin = 0
+  })
+
+  const animateSpin = () => {
+    if (pauseSpin) {
+      updateSpin()
+    }
     controls.update()
-    lightHolder.quaternion.copy(camera.quaternion);
+    lightHolder.quaternion.copy(camera.quaternion)
     renderer.render(scene, camera)
     requestAnimationFrame(animateSpin)
   }
   controls.update()
-  console.log(controls)
   scene.add(mesh)
-  //controls.autoRotate = true
   animateSpin()
   // HIDDING THE LOADING SPLASH
   document.getElementById('loading').style.display = 'none'
-
-
 
   document.getElementById('modelContainer').appendChild(renderer.domElement)
 
@@ -346,7 +361,6 @@ function init(fileExt, fileData) {
 
 class ModelViewer extends React.Component {
   async componentDidMount() {
-    console.log('MOUNTED!')
     const print2aApiHost = 'https://print2a.com'
     const print2aApiPort = '5757'
     const print2aApiEndpoint = `${print2aApiHost}:${print2aApiPort}`
@@ -391,6 +405,13 @@ class ModelViewer extends React.Component {
         <div className="content">
           <div id="modelContainer"></div>
           <div id="calcContainer">
+          <Frame
+          animate
+          level={3}
+          corners={6}
+          layer="primary"
+          show={this.props.anim.entered}
+        >
             <span id="densityLabel">Density</span>:&nbsp;
             <span id="densityValue"></span>&nbsp;g/cc&nbsp;
             <input
@@ -479,6 +500,7 @@ class ModelViewer extends React.Component {
             &nbsp;
             <span id="minutesLabel">mins</span>
             <br />
+            </Frame>
           </div>
         </div>
       </div>
