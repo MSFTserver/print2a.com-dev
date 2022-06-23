@@ -216,9 +216,9 @@ function init(fileExt, fileData) {
   geometry.center()
 
   const material = new THREE.MeshPhongMaterial({
-    color: 0x00ff00,
+    color: 0x00cc00,
     emissive: 0x000000,
-    emissiveIntensity: 2,
+    emissiveIntensity: 1,
   })
   mesh = new THREE.Mesh(geometry, material)
 
@@ -313,10 +313,21 @@ function init(fileExt, fileData) {
   // AN ALTERNATIVE FOR MOVING THE OBJECT USING THE MOUSE WITHIN THE RENDERER
   controls = new OrbitControls(camera, renderer.domElement)
   // controls = new OrbitControls(camera);
+  
+  const lightHolder = new THREE.Group()
+  const ambientLight = new THREE.AmbientLight(0xd5d5d5)
+  const light = new THREE.SpotLight(0xffffff)
+  light.position.set( 1, distance, 100 )
+  light.castShadow = true
+  lightHolder.add(light)
+  lightHolder.add(ambientLight)
+  scene.add(lightHolder)
+
   function animateSpin() {
     controls.update()
-    requestAnimationFrame(animateSpin)
+    lightHolder.quaternion.copy(camera.quaternion);
     renderer.render(scene, camera)
+    requestAnimationFrame(animateSpin)
   }
   controls.update()
   console.log(controls)
@@ -326,9 +337,6 @@ function init(fileExt, fileData) {
   // HIDDING THE LOADING SPLASH
   document.getElementById('loading').style.display = 'none'
 
-  let light = new THREE.HemisphereLight(0x000000, 0xffffff, 1)
-  light.position.set(1, 1, 0)
-  scene.add(light)
 
 
   document.getElementById('modelContainer').appendChild(renderer.domElement)
