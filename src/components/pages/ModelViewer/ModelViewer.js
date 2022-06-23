@@ -21,18 +21,24 @@ const camera = new THREE.PerspectiveCamera(
 let vol = 0
 
 function vh(v) {
-  var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+  let h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
   return (v * h) / 100;
 }
 
 function vw(v) {
-  var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+  let w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0)
   return (v * w) / 100;
+}
+
+function resizeInput() {
+  console.log(this.value)
+  this.style.width = `${this.value.length + 2}ch`
+  moreDensity(0,this.value)
 }
 
 const renderer = new THREE.WebGLRenderer({ antialias: false })
 renderer.setClearColor( 0x000000, 0 );
-renderer.setSize(vw(80), vh(80))
+renderer.setSize(vw(100), vh(100))
 
 let controls
 let mesh
@@ -47,7 +53,7 @@ let filamentCost = parseFloat('20')
 let filamentDiameter = parseFloat('1.75')
 let printingSpeed = parseFloat('150')
 
-const getRandomValue = (min, max) => Math.random() * (max - min) + min;
+const getRandomValue = (min, max) => Math.random() * (max - min) + min
 
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight
@@ -65,9 +71,11 @@ function updateCost() {
   document.getElementById('costValue').innerHTML = finalCost
 }
 
-function moreDensity(increaseDensity) {
+function moreDensity(increaseDensity, inputDensity=null) {
   let result
-  if (increaseDensity === true) {
+  if (inputDensity) {
+    density = inputDensity
+  } else if (increaseDensity === true) {
     result = parseFloat(density) + parseFloat('0.01')
     if (result <= 10000) {
       density = result
@@ -91,7 +99,7 @@ function moreDensity(increaseDensity) {
   volumeFinal = volumeFinal.toFixed(2)
   let weightFinal = volumeFinal * density
   weightFinal = weightFinal.toFixed(2)
-  document.getElementById('densityValue').innerHTML = density
+  document.getElementById('densityValue').placeholder = density
   document.getElementById('weightValue').innerHTML = weightFinal
   document.getElementById('volumeValue').innerHTML = volumeFinal
   document.getElementById('widthValue').innerHTML = widthFinal
@@ -373,7 +381,9 @@ class ModelViewer extends React.Component {
       `${print2aApiEndpoint}/GetFile?fileLocation=print2a/${filePath}`,
     )
     const fileData = await data.arrayBuffer()
-    document.getElementById('densityValue').innerHTML = density
+    const densityValueInput = document.getElementById('densityValue')
+    densityValueInput.addEventListener('input', resizeInput)
+    densityValueInput.style.width = densityValueInput.value ? (`${densityValueInput.value.length+2}ch`) : (`${densityValueInput.placeholder.length+2}ch`)
     document.getElementById('costKilogramValue').innerHTML = filamentCost
     document.getElementById('diameterValue').innerHTML = filamentDiameter
     document.getElementById('speedValue').innerHTML = printingSpeed
@@ -406,15 +416,17 @@ class ModelViewer extends React.Component {
           <div id="modelContainer"></div>
           <div id="calcContainer">
           <Frame
-          animate
-          level={3}
-          corners={6}
-          layer="primary"
-          show={this.props.anim.entered}
-        >
-            <span id="densityLabel">Density</span>:&nbsp;
-            <span id="densityValue"></span>&nbsp;g/cc&nbsp;
-            <input
+            animate
+            level={3}
+            corners={6}
+            layer="primary"
+            show={this.props.anim.entered}
+          >
+            <div id="calcContents">
+            <label for="densityValue">Density:&nbsp;</label>
+            <input type="number" steps="0.01" id="densityValue" placeHolder={density}></input>
+            <span>&nbsp;g/cc&nbsp;</span>
+            {/* <input
               type="submit"
               className="buttonChanger"
               onClick={() => moreDensity(true)}
@@ -426,7 +438,7 @@ class ModelViewer extends React.Component {
               className="buttonChanger"
               onClick={() => moreDensity(false)}
               value="-"
-            />
+            /> */}
             <br />
             <span id="weightLabel">Weight</span>:&nbsp;<span id="weightValue"></span>
             &nbsp;g
@@ -500,6 +512,7 @@ class ModelViewer extends React.Component {
             &nbsp;
             <span id="minutesLabel">mins</span>
             <br />
+            </div>
             </Frame>
           </div>
         </div>

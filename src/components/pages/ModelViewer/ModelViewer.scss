@@ -1,18 +1,18 @@
+.App {
+	overflow:hidden;
+}	
 .ModelViewer {
 
-  .content
+position: fixed;
+
+.content
 	{
 	margin:auto;
-	max-width:80vw;
-	max-height:80vh;
 	overflow:hidden;
 	text-align:center;
 	}
 #modelContainer
 	{
-	width:80vw;
-	height:80vh;
-	margin-bottom:-10px;
 	overflow:hidden;
 	}
 #calcContainer
@@ -22,6 +22,18 @@
 	left:5px;
 	top:8px;
 	margin-left:5px;
+	}
+#calcContents 
+	{
+	padding: 1em;
+	#densityValue {
+		background: rgba(0,0,0,0);
+		border-color: #2a9d00;
+		color: #2a9d00;
+	} 
+	::placeholder {
+		color: #2a9d00;
+	}
 	}
 .leftitem
 	{
