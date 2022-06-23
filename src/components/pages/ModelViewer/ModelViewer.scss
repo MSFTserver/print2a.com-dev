@@ -1,18 +1,7 @@
 .ModelViewer {
-  
-  padding: 30px;
-  position: fixed;
-  left: 10%;
-  right: 10%;
 
   .content
 	{
-	width:80vw;
-	height:80vh;
-	left:0;
-	right:0;
-	top:0;
-	bottom:0;
 	margin:auto;
 	max-width:80vw;
 	max-height:80vh;
@@ -30,16 +19,9 @@
 	{
 	position:absolute;
 	text-align:left;
-	font-family:Arial;
-	font-size:15px;
-	color:#2a9d00;
-	text-shadow:0 0 1px #5a5a5a,0 0 5px #5a5a5a;
 	left:5px;
 	top:8px;
 	margin-left:5px;
-	z-index:999;
-	cursor:default;
-	display:none;
 	}
 .leftitem
 	{
