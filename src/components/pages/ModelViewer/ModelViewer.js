@@ -1,7 +1,7 @@
 /* eslint-disable react/prefer-stateless-function */
 import './ModelViewer.scss'
 import React from 'react'
-import { Frame, Heading, Link, Words } from 'arwes'
+import { Frame, Heading, Link, Words, Button } from 'arwes'
 import * as THREE from 'three';
 import { OrbitControls, STLExporter, STLLoader, TDSLoader, OBJLoader, signedVolumeOfTriangle } from './three.js'
 
@@ -65,9 +65,28 @@ function updateCost() {
   document.getElementById('costValue').innerHTML = finalCost
 }
 
-function moreDensity(inputDensity) {
-  console.log(inputDensity)
-  density = inputDensity
+function moreDensity(inputDensity, increaseDensity=null) {
+  
+  if(inputDensity !== null) {
+      density = parseFloat(inputDensity)
+  } else if(increaseDensity && inputDensity === null) {
+      density = parseFloat(density) + parseFloat('0.01')
+      document.getElementById('densityValue').value = density.toFixed(2)
+  } else if(increaseDensity !== null && inputDensity === null) {
+      density = parseFloat(density) - parseFloat('0.01')
+      document.getElementById('densityValue').value = density.toFixed(2)
+  } else {
+    density = parseFloat('0.01')
+    document.getElementById('densityValue').value = density.toFixed(2)
+  }
+
+  if (density > 100) {
+    density = parseFloat('100.00')
+    document.getElementById('densityValue').value = density.toFixed(2)
+  } else if (density < 0) {
+    density = parseFloat('0.00')
+    document.getElementById('densityValue').value = density.toFixed(2)
+  }
 
   let heightFinal = height / 10
   heightFinal = heightFinal.toFixed(2)
@@ -79,7 +98,6 @@ function moreDensity(inputDensity) {
   volumeFinal = volumeFinal.toFixed(2)
   let weightFinal = volumeFinal * density
   weightFinal = weightFinal.toFixed(2)
-  document.getElementById('densityValue').value = density
   document.getElementById('weightValue').innerHTML = weightFinal
   document.getElementById('volumeValue').innerHTML = volumeFinal
   document.getElementById('widthValue').innerHTML = widthFinal
@@ -361,10 +379,9 @@ class ModelViewer extends React.Component {
       `${print2aApiEndpoint}/GetFile?fileLocation=print2a/${filePath}`,
     )
     const fileData = await data.arrayBuffer()
-    const densityValueInput = document.getElementById('densityValue')
-    densityValueInput.addEventListener('input', () => moreDensity(densityValueInput.value))
-    densityValueInput.style.width = "6ch"
-    densityValueInput.value = density
+    const densityInput = document.getElementById('densityValue')
+    densityInput.addEventListener('input', () => moreDensity(densityInput.value.toString()))
+    densityInput.value = density
     document.getElementById('costKilogramValue').innerHTML = filamentCost
     document.getElementById('diameterValue').innerHTML = filamentDiameter
     document.getElementById('speedValue').innerHTML = printingSpeed
@@ -404,9 +421,24 @@ class ModelViewer extends React.Component {
             show={this.props.anim.entered}
           >
             <div id="calcContents">
-            <label for="densityValue">Density:&nbsp;</label>
-            <input type="number" step="0.01" min="0" id="densityValue"></input>
-            <span>&nbsp;g/cc&nbsp;</span>
+            <label for="densityValue">
+              <Words animate show={this.props.anim.entered}>
+                Density:&nbsp;
+              </Words>
+            </label>
+            <input id="densityValue"></input>
+            <span>
+              <Words animate show={this.props.anim.entered}>
+                &nbsp;g/cc&nbsp;
+              </Words>
+            </span>
+            <Button buttonProps={{style:{padding:"1vh"}}} className="buttonChanger" onClick={() => moreDensity(null,1)}>
+            <i class="fa-solid fa-circle-chevron-up"></i>
+            </Button>
+            &nbsp;
+            <Button buttonProps={{style:{padding:"1vh"}}} className="buttonChanger" onClick={() => moreDensity(null,0)}>
+            <i class="fa-solid fa-circle-chevron-down"></i>
+            </Button>
             <br />
             <span id="weightLabel">Weight</span>:&nbsp;<span id="weightValue"></span>
             &nbsp;g
