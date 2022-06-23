@@ -2,14 +2,21 @@
 import './ModelViewer.scss'
 import React from 'react'
 import { Frame, Heading, Link, Words, Button } from 'arwes'
-import * as THREE from 'three';
-import { OrbitControls, STLExporter, STLLoader, TDSLoader, OBJLoader, signedVolumeOfTriangle } from './three.js'
+import * as THREE from 'three'
+import {
+  OrbitControls,
+  STLExporter,
+  STLLoader,
+  TDSLoader,
+  OBJLoader,
+  signedVolumeOfTriangle,
+} from './three'
 
 const StringERROR =
   'ERROR: Please check that the model is a STL, OBJ or 3DS model.'
 
 const scene = new THREE.Scene()
-//scene.background = new THREE.Color(0x000000)
+// scene.background = new THREE.Color(0x000000)
 
 const camera = new THREE.PerspectiveCamera(
   45,
@@ -21,17 +28,23 @@ const camera = new THREE.PerspectiveCamera(
 let vol = 0
 
 function vh(v) {
-  let h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
-  return (v * h) / 100;
+  const h = Math.max(
+    document.documentElement.clientHeight,
+    window.innerHeight || 0,
+  )
+  return (v * h) / 100
 }
 
 function vw(v) {
-  let w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0)
-  return (v * w) / 100;
+  const w = Math.max(
+    document.documentElement.clientWidth,
+    window.innerWidth || 0,
+  )
+  return (v * w) / 100
 }
 
 const renderer = new THREE.WebGLRenderer({ antialias: false })
-renderer.setClearColor( 0x000000, 0 );
+renderer.setClearColor(0x000000, 0)
 renderer.setSize(vw(100), vh(100))
 
 let controls
@@ -65,16 +78,15 @@ function updateCost() {
   document.getElementById('costValue').innerHTML = finalCost
 }
 
-function moreDensity(inputDensity, increaseDensity=null) {
-  
-  if(inputDensity !== null) {
-      density = parseFloat(inputDensity)
-  } else if(increaseDensity && inputDensity === null) {
-      density = parseFloat(density) + parseFloat('0.01')
-      document.getElementById('densityValue').value = density.toFixed(2)
-  } else if(increaseDensity !== null && inputDensity === null) {
-      density = parseFloat(density) - parseFloat('0.01')
-      document.getElementById('densityValue').value = density.toFixed(2)
+function moreDensity(inputDensity, increaseDensity = null) {
+  if (inputDensity !== null) {
+    density = parseFloat(inputDensity)
+  } else if (increaseDensity && inputDensity === null) {
+    density = parseFloat(density) + parseFloat('0.01')
+    document.getElementById('densityValue').value = density.toFixed(2)
+  } else if (increaseDensity !== null && inputDensity === null) {
+    density = parseFloat(density) - parseFloat('0.01')
+    document.getElementById('densityValue').value = density.toFixed(2)
   } else {
     density = parseFloat('0.01')
     document.getElementById('densityValue').value = density.toFixed(2)
@@ -151,7 +163,7 @@ function moreDiameter(increaseDiameter) {
   let minutes = (filamentLength / printingSpeed) % 60
   minutes = parseFloat(minutes).toFixed(0)
 
-  if (minutes == 0) {
+  if (minutes === 0) {
     minutes = 1
   }
 
@@ -283,7 +295,7 @@ function init(fileExt, fileData) {
   let minutes = (filamentLength / printingSpeed) % 60
   minutes = parseFloat(minutes).toFixed(0)
 
-  if (minutes == 0) {
+  if (minutes === 0) {
     minutes = 1
   }
 
@@ -317,11 +329,11 @@ function init(fileExt, fileData) {
   // AN ALTERNATIVE FOR MOVING THE OBJECT USING THE MOUSE WITHIN THE RENDERER
   controls = new OrbitControls(camera, renderer.domElement)
   // controls = new OrbitControls(camera);
-  
+
   const lightHolder = new THREE.Group()
   const ambientLight = new THREE.AmbientLight(0xd5d5d5)
   const light = new THREE.SpotLight(0xffffff)
-  light.position.set( 1, distance, 100 )
+  light.position.set(1, distance, 100)
   light.castShadow = true
   lightHolder.add(light)
   lightHolder.add(ambientLight)
@@ -380,7 +392,9 @@ class ModelViewer extends React.Component {
     )
     const fileData = await data.arrayBuffer()
     const densityInput = document.getElementById('densityValue')
-    densityInput.addEventListener('input', () => moreDensity(densityInput.value.toString()))
+    densityInput.addEventListener('input', () =>
+      moreDensity(densityInput.value.toString()),
+    )
     densityInput.value = density
     document.getElementById('costKilogramValue').innerHTML = filamentCost
     document.getElementById('diameterValue').innerHTML = filamentDiameter
@@ -413,106 +427,122 @@ class ModelViewer extends React.Component {
         <div className="content">
           <div id="modelContainer"></div>
           <div id="calcContainer">
-          <Frame
-            animate
-            level={3}
-            corners={6}
-            layer="primary"
-            show={this.props.anim.entered}
-          >
-            <div id="calcContents">
-            <label for="densityValue">
-              <Words animate show={this.props.anim.entered}>
-                Density:&nbsp;
-              </Words>
-            </label>
-            <input id="densityValue"></input>
-            <span>
-              <Words animate show={this.props.anim.entered}>
-                &nbsp;g/cc&nbsp;
-              </Words>
-            </span>
-            <Button buttonProps={{style:{padding:"1vh"}}} className="buttonChanger" onClick={() => moreDensity(null,1)}>
-            <i class="fa-solid fa-circle-chevron-up"></i>
-            </Button>
-            &nbsp;
-            <Button buttonProps={{style:{padding:"1vh"}}} className="buttonChanger" onClick={() => moreDensity(null,0)}>
-            <i class="fa-solid fa-circle-chevron-down"></i>
-            </Button>
-            <br />
-            <span id="weightLabel">Weight</span>:&nbsp;<span id="weightValue"></span>
-            &nbsp;g
-            <br />
-            <span id="volumeLabel">Volume</span>:&nbsp;<span id="volumeValue"></span>
-            &nbsp;cm3
-            <br />
-            <span id="sizeLabel">Dimensions</span>:&nbsp;<span id="widthValue"></span>
-            &nbsp;x&nbsp;
-            <span id="heightValue"></span>&nbsp;x&nbsp;
-            <span id="depthValue"></span>&nbsp;cm
-            <br />
-            <hr className="separator" />
-            <span id="costKilogramLabel">Filament Cost</span>:&nbsp;$
-            <span id="costKilogramValue"></span>&nbsp;
-            <input
-              type="submit"
-              className="buttonChanger"
-              onClick={() => moreCost(true)}
-              value="+"
-            />
-            &nbsp;
-            <input
-              type="submit"
-              className="buttonChanger"
-              onClick={() => moreCost(false)}
-              value="-"
-            />
-            <br />
-            <span id="costLabel">Printing Cost</span>:&nbsp;$<span id="costValue"></span>
-            <br />
-            <hr className="separator" />
-            <span id="diameterLabel">Filament Diameter</span>:&nbsp;
-            <span id="diameterValue"></span>&nbsp;mm&nbsp;
-            <input
-              type="submit"
-              className="buttonChanger"
-              onClick={() => moreDiameter(true)}
-              value="+"
-            />
-            &nbsp;
-            <input
-              type="submit"
-              className="buttonChanger"
-              onClick={() => moreDiameter(false)}
-              value="-"
-            />
-            <br />
-            <span id="speedLabel">Print Speed</span>:&nbsp;<span id="speedValue"></span>
-            &nbsp;mm/s&nbsp;
-            <input
-              type="submit"
-              className="buttonChanger"
-              onClick={() => moreSpeed(true)}
-              value="+"
-            />
-            &nbsp;
-            <input
-              type="submit"
-              className="buttonChanger"
-              onClick={() => moreSpeed(false)}
-              value="-"
-            />
-            <br />
-            <span id="lengthLabel">Filament Length</span>:&nbsp;<span id="lengthValue"></span>
-            &nbsp;mm
-            <br />
-            <span id="timeLabel">Print Time</span>:&nbsp;<span id="hoursValue"></span>
-            &nbsp;
-            <span id="hoursLabel">hrs</span>&nbsp;<span id="minutesValue"></span>
-            &nbsp;
-            <span id="minutesLabel">mins</span>
-            <br />
-            </div>
+            <Frame
+              animate
+              level={3}
+              corners={6}
+              layer="primary"
+              show={this.props.anim.entered}
+            >
+              <div id="calcContents">
+                <label htmlFor="densityValue">
+                  <Words animate show={this.props.anim.entered}>
+                    Density:&nbsp;
+                  </Words>
+                </label>
+                <input id="densityValue"></input>
+                <span>
+                  <Words animate show={this.props.anim.entered}>
+                    &nbsp;g/cc&nbsp;
+                  </Words>
+                </span>
+                <Button
+                  buttonProps={{ style: { padding: '1vh' } }}
+                  className="buttonChanger"
+                  onClick={() => moreDensity(null, 1)}
+                >
+                  <i className="fa-solid fa-circle-chevron-up"></i>
+                </Button>
+                &nbsp;
+                <Button
+                  buttonProps={{ style: { padding: '1vh' } }}
+                  className="buttonChanger"
+                  onClick={() => moreDensity(null, 0)}
+                >
+                  <i className="fa-solid fa-circle-chevron-down"></i>
+                </Button>
+                <br />
+                <span id="weightLabel">Weight</span>:&nbsp;
+                <span id="weightValue"></span>
+                &nbsp;g
+                <br />
+                <span id="volumeLabel">Volume</span>:&nbsp;
+                <span id="volumeValue"></span>
+                &nbsp;cm3
+                <br />
+                <span id="sizeLabel">Dimensions</span>:&nbsp;
+                <span id="widthValue"></span>
+                &nbsp;x&nbsp;
+                <span id="heightValue"></span>&nbsp;x&nbsp;
+                <span id="depthValue"></span>&nbsp;cm
+                <br />
+                <hr className="separator" />
+                <span id="costKilogramLabel">Filament Cost</span>:&nbsp;$
+                <span id="costKilogramValue"></span>&nbsp;
+                <input
+                  type="submit"
+                  className="buttonChanger"
+                  onClick={() => moreCost(true)}
+                  value="+"
+                />
+                &nbsp;
+                <input
+                  type="submit"
+                  className="buttonChanger"
+                  onClick={() => moreCost(false)}
+                  value="-"
+                />
+                <br />
+                <span id="costLabel">Printing Cost</span>:&nbsp;$
+                <span id="costValue"></span>
+                <br />
+                <hr className="separator" />
+                <span id="diameterLabel">Filament Diameter</span>:&nbsp;
+                <span id="diameterValue"></span>&nbsp;mm&nbsp;
+                <input
+                  type="submit"
+                  className="buttonChanger"
+                  onClick={() => moreDiameter(true)}
+                  value="+"
+                />
+                &nbsp;
+                <input
+                  type="submit"
+                  className="buttonChanger"
+                  onClick={() => moreDiameter(false)}
+                  value="-"
+                />
+                <br />
+                <span id="speedLabel">Print Speed</span>:&nbsp;
+                <span id="speedValue"></span>
+                &nbsp;mm/s&nbsp;
+                <input
+                  type="submit"
+                  className="buttonChanger"
+                  onClick={() => moreSpeed(true)}
+                  value="+"
+                />
+                &nbsp;
+                <input
+                  type="submit"
+                  className="buttonChanger"
+                  onClick={() => moreSpeed(false)}
+                  value="-"
+                />
+                <br />
+                <span id="lengthLabel">Filament Length</span>:&nbsp;
+                <span id="lengthValue"></span>
+                &nbsp;mm
+                <br />
+                <span id="timeLabel">Print Time</span>:&nbsp;
+                <span id="hoursValue"></span>
+                &nbsp;
+                <span id="hoursLabel">hrs</span>&nbsp;
+                <span id="minutesValue"></span>
+                &nbsp;
+                <span id="minutesLabel">mins</span>
+                <br />
+              </div>
             </Frame>
           </div>
         </div>
