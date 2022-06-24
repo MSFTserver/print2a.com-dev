@@ -1,7 +1,8 @@
 /* eslint-disable react/prefer-stateless-function */
 import './Latest.scss'
 import React from 'react'
-import { Frame, Heading, Link, Words } from 'arwes'
+import { Frame, Header, Heading, Link, Words, Row, Col } from 'arwes'
+import GetLatest from './GetLatest'
 
 class Latest extends React.Component {
   render() {
@@ -14,11 +15,11 @@ class Latest extends React.Component {
           layer="primary"
           show={this.props.anim.entered}
         >
-          <div className="latestContents">
-            <Heading node="h2">
-              <div className="h2">Latest Files and Stats</div>
-            </Heading>
-          </div>
+          <Header style={{ paddingTop: 20 }} animate>
+            <Heading node="h1">Latest Projects</Heading>
+          </Header>
+          <br />
+          <GetLatest />
         </Frame>
       </div>
     )
