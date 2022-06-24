@@ -518,227 +518,228 @@ class ModelViewer extends React.Component {
                   buttonProps={buttonStyle}
                   className="buttonChanger"
                   onClick={() => {
-                    const calcContentsToggle = document.getElementById('calcContentsToggle')
+                    const calcContentsToggle =
+                      document.getElementById('calcContentsToggle')
                     const isToggled = calcContentsToggle.style.display
-                    if(isToggled === 'none'){
+                    if (isToggled === 'none') {
                       calcContentsToggle.style.display = 'inherit'
                     } else {
                       calcContentsToggle.style.display = 'none'
                     }
                   }}
                 >
-                  <i class="fa-solid fa-calculator"></i>
+                  <i className="fa-solid fa-calculator"></i>
                   &nbsp;Calc Menu
                 </Button>
-                <div style={{display:'none'}} id="calcContentsToggle">
-                <Line animate className="separator" />
-                <label htmlFor="densityValue">
-                  <Words animate show={this.props.anim.entered}>
-                    Density:&nbsp;
+                <div style={{ display: 'none' }} id="calcContentsToggle">
+                  <Line animate className="separator" />
+                  <label htmlFor="densityValue">
+                    <Words animate show={this.props.anim.entered}>
+                      Density:&nbsp;
+                    </Words>
+                  </label>
+                  <input id="densityValue" />
+                  <Words layer="alert" animate show={this.props.anim.entered}>
+                    &nbsp;g/cc&nbsp;
                   </Words>
-                </label>
-                <input id="densityValue" />
-                <Words layer="alert" animate show={this.props.anim.entered}>
-                  &nbsp;g/cc&nbsp;
-                </Words>
-                <Button
-                  buttonProps={buttonStyle}
-                  className="buttonChanger"
-                  onClick={() => moreDensity(null, 1)}
-                >
-                  <i className="fa-solid fa-circle-chevron-up"></i>
-                </Button>
-                &nbsp;
-                <Button
-                  buttonProps={buttonStyle}
-                  className="buttonChanger"
-                  onClick={() => moreDensity(null, 0)}
-                >
-                  <i className="fa-solid fa-circle-chevron-down"></i>
-                </Button>
-                <br style={brStyle} />
-                <Words animate show={this.props.anim.entered}>
-                  Weight:&nbsp;
-                </Words>
-                <Words
-                  layer="alert"
-                  animate
-                  show={this.props.anim.entered}
-                  id="weightValue"
-                />
-                <Words layer="alert" animate show={this.props.anim.entered}>
-                  &nbsp;g
-                </Words>
-                <br style={brStyle} />
-                <Words animate show={this.props.anim.entered}>
-                  Volume:&nbsp;
-                </Words>
-                <Words
-                  layer="alert"
-                  animate
-                  show={this.props.anim.entered}
-                  id="volumeValue"
-                />
-                <Words layer="alert" animate show={this.props.anim.entered}>
-                  &nbsp;cm3
-                </Words>
-                <br style={brStyle} />
-                <Words animate show={this.props.anim.entered}>
-                  Dimensions:&nbsp;
-                </Words>
-                <Words
-                  layer="alert"
-                  animate
-                  show={this.props.anim.entered}
-                  id="widthValue"
-                />
-                <Words layer="alert" animate show={this.props.anim.entered}>
-                  &nbsp;x&nbsp;
-                </Words>
-                <Words
-                  layer="alert"
-                  animate
-                  show={this.props.anim.entered}
-                  id="heightValue"
-                />
-                <Words layer="alert" animate show={this.props.anim.entered}>
-                  &nbsp;x&nbsp;
-                </Words>
-                <Words
-                  layer="alert"
-                  animate
-                  show={this.props.anim.entered}
-                  id="depthValue"
-                />
-                <Words layer="alert" animate show={this.props.anim.entered}>
-                  &nbsp;cm
-                </Words>
-                <br style={brStyle} />
-                <Line animate className="separator" />
-                <label htmlFor="costKilogramValue">
+                  <Button
+                    buttonProps={buttonStyle}
+                    className="buttonChanger"
+                    onClick={() => moreDensity(null, 1)}
+                  >
+                    <i className="fa-solid fa-circle-chevron-up"></i>
+                  </Button>
+                  &nbsp;
+                  <Button
+                    buttonProps={buttonStyle}
+                    className="buttonChanger"
+                    onClick={() => moreDensity(null, 0)}
+                  >
+                    <i className="fa-solid fa-circle-chevron-down"></i>
+                  </Button>
+                  <br style={brStyle} />
                   <Words animate show={this.props.anim.entered}>
-                    Filament Cost:&nbsp;
+                    Weight:&nbsp;
+                  </Words>
+                  <Words
+                    layer="alert"
+                    animate
+                    show={this.props.anim.entered}
+                    id="weightValue"
+                  />
+                  <Words layer="alert" animate show={this.props.anim.entered}>
+                    &nbsp;g
+                  </Words>
+                  <br style={brStyle} />
+                  <Words animate show={this.props.anim.entered}>
+                    Volume:&nbsp;
+                  </Words>
+                  <Words
+                    layer="alert"
+                    animate
+                    show={this.props.anim.entered}
+                    id="volumeValue"
+                  />
+                  <Words layer="alert" animate show={this.props.anim.entered}>
+                    &nbsp;cm3
+                  </Words>
+                  <br style={brStyle} />
+                  <Words animate show={this.props.anim.entered}>
+                    Dimensions:&nbsp;
+                  </Words>
+                  <Words
+                    layer="alert"
+                    animate
+                    show={this.props.anim.entered}
+                    id="widthValue"
+                  />
+                  <Words layer="alert" animate show={this.props.anim.entered}>
+                    &nbsp;x&nbsp;
+                  </Words>
+                  <Words
+                    layer="alert"
+                    animate
+                    show={this.props.anim.entered}
+                    id="heightValue"
+                  />
+                  <Words layer="alert" animate show={this.props.anim.entered}>
+                    &nbsp;x&nbsp;
+                  </Words>
+                  <Words
+                    layer="alert"
+                    animate
+                    show={this.props.anim.entered}
+                    id="depthValue"
+                  />
+                  <Words layer="alert" animate show={this.props.anim.entered}>
+                    &nbsp;cm
+                  </Words>
+                  <br style={brStyle} />
+                  <Line animate className="separator" />
+                  <label htmlFor="costKilogramValue">
+                    <Words animate show={this.props.anim.entered}>
+                      Filament Cost:&nbsp;
+                    </Words>
+                    <Words layer="alert" animate show={this.props.anim.entered}>
+                      $
+                    </Words>
+                  </label>
+                  <input id="costKilogramValue" />
+                  &nbsp;&nbsp;
+                  <Button
+                    buttonProps={buttonStyle}
+                    className="buttonChanger"
+                    onClick={() => moreCost(null, 1)}
+                  >
+                    <i className="fa-solid fa-circle-chevron-up"></i>
+                  </Button>
+                  &nbsp;
+                  <Button
+                    buttonProps={buttonStyle}
+                    className="buttonChanger"
+                    onClick={() => moreCost(null, 0)}
+                  >
+                    <i className="fa-solid fa-circle-chevron-down"></i>
+                  </Button>
+                  <br style={brStyle} />
+                  <Words animate show={this.props.anim.entered}>
+                    Printing Cost:&nbsp;
                   </Words>
                   <Words layer="alert" animate show={this.props.anim.entered}>
                     $
                   </Words>
-                </label>
-                <input id="costKilogramValue" />
-                &nbsp;&nbsp;
-                <Button
-                  buttonProps={buttonStyle}
-                  className="buttonChanger"
-                  onClick={() => moreCost(null, 1)}
-                >
-                  <i className="fa-solid fa-circle-chevron-up"></i>
-                </Button>
-                &nbsp;
-                <Button
-                  buttonProps={buttonStyle}
-                  className="buttonChanger"
-                  onClick={() => moreCost(null, 0)}
-                >
-                  <i className="fa-solid fa-circle-chevron-down"></i>
-                </Button>
-                <br style={brStyle} />
-                <Words animate show={this.props.anim.entered}>
-                  Printing Cost:&nbsp;
-                </Words>
-                <Words layer="alert" animate show={this.props.anim.entered}>
-                  $
-                </Words>
-                <Words
-                  layer="alert"
-                  animate
-                  show={this.props.anim.entered}
-                  id="costValue"
-                />
-                <br style={brStyle} />
-                <Line animate className="separator" />
-                <Words animate show={this.props.anim.entered}>
-                  Filament Diameter:&nbsp;
-                </Words>
-                <input id="diameterValue" />
-                <Words layer="alert" animate show={this.props.anim.entered}>
-                  &nbsp;mm&nbsp;
-                </Words>
-                <Button
-                  buttonProps={buttonStyle}
-                  className="buttonChanger"
-                  onClick={() => moreDiameter(null, 1)}
-                >
-                  <i className="fa-solid fa-circle-chevron-up"></i>
-                </Button>
-                &nbsp;
-                <Button
-                  buttonProps={buttonStyle}
-                  className="buttonChanger"
-                  onClick={() => moreDiameter(null, 0)}
-                >
-                  <i className="fa-solid fa-circle-chevron-down"></i>
-                </Button>
-                <br style={brStyle} />
-                <Words animate show={this.props.anim.entered}>
-                  Print Speed:&nbsp;
-                </Words>
-                <input id="printSpeedValue"></input>
-                <Words layer="alert" animate show={this.props.anim.entered}>
-                  &nbsp;mm/s&nbsp;
-                </Words>
-                <Button
-                  buttonProps={buttonStyle}
-                  className="buttonChanger"
-                  onClick={() => moreSpeed(null, 1)}
-                >
-                  <i className="fa-solid fa-circle-chevron-up"></i>
-                </Button>
-                &nbsp;
-                <Button
-                  buttonProps={buttonStyle}
-                  className="buttonChanger"
-                  onClick={() => moreSpeed(null, 0)}
-                >
-                  <i className="fa-solid fa-circle-chevron-down"></i>
-                </Button>
-                <br style={brStyle} />
-                <Words animate show={this.props.anim.entered}>
-                  Filament Length:&nbsp;
-                </Words>
-                <Words
-                  layer="alert"
-                  animate
-                  show={this.props.anim.entered}
-                  id="lengthValue"
-                />
-                <Words layer="alert" animate show={this.props.anim.entered}>
-                  &nbsp;mm
-                </Words>
-                <br style={brStyle} />
-                <Words animate show={this.props.anim.entered}>
-                  Print Time:&nbsp;
-                </Words>
-                <Words
-                  layer="alert"
-                  animate
-                  show={this.props.anim.entered}
-                  id="hoursValue"
-                />
-                &nbsp;
-                <Words layer="alert" animate show={this.props.anim.entered}>
-                  hrs&nbsp;
-                </Words>
-                <Words
-                  layer="alert"
-                  animate
-                  show={this.props.anim.entered}
-                  id="minutesValue"
-                />
-                &nbsp;
-                <Words layer="alert" animate show={this.props.anim.entered}>
-                  mins
-                </Words>
-                <br style={brStyle} />
-              </div>
+                  <Words
+                    layer="alert"
+                    animate
+                    show={this.props.anim.entered}
+                    id="costValue"
+                  />
+                  <br style={brStyle} />
+                  <Line animate className="separator" />
+                  <Words animate show={this.props.anim.entered}>
+                    Filament Diameter:&nbsp;
+                  </Words>
+                  <input id="diameterValue" />
+                  <Words layer="alert" animate show={this.props.anim.entered}>
+                    &nbsp;mm&nbsp;
+                  </Words>
+                  <Button
+                    buttonProps={buttonStyle}
+                    className="buttonChanger"
+                    onClick={() => moreDiameter(null, 1)}
+                  >
+                    <i className="fa-solid fa-circle-chevron-up"></i>
+                  </Button>
+                  &nbsp;
+                  <Button
+                    buttonProps={buttonStyle}
+                    className="buttonChanger"
+                    onClick={() => moreDiameter(null, 0)}
+                  >
+                    <i className="fa-solid fa-circle-chevron-down"></i>
+                  </Button>
+                  <br style={brStyle} />
+                  <Words animate show={this.props.anim.entered}>
+                    Print Speed:&nbsp;
+                  </Words>
+                  <input id="printSpeedValue"></input>
+                  <Words layer="alert" animate show={this.props.anim.entered}>
+                    &nbsp;mm/s&nbsp;
+                  </Words>
+                  <Button
+                    buttonProps={buttonStyle}
+                    className="buttonChanger"
+                    onClick={() => moreSpeed(null, 1)}
+                  >
+                    <i className="fa-solid fa-circle-chevron-up"></i>
+                  </Button>
+                  &nbsp;
+                  <Button
+                    buttonProps={buttonStyle}
+                    className="buttonChanger"
+                    onClick={() => moreSpeed(null, 0)}
+                  >
+                    <i className="fa-solid fa-circle-chevron-down"></i>
+                  </Button>
+                  <br style={brStyle} />
+                  <Words animate show={this.props.anim.entered}>
+                    Filament Length:&nbsp;
+                  </Words>
+                  <Words
+                    layer="alert"
+                    animate
+                    show={this.props.anim.entered}
+                    id="lengthValue"
+                  />
+                  <Words layer="alert" animate show={this.props.anim.entered}>
+                    &nbsp;mm
+                  </Words>
+                  <br style={brStyle} />
+                  <Words animate show={this.props.anim.entered}>
+                    Print Time:&nbsp;
+                  </Words>
+                  <Words
+                    layer="alert"
+                    animate
+                    show={this.props.anim.entered}
+                    id="hoursValue"
+                  />
+                  &nbsp;
+                  <Words layer="alert" animate show={this.props.anim.entered}>
+                    hrs&nbsp;
+                  </Words>
+                  <Words
+                    layer="alert"
+                    animate
+                    show={this.props.anim.entered}
+                    id="minutesValue"
+                  />
+                  &nbsp;
+                  <Words layer="alert" animate show={this.props.anim.entered}>
+                    mins
+                  </Words>
+                  <br style={brStyle} />
+                </div>
               </div>
             </Frame>
           </div>
