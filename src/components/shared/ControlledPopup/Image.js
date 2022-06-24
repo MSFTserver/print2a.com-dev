@@ -57,7 +57,8 @@ class ImagePopup extends React.Component {
                 )
               }
             >
-              <i className="fa-solid fa-circle-arrow-down"></i>Download
+              <i className="fa-solid fa-circle-arrow-down"></i>
+              Download
             </Button>
           </div>
           <img

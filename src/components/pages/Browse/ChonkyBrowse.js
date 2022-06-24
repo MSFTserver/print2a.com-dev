@@ -49,15 +49,22 @@ function ChonkyBrowse(props) {
       const fileExt = fileName.split('.').pop()
       let data
       toast(`Opening file: \n ${fileName}`)
-      if (['md', 'txt', 'pdf', 'png', 'jpg'].includes(fileExt)) {
+      if (['md', 'txt', 'pdf', 'png', 'jpg'].includes(fileExt.toLowerCase())) {
         data = await fetch(
           `${print2aApiEndpoint}/GetFile?fileLocation=${folder.id}`,
         )
         data = await data.text()
+        props.setPopupFile(fileName, folder.id, fileExt, data)
+        props.setShowPopup()
+      } else if (['stl'].includes(fileExt.toLowerCase())) {
+        window.location.href = `/modelViewer?fileLocation=${folder.id.replace(
+          'print2a/',
+          '',
+        )}`
+      } else {
+        props.setPopupFile(fileName, folder.id, fileExt, data)
+        props.setShowPopup()
       }
-      props.setPopupFile(fileName, folder.id, fileExt, data)
-      props.setShowPopup()
-      // window.open(`${print2aApiEndpoint}/${folder.id}`, '_blank')
     } else if (
       node.id === 'download_files' &&
       node.state.selectedFiles[0].isDir

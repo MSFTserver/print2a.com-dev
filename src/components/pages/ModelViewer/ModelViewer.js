@@ -1,7 +1,7 @@
 /* eslint-disable react/prefer-stateless-function */
 import './ModelViewer.scss'
 import React from 'react'
-import { Frame, Heading, Link, Words, Button } from 'arwes'
+import { Frame, Heading, Line, Words, Button } from 'arwes'
 import * as THREE from 'three'
 import {
   OrbitControls,
@@ -14,6 +14,8 @@ import {
 
 const StringERROR =
   'ERROR: Please check that the model is a STL, OBJ or 3DS model.'
+const buttonStyle = { style: { padding: '1vh' } }
+const brStyle = { margin: '5px 0px' }
 
 const scene = new THREE.Scene()
 // scene.background = new THREE.Color(0x000000)
@@ -55,10 +57,15 @@ let depth
 let pauseSpin = 1
 let pauseSpinTimeout
 
-let density = parseFloat('1.05')
-let filamentCost = parseFloat('20')
-let filamentDiameter = parseFloat('1.75')
-let printingSpeed = parseFloat('150')
+const densityDefault = parseFloat('1.05')
+const filamentCostDefault = parseFloat('20.00')
+const filamentDiameterDefault = parseFloat('1.75')
+const printSpeedDefault = parseFloat('150.00')
+
+let density = densityDefault
+let filamentCost = filamentCostDefault
+let filamentDiameter = filamentDiameterDefault
+let printSpeed = printSpeedDefault
 
 const getRandomValue = (min, max) => Math.random() * (max - min) + min
 
@@ -79,25 +86,26 @@ function updateCost() {
 }
 
 function moreDensity(inputDensity, increaseDensity = null) {
+  const densityInput = document.getElementById('densityValue')
   if (inputDensity !== null) {
     density = parseFloat(inputDensity)
   } else if (increaseDensity && inputDensity === null) {
     density = parseFloat(density) + parseFloat('0.01')
-    document.getElementById('densityValue').value = density.toFixed(2)
+    densityInput.value = density.toFixed(2)
   } else if (increaseDensity !== null && inputDensity === null) {
     density = parseFloat(density) - parseFloat('0.01')
-    document.getElementById('densityValue').value = density.toFixed(2)
+    densityInput.value = density.toFixed(2)
   } else {
     density = parseFloat('0.01')
-    document.getElementById('densityValue').value = density.toFixed(2)
+    densityInput.value = density.toFixed(2)
   }
 
   if (density > 100) {
     density = parseFloat('100.00')
-    document.getElementById('densityValue').value = density.toFixed(2)
+    densityInput.value = density.toFixed(2)
   } else if (density < 0) {
     density = parseFloat('0.00')
-    document.getElementById('densityValue').value = density.toFixed(2)
+    densityInput.value = density.toFixed(2)
   }
 
   let heightFinal = height / 10
@@ -118,88 +126,106 @@ function moreDensity(inputDensity, increaseDensity = null) {
   updateCost()
 }
 
-function moreCost(increaseCost) {
-  let result
-  if (increaseCost === true) {
-    result = parseFloat(filamentCost) + parseFloat('1')
-    if (result <= 10000) {
-      filamentCost = result
-    }
+function moreCost(inputCost, increaseCost = null) {
+  const costKilogramInput = document.getElementById('costKilogramValue')
+  if (inputCost !== null) {
+    filamentCost = parseFloat(inputCost)
+  } else if (increaseCost && inputCost === null) {
+    filamentCost = parseFloat(filamentCost) + parseFloat('1.00')
+    costKilogramInput.value = filamentCost.toFixed(2)
+  } else if (increaseCost !== null && inputCost === null) {
+    filamentCost = parseFloat(filamentCost) - parseFloat('1.00')
+    costKilogramInput.value = filamentCost.toFixed(2)
   } else {
-    result = parseFloat(filamentCost) - parseFloat('1')
-    if (result > 0) {
-      filamentCost = result
-    }
+    filamentCost = parseFloat('20.00')
+    costKilogramInput.value = filamentCost.toFixed(2)
   }
-  document.getElementById('costKilogramValue').innerHTML = filamentCost
 
+  if (filamentCost > 1000) {
+    filamentCost = parseFloat('1000.00')
+    costKilogramInput.value = filamentCost.toFixed(2)
+  } else if (filamentCost < 0) {
+    filamentCost = parseFloat('0.00')
+    costKilogramInput.value = filamentCost.toFixed(2)
+  }
   updateCost()
 }
 
-function moreDiameter(increaseDiameter) {
-  let result
-  if (increaseDiameter === true) {
-    result = parseFloat(filamentDiameter) + parseFloat('0.01')
-    if (result <= 10000) {
-      filamentDiameter = result
-    }
+function moreDiameter(inputDiameter, increaseDiameter = null) {
+  const filamentDiameterInput = document.getElementById('diameterValue')
+  if (inputDiameter !== null) {
+    filamentDiameter = parseFloat(inputDiameter)
+  } else if (increaseDiameter && inputDiameter === null) {
+    filamentDiameter = parseFloat(filamentDiameter) + parseFloat('0.01')
+    filamentDiameterInput.value = filamentDiameter.toFixed(2)
+  } else if (increaseDiameter !== null && inputDiameter === null) {
+    filamentDiameter = parseFloat(filamentDiameter) - parseFloat('0.01')
+    filamentDiameterInput.value = filamentDiameter.toFixed(2)
   } else {
-    result = parseFloat(filamentDiameter) - parseFloat('0.01')
-    if (result > 0) {
-      filamentDiameter = result
-    }
+    filamentDiameter = parseFloat('1.75')
+    filamentDiameterInput.value = filamentDiameter.toFixed(2)
   }
 
-  filamentDiameter = parseFloat(filamentDiameter).toFixed(2)
+  if (filamentDiameter > 10) {
+    filamentDiameter = parseFloat('10.00')
+    filamentDiameterInput.value = filamentDiameter.toFixed(2)
+  } else if (filamentDiameter < 0) {
+    filamentDiameter = parseFloat('0.00')
+    filamentDiameterInput.value = filamentDiameter.toFixed(2)
+  }
 
   let filamentLength = parseFloat(
     (((vol / (filamentDiameter / 2)) ^ (2 / Math.PI)) * 2) / 10,
   ).toFixed(2)
   filamentLength = parseFloat(filamentLength).toFixed(0)
 
-  let hours = Math.floor(filamentLength / printingSpeed / 60)
+  let hours = Math.floor(filamentLength / printSpeed / 60)
   hours = parseFloat(hours).toFixed(0)
 
-  let minutes = (filamentLength / printingSpeed) % 60
+  let minutes = (filamentLength / printSpeed) % 60
   minutes = parseFloat(minutes).toFixed(0)
 
   if (minutes === 0) {
     minutes = 1
   }
-
-  document.getElementById('diameterValue').innerHTML = filamentDiameter
   document.getElementById('lengthValue').innerHTML = filamentLength
   document.getElementById('hoursValue').innerHTML = hours
   document.getElementById('minutesValue').innerHTML = minutes
 }
 
-function moreSpeed(increaseSpeed) {
-  let result
-  if (increaseSpeed === true) {
-    result = parseFloat(printingSpeed) + parseFloat('1')
-    if (result <= 10000) {
-      printingSpeed = result
-    }
+function moreSpeed(inputSpeed, increaseSpeed) {
+  const printSpeedInput = document.getElementById('printSpeedValue')
+  if (inputSpeed !== null) {
+    printSpeed = parseFloat(inputSpeed)
+  } else if (increaseSpeed && inputSpeed === null) {
+    printSpeed = parseFloat(printSpeed) + parseFloat('5.00')
+    printSpeedInput.value = printSpeed.toFixed(2)
+  } else if (increaseSpeed !== null && inputSpeed === null) {
+    printSpeed = parseFloat(printSpeed) - parseFloat('5.00')
+    printSpeedInput.value = printSpeed.toFixed(2)
   } else {
-    result = parseFloat(printingSpeed) - parseFloat('1')
-    if (result > 0) {
-      printingSpeed = result
-    }
+    printSpeed = parseFloat('150.00')
+    printSpeedInput.value = printSpeed.toFixed(2)
   }
 
-  printingSpeed = parseFloat(printingSpeed).toFixed(0)
+  if (printSpeed > 1000) {
+    printSpeed = parseFloat('1000.00')
+    printSpeedInput.value = printSpeed.toFixed(2)
+  } else if (printSpeed < 0) {
+    printSpeed = parseFloat('0.00')
+    printSpeedInput.value = printSpeed.toFixed(2)
+  }
 
   const filamentLength = parseFloat(
     (((vol / (filamentDiameter / 2)) ^ (2 / Math.PI)) * 2) / 10,
   ).toFixed(2)
 
-  let hours = Math.floor(filamentLength / printingSpeed / 60)
+  let hours = Math.floor(filamentLength / printSpeed / 60)
   hours = parseFloat(hours).toFixed(0)
 
-  let minutes = (filamentLength / printingSpeed) % 60
+  let minutes = (filamentLength / printSpeed) % 60
   minutes = parseFloat(minutes).toFixed(0)
 
-  document.getElementById('speedValue').innerHTML = printingSpeed
   document.getElementById('hoursValue').innerHTML = hours
   document.getElementById('minutesValue').innerHTML = minutes
 }
@@ -289,10 +315,10 @@ function init(fileExt, fileData) {
   ).toFixed(2)
   filamentLength = parseFloat(filamentLength).toFixed(0)
 
-  let hours = Math.floor(filamentLength / printingSpeed / 60)
+  let hours = Math.floor(filamentLength / printSpeed / 60)
   hours = parseFloat(hours).toFixed(0)
 
-  let minutes = (filamentLength / printingSpeed) % 60
+  let minutes = (filamentLength / printSpeed) % 60
   minutes = parseFloat(minutes).toFixed(0)
 
   if (minutes === 0) {
@@ -391,14 +417,31 @@ class ModelViewer extends React.Component {
       `${print2aApiEndpoint}/GetFile?fileLocation=print2a/${filePath}`,
     )
     const fileData = await data.arrayBuffer()
+
     const densityInput = document.getElementById('densityValue')
     densityInput.addEventListener('input', () =>
       moreDensity(densityInput.value.toString()),
     )
     densityInput.value = density
-    document.getElementById('costKilogramValue').innerHTML = filamentCost
-    document.getElementById('diameterValue').innerHTML = filamentDiameter
-    document.getElementById('speedValue').innerHTML = printingSpeed
+
+    const costKilogramInput = document.getElementById('costKilogramValue')
+    costKilogramInput.addEventListener('input', () =>
+      moreCost(costKilogramInput.value.toString()),
+    )
+    costKilogramInput.value = filamentCost
+
+    const filamentDiameterInput = document.getElementById('diameterValue')
+    filamentDiameterInput.addEventListener('input', () =>
+      moreDiameter(filamentDiameterInput.value.toString()),
+    )
+    filamentDiameterInput.value = filamentDiameter
+
+    const printSpeedInput = document.getElementById('printSpeedValue')
+    printSpeedInput.addEventListener('input', () =>
+      moreSpeed(printSpeedInput.value.toString()),
+    )
+    printSpeedInput.value = printSpeed
+
     document.getElementById('calcContainer').style.display = 'block'
     init(fileExt, fileData)
   }
@@ -435,19 +478,53 @@ class ModelViewer extends React.Component {
               show={this.props.anim.entered}
             >
               <div id="calcContents">
+                <Button
+                  buttonProps={buttonStyle}
+                  className="buttonChanger"
+                  onClick={() => {
+                    const urlParams = new URLSearchParams(
+                      window.location.search,
+                    )
+                    let objParams = urlParams.get('fileLocation').split('/')
+                    objParams.pop()
+                    objParams = objParams.join('/')
+                    window.location.href = `/browse?folder=${objParams}`
+                  }}
+                >
+                  <i className="fa-solid fa-gun fa-flip-horizontal"></i>
+                  &nbsp;Back to Folder
+                </Button>
+                &nbsp;&nbsp;
+                <Button
+                  buttonProps={buttonStyle}
+                  className="buttonChanger"
+                  onClick={() => {
+                    const urlParams = new URLSearchParams(
+                      window.location.search,
+                    )
+                    const filePath = urlParams.get('fileLocation')
+
+                    window.open(
+                      `https://print2a.com:5757/print2a/${filePath}`,
+                      '_blank',
+                    )
+                  }}
+                >
+                  <i className="fa-solid fa-circle-arrow-down"></i>
+                  &nbsp;Download
+                </Button>
+                <Line animate className="separator" />
                 <label htmlFor="densityValue">
                   <Words animate show={this.props.anim.entered}>
                     Density:&nbsp;
                   </Words>
                 </label>
-                <input id="densityValue"></input>
-                <span>
-                  <Words animate show={this.props.anim.entered}>
-                    &nbsp;g/cc&nbsp;
-                  </Words>
-                </span>
+                <input id="densityValue" />
+                <Words layer="alert" animate show={this.props.anim.entered}>
+                  &nbsp;g/cc&nbsp;
+                </Words>
                 <Button
-                  buttonProps={{ style: { padding: '1vh' } }}
+                  buttonProps={buttonStyle}
                   className="buttonChanger"
                   onClick={() => moreDensity(null, 1)}
                 >
@@ -455,93 +532,194 @@ class ModelViewer extends React.Component {
                 </Button>
                 &nbsp;
                 <Button
-                  buttonProps={{ style: { padding: '1vh' } }}
+                  buttonProps={buttonStyle}
                   className="buttonChanger"
                   onClick={() => moreDensity(null, 0)}
                 >
                   <i className="fa-solid fa-circle-chevron-down"></i>
                 </Button>
-                <br />
-                <span id="weightLabel">Weight</span>:&nbsp;
-                <span id="weightValue"></span>
-                &nbsp;g
-                <br />
-                <span id="volumeLabel">Volume</span>:&nbsp;
-                <span id="volumeValue"></span>
-                &nbsp;cm3
-                <br />
-                <span id="sizeLabel">Dimensions</span>:&nbsp;
-                <span id="widthValue"></span>
-                &nbsp;x&nbsp;
-                <span id="heightValue"></span>&nbsp;x&nbsp;
-                <span id="depthValue"></span>&nbsp;cm
-                <br />
-                <hr className="separator" />
-                <span id="costKilogramLabel">Filament Cost</span>:&nbsp;$
-                <span id="costKilogramValue"></span>&nbsp;
-                <input
-                  type="submit"
-                  className="buttonChanger"
-                  onClick={() => moreCost(true)}
-                  value="+"
+                <br style={brStyle} />
+                <Words animate show={this.props.anim.entered}>
+                  Weight:&nbsp;
+                </Words>
+                <Words
+                  layer="alert"
+                  animate
+                  show={this.props.anim.entered}
+                  id="weightValue"
                 />
+                <Words layer="alert" animate show={this.props.anim.entered}>
+                  &nbsp;g
+                </Words>
+                <br style={brStyle} />
+                <Words animate show={this.props.anim.entered}>
+                  Volume:&nbsp;
+                </Words>
+                <Words
+                  layer="alert"
+                  animate
+                  show={this.props.anim.entered}
+                  id="volumeValue"
+                />
+                <Words layer="alert" animate show={this.props.anim.entered}>
+                  &nbsp;cm3
+                </Words>
+                <br style={brStyle} />
+                <Words animate show={this.props.anim.entered}>
+                  Dimensions:&nbsp;
+                </Words>
+                <Words
+                  layer="alert"
+                  animate
+                  show={this.props.anim.entered}
+                  id="widthValue"
+                />
+                <Words layer="alert" animate show={this.props.anim.entered}>
+                  &nbsp;x&nbsp;
+                </Words>
+                <Words
+                  layer="alert"
+                  animate
+                  show={this.props.anim.entered}
+                  id="heightValue"
+                />
+                <Words layer="alert" animate show={this.props.anim.entered}>
+                  &nbsp;x&nbsp;
+                </Words>
+                <Words
+                  layer="alert"
+                  animate
+                  show={this.props.anim.entered}
+                  id="depthValue"
+                />
+                <Words layer="alert" animate show={this.props.anim.entered}>
+                  &nbsp;cm
+                </Words>
+                <br style={brStyle} />
+                <Line animate className="separator" />
+                <label htmlFor="costKilogramValue">
+                  <Words animate show={this.props.anim.entered}>
+                    Filament Cost:&nbsp;
+                  </Words>
+                  <Words layer="alert" animate show={this.props.anim.entered}>
+                    $
+                  </Words>
+                </label>
+                <input id="costKilogramValue" />
+                &nbsp;&nbsp;
+                <Button
+                  buttonProps={buttonStyle}
+                  className="buttonChanger"
+                  onClick={() => moreCost(null, 1)}
+                >
+                  <i className="fa-solid fa-circle-chevron-up"></i>
+                </Button>
                 &nbsp;
-                <input
-                  type="submit"
+                <Button
+                  buttonProps={buttonStyle}
                   className="buttonChanger"
-                  onClick={() => moreCost(false)}
-                  value="-"
+                  onClick={() => moreCost(null, 0)}
+                >
+                  <i className="fa-solid fa-circle-chevron-down"></i>
+                </Button>
+                <br style={brStyle} />
+                <Words animate show={this.props.anim.entered}>
+                  Printing Cost:&nbsp;
+                </Words>
+                <Words layer="alert" animate show={this.props.anim.entered}>
+                  $
+                </Words>
+                <Words
+                  layer="alert"
+                  animate
+                  show={this.props.anim.entered}
+                  id="costValue"
                 />
-                <br />
-                <span id="costLabel">Printing Cost</span>:&nbsp;$
-                <span id="costValue"></span>
-                <br />
-                <hr className="separator" />
-                <span id="diameterLabel">Filament Diameter</span>:&nbsp;
-                <span id="diameterValue"></span>&nbsp;mm&nbsp;
-                <input
-                  type="submit"
+                <br style={brStyle} />
+                <Line animate className="separator" />
+                <Words animate show={this.props.anim.entered}>
+                  Filament Diameter:&nbsp;
+                </Words>
+                <input id="diameterValue" />
+                <Words layer="alert" animate show={this.props.anim.entered}>
+                  &nbsp;mm&nbsp;
+                </Words>
+                <Button
+                  buttonProps={buttonStyle}
                   className="buttonChanger"
-                  onClick={() => moreDiameter(true)}
-                  value="+"
-                />
+                  onClick={() => moreDiameter(null, 1)}
+                >
+                  <i className="fa-solid fa-circle-chevron-up"></i>
+                </Button>
                 &nbsp;
-                <input
-                  type="submit"
+                <Button
+                  buttonProps={buttonStyle}
                   className="buttonChanger"
-                  onClick={() => moreDiameter(false)}
-                  value="-"
-                />
-                <br />
-                <span id="speedLabel">Print Speed</span>:&nbsp;
-                <span id="speedValue"></span>
-                &nbsp;mm/s&nbsp;
-                <input
-                  type="submit"
+                  onClick={() => moreDiameter(null, 0)}
+                >
+                  <i className="fa-solid fa-circle-chevron-down"></i>
+                </Button>
+                <br style={brStyle} />
+                <Words animate show={this.props.anim.entered}>
+                  Print Speed:&nbsp;
+                </Words>
+                <input id="printSpeedValue"></input>
+                <Words layer="alert" animate show={this.props.anim.entered}>
+                  &nbsp;mm/s&nbsp;
+                </Words>
+                <Button
+                  buttonProps={buttonStyle}
                   className="buttonChanger"
-                  onClick={() => moreSpeed(true)}
-                  value="+"
-                />
+                  onClick={() => moreSpeed(null, 1)}
+                >
+                  <i className="fa-solid fa-circle-chevron-up"></i>
+                </Button>
                 &nbsp;
-                <input
-                  type="submit"
+                <Button
+                  buttonProps={buttonStyle}
                   className="buttonChanger"
-                  onClick={() => moreSpeed(false)}
-                  value="-"
-                />
-                <br />
-                <span id="lengthLabel">Filament Length</span>:&nbsp;
-                <span id="lengthValue"></span>
-                &nbsp;mm
-                <br />
-                <span id="timeLabel">Print Time</span>:&nbsp;
-                <span id="hoursValue"></span>
+                  onClick={() => moreSpeed(null, 0)}
+                >
+                  <i className="fa-solid fa-circle-chevron-down"></i>
+                </Button>
+                <br style={brStyle} />
+                <Words animate show={this.props.anim.entered}>
+                  Filament Length:&nbsp;
+                </Words>
+                <Words
+                  layer="alert"
+                  animate
+                  show={this.props.anim.entered}
+                  id="lengthValue"
+                ></Words>
+                <Words layer="alert" animate show={this.props.anim.entered}>
+                  &nbsp;mm
+                </Words>
+                <br style={brStyle} />
+                <Words animate show={this.props.anim.entered}>
+                  Print Time:&nbsp;
+                </Words>
+                <Words
+                  layer="alert"
+                  animate
+                  show={this.props.anim.entered}
+                  id="hoursValue"
+                ></Words>
                 &nbsp;
-                <span id="hoursLabel">hrs</span>&nbsp;
-                <span id="minutesValue"></span>
+                <Words layer="alert" animate show={this.props.anim.entered}>
+                  hrs&nbsp;
+                </Words>
+                <Words
+                  layer="alert"
+                  animate
+                  show={this.props.anim.entered}
+                  id="minutesValue"
+                ></Words>
                 &nbsp;
-                <span id="minutesLabel">mins</span>
-                <br />
+                <Words layer="alert" animate show={this.props.anim.entered}>
+                  mins
+                </Words>
+                <br style={brStyle} />
               </div>
             </Frame>
           </div>
