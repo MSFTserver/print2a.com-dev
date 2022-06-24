@@ -13,7 +13,9 @@ position: fixed;
 	}
 #modelContainer
 	{
-	overflow:hidden;
+		overflow: hidden;
+		display: block;
+		position: absolute;
 	}
 #densityValue, #diameterValue
 	{
@@ -25,15 +27,18 @@ position: fixed;
 	}
 #calcContainer
 	{
-	position:absolute;
-	text-align:left;
-	left:5px;
-	top:8px;
-	margin-left:5px;
+		position: absolute;
+		text-align: left;
+		left: 5px;
+		top: 8px;
+		margin-left: 5px;
+		width: max-content;
 	}
 #calcContents 
 	{
-	padding: 1em;
+		padding: 1em;
+		display: block;
+		position: inherit;
 	#densityValue, #costKilogramValue, #diameterValue, #printSpeedValue
 		{
 		background: rgba(0,0,0,0);

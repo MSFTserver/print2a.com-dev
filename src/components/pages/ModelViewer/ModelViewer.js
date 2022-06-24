@@ -513,6 +513,24 @@ class ModelViewer extends React.Component {
                   <i className="fa-solid fa-circle-arrow-down"></i>
                   &nbsp;Download
                 </Button>
+                &nbsp;&nbsp;
+                <Button
+                  buttonProps={buttonStyle}
+                  className="buttonChanger"
+                  onClick={() => {
+                    const calcContentsToggle = document.getElementById('calcContentsToggle')
+                    const isToggled = calcContentsToggle.style.display
+                    if(isToggled === 'none'){
+                      calcContentsToggle.style.display = 'inherit'
+                    } else {
+                      calcContentsToggle.style.display = 'none'
+                    }
+                  }}
+                >
+                  <i class="fa-solid fa-calculator"></i>
+                  &nbsp;Calc Menu
+                </Button>
+                <div style={{display:'none'}} id="calcContentsToggle">
                 <Line animate className="separator" />
                 <label htmlFor="densityValue">
                   <Words animate show={this.props.anim.entered}>
@@ -691,7 +709,7 @@ class ModelViewer extends React.Component {
                   animate
                   show={this.props.anim.entered}
                   id="lengthValue"
-                ></Words>
+                />
                 <Words layer="alert" animate show={this.props.anim.entered}>
                   &nbsp;mm
                 </Words>
@@ -704,7 +722,7 @@ class ModelViewer extends React.Component {
                   animate
                   show={this.props.anim.entered}
                   id="hoursValue"
-                ></Words>
+                />
                 &nbsp;
                 <Words layer="alert" animate show={this.props.anim.entered}>
                   hrs&nbsp;
@@ -714,12 +732,13 @@ class ModelViewer extends React.Component {
                   animate
                   show={this.props.anim.entered}
                   id="minutesValue"
-                ></Words>
+                />
                 &nbsp;
                 <Words layer="alert" animate show={this.props.anim.entered}>
                   mins
                 </Words>
                 <br style={brStyle} />
+              </div>
               </div>
             </Frame>
           </div>
