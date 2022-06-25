@@ -19,7 +19,7 @@ class Latest extends React.Component {
             <Heading node="h1">Latest Projects</Heading>
           </Header>
           <br />
-          <GetLatest />
+          <GetLatest {...this.props} style={{ marginBottom: 20 }} />
         </Frame>
       </div>
     )

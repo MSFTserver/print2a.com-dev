@@ -5,7 +5,8 @@ const print2aApiHost = 'https://print2a.com'
 const print2aApiPort = '5757'
 const print2aApiEndpoint = `${print2aApiHost}:${print2aApiPort}`
 
-const GetLatest = () => {
+const GetLatest = (props) => {
+  console.log(props)
   const [latest, setLatest] = useState([
     { title: 'LOADING...', tags: 'LOADING...', link: '#' },
   ])
@@ -19,30 +20,69 @@ const GetLatest = () => {
       getLatest()
     }
   }, [])
-
-  const repoStats = [[...latest].shift()]
-  const stats = repoStats.map((stat, i) => (
-    <Row col s={1} m={8} offset={['s3', 'l2']}>
-      <Frame>{stat?.title}</Frame>
-    </Row>
+  const apiResponse = [...latest]
+  const repoStats = [apiResponse.shift()]
+  const stats = repoStats.map((stat, i) => {
+    const details = stat.tags.split('\n').map((file, index) => {
+      const key = file.split(':')[0]
+      const value = file.split(':')[1]
+      return (
+        <Col m={6} l={6} xl={6} offset={['s3', 'l3', 'xl3']}>
+          <Frame
+            animate
+            level={3}
+            corners={1}
+            layer="primary"
+            show={props.anim.entered}
+          >
+            <Words>{key}:&nbsp;</Words>
+            <Words layer="alert">{value}</Words>
+          </Frame>
+          <br />
+        </Col>
+      )
+    })
+    return (
+      <Row col s={1} m={10} offset={['s3', 'l1']}>
+        <Frame
+          animate
+          level={3}
+          corners={3}
+          layer="primary"
+          show={props.anim.entered}
+        >
+          <Heading style={{ paddingTop: 20 }} node="h2">
+            {stat.title}
+          </Heading>
+          {details}
+        </Frame>
+      </Row>
+    )
+  })
+  let latestProjects = [
+    { desc: <i className="fa-solid fa-gun  fa-shake"></i> },
+    { desc: 'Nothing New' },
+    { desc: 'Check Back Later' },
+    {
+      desc: (
+        <i data-fa-transform="flip-h" className="fa-solid fa-gun fa-shake"></i>
+      ),
+    },
+  ].map((file, index) => (
+    <Col m={6} l={4} xl={3} style={props.style}>
+      <Frame>{file.desc}</Frame>
+    </Col>
   ))
+  if (apiResponse.length) {
+    latestProjects = apiResponse.map((file, index) => (
+      <Col m={6} l={4} xl={3} style={props.style}>
+        <Frame>test</Frame>
+      </Col>
+    ))
+  }
 
-  const latestProjects = latest.map((file, index) => (
-    <Row>
-      <Col m={6} l={4} xl={3}>
-        <Frame>test</Frame>
-      </Col>
-      <Col m={6} l={4} xl={3}>
-        <Frame>test</Frame>
-      </Col>
-      <Col s={4} m={6} l={4} xl={3}>
-        <Frame>test</Frame>
-      </Col>
-      <Col s={4} m={6} l={4} xl={3}>
-        <Frame>test</Frame>
-      </Col>
-    </Row>
-  ))
+  console.log(latestProjects)
+
   return [...stats, ...latestProjects]
 }
 export default GetLatest
