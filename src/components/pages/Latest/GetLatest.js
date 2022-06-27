@@ -237,48 +237,46 @@ const GetLatest = (props) => {
     </Col>
   ))
   if (/* apiResponse.length */ testData.length) {
-    latestProjects = testData.map((project, index) => {
+    latestProjects = testData.map((project, index) => (
       // console.log(project)
-      return (
-        <Link href={project.link}>
-          <Col m={3} l={3} xl={3} style={props.style}>
-            <Frame
-              animate
-              level={3}
-              corners={3}
-              layer="primary"
-              show={props.anim.entered}
-            >
-              <Header>
-                <Heading style={{ margin: 0 }} node="h3">
-                  <Words className='project-title' style={{}}>
-                    {project.title}
-                  </Words>
-                </Heading>
-                <Words layer="primary">{project.created}</Words>
-              </Header>
-              <Row style={{ marginBottom: 0 }}>
-                <Col m={6} l={6}>
-                  <Words layer="primary">STL: {project.stl}</Words>
-                </Col>
-                <Col m={6} l={6}>
-                  <Words layer="primary">STP: {project.stp}</Words>
-                </Col>
-              </Row>
-              <Row style={{ marginBottom: 0 }}>
-                <Col m={6} l={6}>
-                  <Words layer="primary">Docs: {project.docs}</Words>
-                </Col>
-                <Col m={6} l={6}>
-                  <Words layer="primary">Pics: {project.pics}</Words>
-                </Col>
-              </Row>
-              <Words layer="primary">Project Size: {project.size}</Words>
-            </Frame>
-          </Col>
-        </Link>
-      )
-    })
+      <Link href={project.link}>
+        <Col m={3} l={3} xl={3} style={props.style}>
+          <Frame
+            animate
+            level={3}
+            corners={3}
+            layer="primary"
+            show={props.anim.entered}
+          >
+            <Header>
+              <Heading style={{ margin: 0 }} node="h3">
+                <Words className="project-title" style={{}}>
+                  {project.title}
+                </Words>
+              </Heading>
+              <Words layer="primary">{project.created}</Words>
+            </Header>
+            <Row style={{ marginBottom: 0 }}>
+              <Col m={6} l={6}>
+                <Words layer="primary">STL: {project.stl}</Words>
+              </Col>
+              <Col m={6} l={6}>
+                <Words layer="primary">STP: {project.stp}</Words>
+              </Col>
+            </Row>
+            <Row style={{ marginBottom: 0 }}>
+              <Col m={6} l={6}>
+                <Words layer="primary">Docs: {project.docs}</Words>
+              </Col>
+              <Col m={6} l={6}>
+                <Words layer="primary">Pics: {project.pics}</Words>
+              </Col>
+            </Row>
+            <Words layer="primary">Project Size: {project.size}</Words>
+          </Frame>
+        </Col>
+      </Link>
+    ))
   }
 
   // console.log(latestProjects)
