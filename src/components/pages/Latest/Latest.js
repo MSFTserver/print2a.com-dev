@@ -15,11 +15,17 @@ class Latest extends React.Component {
           layer="primary"
           show={this.props.anim.entered}
         >
-          <Header style={{ paddingTop: 20 }} animate>
-            <Heading node="h1">Latest Projects</Heading>
-          </Header>
-          <br />
-          <GetLatest {...this.props} style={{ marginBottom: 20 }} />
+          <div className="latestBox">
+            <Header style={{ paddingTop: 20 }} animate>
+              <Heading node="h1">Latest Projects</Heading>
+            </Header>
+            <br />
+            <GetLatest
+              {...this.props}
+              style={{ marginBottom: 20 }}
+              wordStyle={{ whiteSpace: 'nowrap' }}
+            />
+          </div>
         </Frame>
       </div>
     )
