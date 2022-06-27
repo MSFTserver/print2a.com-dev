@@ -23,7 +23,6 @@ class Latest extends React.Component {
             <GetLatest
               {...this.props}
               style={{ marginBottom: 20 }}
-              wordStyle={{ whiteSpace: 'nowrap' }}
             />
           </div>
         </Frame>

@@ -3,7 +3,7 @@ import { Frame, Header, Heading, Link, Words, Row, Col } from 'arwes'
 
 const testData = [
   {
-    title: 'Test Data',
+    title: 'Test Data Test Data Test Data Test Data Test Data',
     created: '3/23/2022',
     docs: 9,
     stl: 1,
@@ -169,7 +169,7 @@ const print2aApiPort = '5757'
 const print2aApiEndpoint = `${print2aApiHost}:${print2aApiPort}`
 
 const GetLatest = (props) => {
-  console.log(props)
+  // console.log(props)
   const [latest, setLatest] = useState([
     { title: 'LOADING...', tags: 'LOADING...', link: '#' },
   ])
@@ -232,16 +232,16 @@ const GetLatest = (props) => {
       ),
     },
   ].map((file, index) => (
-    <Col m={6} l={4} xl={3} style={props.style}>
+    <Col m={4} l={4} xl={4} style={props.style}>
       <Frame>{file.desc}</Frame>
     </Col>
   ))
   if (/* apiResponse.length */ testData.length) {
     latestProjects = testData.map((project, index) => {
-      console.log(project)
+      // console.log(project)
       return (
         <Link href={project.link}>
-          <Col m={6} l={4} xl={3} style={props.style}>
+          <Col m={3} l={3} xl={3} style={props.style}>
             <Frame
               animate
               level={3}
@@ -251,19 +251,29 @@ const GetLatest = (props) => {
             >
               <Header>
                 <Heading style={{ margin: 0 }} node="h3">
-                  <Words style={props.wordStyle}>{project.title}</Words>
+                  <Words className='project-title' style={{}}>
+                    {project.title}
+                  </Words>
                 </Heading>
-                <Words>{project.created}</Words>
+                <Words layer="primary">{project.created}</Words>
               </Header>
               <Row style={{ marginBottom: 0 }}>
-                <Col m={6}>STL: {project.stl}</Col>
-                <Col m={6}>STP: {project.stp}</Col>
+                <Col m={6} l={6}>
+                  <Words layer="primary">STL: {project.stl}</Words>
+                </Col>
+                <Col m={6} l={6}>
+                  <Words layer="primary">STP: {project.stp}</Words>
+                </Col>
               </Row>
               <Row style={{ marginBottom: 0 }}>
-                <Col m={6}>Docs: {project.docs}</Col>
-                <Col m={6}>Pics: {project.pics}</Col>
+                <Col m={6} l={6}>
+                  <Words layer="primary">Docs: {project.docs}</Words>
+                </Col>
+                <Col m={6} l={6}>
+                  <Words layer="primary">Pics: {project.pics}</Words>
+                </Col>
               </Row>
-              <Words>Project Size: {project.size}</Words>
+              <Words layer="primary">Project Size: {project.size}</Words>
             </Frame>
           </Col>
         </Link>
@@ -271,7 +281,7 @@ const GetLatest = (props) => {
     })
   }
 
-  console.log(latestProjects)
+  // console.log(latestProjects)
 
   return [...stats, ...latestProjects]
 }
