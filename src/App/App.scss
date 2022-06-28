@@ -17,19 +17,3 @@
   justify-content: space-between;
   padding: 1vh;
 }
-
-.mobileFooter{
-  visibility: hidden;
-}
-
-@media only screen and (max-width: 700px) {
-  .footer {
-    visibility:hidden;
-  }
-  .mobileFooter {
-    visibility:visible;
-  }
-  .footerContents {
-    font-size: 12px; 
-  }
-}
