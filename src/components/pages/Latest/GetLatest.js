@@ -190,7 +190,7 @@ const GetLatest = (props) => {
       const key = file.split(':')[0]
       const value = file.split(':')[1]
       return (
-        <Col m={6} l={6} xl={6} offset={['s3', 'l3', 'xl3']}>
+        <Col s={10} m={10} l={10} xl={6} offset={['s1', 'm1', 'l1', 'xl3']}>
           <Frame
             animate
             level={3}
@@ -206,7 +206,7 @@ const GetLatest = (props) => {
       )
     })
     return (
-      <Row col s={1} m={10} offset={['s3', 'l1']}>
+      <Row col s={12} m={12} l={10} xl={10} offset={['s0', 'm0', 'l1', 'xl1']}>
         <Frame
           animate
           level={3}
@@ -231,16 +231,16 @@ const GetLatest = (props) => {
         <i data-fa-transform="flip-h" className="fa-solid fa-gun fa-shake"></i>
       ),
     },
-  ].map((file, index) => (
-    <Col m={4} l={4} xl={4} style={props.style}>
+  ].map((file) => (
+    <Col s={3} m={3} l={3} xl={3} style={props.style}>
       <Frame>{file.desc}</Frame>
     </Col>
   ))
   if (/* apiResponse.length */ testData.length) {
-    latestProjects = testData.map((project, index) => (
+    latestProjects = testData.map((project) => (
       // console.log(project)
       <Link href={project.link}>
-        <Col m={3} l={3} xl={3} style={props.style}>
+        <Col s={12} m={12} l={6} xl={4} style={props.style}>
           <Frame
             animate
             level={3}
@@ -250,29 +250,29 @@ const GetLatest = (props) => {
           >
             <Header>
               <Heading style={{ margin: 0 }} node="h3">
-                <Words className="project-title" style={{}}>
-                  {project.title}
-                </Words>
+                <Words className="project-title">{project.title}</Words>
               </Heading>
               <Words layer="primary">{project.created}</Words>
             </Header>
             <Row style={{ marginBottom: 0 }}>
-              <Col m={6} l={6}>
+              <Col s={6} m={6} l={6} xl={6}>
                 <Words layer="primary">STL: {project.stl}</Words>
               </Col>
-              <Col m={6} l={6}>
+              <Col s={6} m={6} l={6} xl={6}>
                 <Words layer="primary">STP: {project.stp}</Words>
               </Col>
             </Row>
             <Row style={{ marginBottom: 0 }}>
-              <Col m={6} l={6}>
+              <Col s={6} m={6} l={6} xl={6}>
                 <Words layer="primary">Docs: {project.docs}</Words>
               </Col>
-              <Col m={6} l={6}>
+              <Col s={6} m={6} l={6} xl={6}>
                 <Words layer="primary">Pics: {project.pics}</Words>
               </Col>
             </Row>
-            <Words layer="primary">Project Size: {project.size}</Words>
+            <Col s={12} m={12} l={12} xl={12}>
+              <Words layer="primary">Project Size: {project.size}</Words>
+            </Col>
           </Frame>
         </Col>
       </Link>

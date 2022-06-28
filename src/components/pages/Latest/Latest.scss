@@ -1,9 +1,6 @@
 .Latest {
   
   padding: 30px;
-  position: fixed;
-  left: 10%;
-  right: 10%;
 
   .latestBox {
     height: 75vh;
@@ -19,34 +16,26 @@
 
   .project-title {
     display: block;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis; 
+
+    span {
+      display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis; 
+    }
   }
 
   @media only screen and (max-width: 700px) {
-
-    padding: 0;
-    position: initial;
-    left: 1%;
-    right: 1%;
-    font-size: 16px;
-    .latestBox {
-      height: 100%;
-    }
+    padding: 10px;
+    left: 10%;
+    right: 10%;
     .latestContents {
       border-radius: 0;
       padding: 0;
       margin: 10px 0 0 0;
     }
-    .h1 {
-      font-size: 20px;
-    }
-    .h2 {
-      font-size: 18px;
-    }
-    .h3 {
-      font-size: 18px;
+    .footerContents {
+      font-size: 12px; 
     }
   }
 
