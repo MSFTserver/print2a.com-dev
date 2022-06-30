@@ -9,19 +9,11 @@ class Browse extends React.Component {
     const { props } = this
     return (
       <div className="Browse">
-        <Frame
-          animate
-          level={3}
-          corners={6}
-          layer="primary"
-          show={props.anim.entered}
-        >
           <div className="browseBox">
             <div className="browseContents">
               <ChonkyBrowse {...props} />
             </div>
           </div>
-        </Frame>
       </div>
     )
   }

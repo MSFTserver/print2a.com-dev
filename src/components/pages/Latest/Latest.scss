@@ -1,9 +1,11 @@
 .Latest {
   
   padding: 30px;
+  width: 90vw;
+  margin: auto;
 
   .latestBox {
-    height: 75vh;
+    height: 78vh;
     overflow: hidden auto;
   }
 
@@ -27,8 +29,8 @@
 
   @media only screen and (max-width: 700px) {
     padding: 10px;
-    left: 10%;
-    right: 10%;
+    height: 68vh;
+
     .latestContents {
       border-radius: 0;
       padding: 0;

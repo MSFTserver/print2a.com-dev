@@ -1,12 +1,11 @@
 .Links {
   
   padding: 30px;
-  position: fixed;
-  left: 10%;
-  right: 10%;
+  width: 90vw;
+  margin: auto;
 
   .linksBox {
-    height: 75vh;
+    height: 78vh;
     overflow: hidden auto;
   }
 
@@ -27,27 +26,16 @@
 
   @media only screen and (max-width: 700px) {
 
-    padding: 0;
-    position: initial;
-    left: 1%;
-    right: 1%;
-    font-size: 16px;
-    .linksBox {
-      height: 100%;
-    }
-    .linksContents {
+    padding: 10px;
+    height: 68vh;
+
+    .linkContents {
       border-radius: 0;
       padding: 0;
       margin: 10px 0 0 0;
     }
-    .h1 {
-      font-size: 20px;
-    }
-    .h2 {
-      font-size: 18px;
-    }
-    .h3 {
-      font-size: 18px;
+    .footerContents {
+      font-size: 12px; 
     }
   }
 

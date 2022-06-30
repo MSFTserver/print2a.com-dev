@@ -199,7 +199,7 @@ const GetLatest = (props) => {
             show={props.anim.entered}
           >
             <Words>{key}:&nbsp;</Words>
-            <Words layer="alert">{value}</Words>
+            <Words layer="alert" style={{textShadow: '0 0 4px rgba(215, 24, 24, 0.65)'}}>{value}</Words>
           </Frame>
           <br />
         </Col>

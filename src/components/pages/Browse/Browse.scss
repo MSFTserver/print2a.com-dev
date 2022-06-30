@@ -1,43 +1,137 @@
 .Browse {
   
   padding: 30px;
-  position: fixed;
-  left: 10%;
-  right: 10%;
+  width: 80vw;
+  margin: auto;
 
   .browseBox {
-    height: 75vh;
+    height: 78vh;
     overflow: hidden auto;
   }
 
   .browseContents {
     border-radius: 2em;
     padding: 1em;
-    padding-left: 2em;
-    margin: 1em;
-    display: contents;
+    height: 100%;
+  }
+
+  .chonky-chonkyRoot{
+    background: (rgba(0,0,0,0));
+    border: none;
+    color: #2a9d00;
+  }
+
+  div[class^="folderBackSideTop-"]::after {
+    border-color: rgba(0,0,0,0);
+  }
+
+  div[class^="folderBackSideTop-"] {
+    background-color: #ff0000;
+    box-shadow: rgba(50, 50, 50, 0.4) 0px 0px 0px 999px inset;
+  }
+
+  div[class^="folderBackSideMid-"] {
+    background-color: #ff0000;
+    box-shadow: rgba(50, 50, 50, 0.4) 0px 0px 0px 999px inset;
+  }
+
+  div[class^="folderFrontSide-"] {
+    box-shadow: rgba(50, 50, 50, 0.15) 0px 0px 0px 999px inset;
+    background-color: #ff0000;
+
+    div[class^="selectionIndicator-"] {
+      background: rgba(0, 0, 0, 0.14) repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.14), rgba(0, 0, 0, 0.14) 10px, rgba(0, 0, 0, 0.25) 0px, rgba(0, 0, 0, 0.25) 20px) repeat scroll 0% 0%;
+    }
+  }
+
+  span[class^="gridFileEntryName-"] {
+    background: rgba(255,0,0,0.3);
+    font-size: initial;
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .MuiButton-label {
+    color: #2a9d00;
+  }
+
+  .MuiButtonBase-root {
+    background-color: rgba(255,0,0,0.3);
+    margin: 0 5px;
+  }
+
+  .MuiButton-root:hover {
+    background-color: rgba(150, 0, 0, 0.3);
+  }
+
+  // file path buttons 
+  .MuiBreadcrumbs-li {
+    div[class^="buttonContainer-"]{
+      button {
+        color: #2a9d00 !important; 
+      }
+    }
+  }
+
+   //file path divider text color
+  .MuiTypography-colorTextSecondary {
+    color: #2a9d00;
+  }
+
+  // search bar
+  .MuiInputBase-root {
+    color: #2a9d00;
+    
+    .MuiOutlinedInput-notchedOutline {
+      border-color: #2a9d00;
+    }
+
+  }
+  .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+    border-color: #195E00 ;
+  }
+
+  //empty file results
+  .chonky-fileListEmpty {
+    color: #2a9d00;
+
+    .chonky-fileListEmptyContent {
+      background-color: rgba(150, 0, 0, 0.6);
+      padding: 10px;
+      border-radius: 4px;
+    }
+
   }
 
   @media only screen and (max-width: 700px) {
 
-    padding: 0;
-    position: initial;
-    left: 1%;
-    right: 1%;
-    font-size: 16px;
-    .browseContents {
+    padding: 10px;
+    height: 68vh;
+
+    .homePageContents {
       border-radius: 0;
       padding: 0;
       margin: 10px 0 0 0;
     }
-    .h1 {
-      font-size: 20px;
+    .footerContents {
+      font-size: 12px; 
     }
-    .h2 {
-      font-size: 18px;
+  }
+
+  @media only screen and (max-height: 700px) {
+
+    padding: 10px;
+    height: 68vh;
+
+    .homePageContents {
+      border-radius: 0;
+      padding: 0;
+      margin: 10px 0 0 0;
     }
-    .h3 {
-      font-size: 18px;
+    .footerContents {
+      font-size: 12px; 
     }
   }
 

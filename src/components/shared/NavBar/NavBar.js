@@ -6,6 +6,20 @@ import { Link } from 'react-router-dom'
 
 class NavBar extends React.Component {
   render() {
+    const location = window.location.pathname
+    if (location === '/') {
+      this.props.state.showPage = 'home'
+    } else if (location === '/latest') {
+      this.props.state.showPage = 'latest'
+    } else if (location === '/links') {
+      this.props.state.showPage = 'links'
+    } else if (location === '/browse') {
+      this.props.state.showPage = 'browse'
+    } else if (location === '/modelViewer') {
+      this.props.state.showPage = 'modelViewer'
+    } else {
+      this.props.state.showPage = 'home'
+    }
     return (
       <div className="NavBar">
         <Header animate show={this.props.anim.entered}>
