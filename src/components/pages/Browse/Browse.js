@@ -9,11 +9,11 @@ class Browse extends React.Component {
     const { props } = this
     return (
       <div className="Browse">
-          <div className="browseBox">
-            <div className="browseContents">
-              <ChonkyBrowse {...props} />
-            </div>
+        <div className="browseBox">
+          <div className="browseContents">
+            <ChonkyBrowse {...props} />
           </div>
+        </div>
       </div>
     )
   }
