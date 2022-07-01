@@ -1,31 +1,38 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/prefer-stateless-function */
 import './NavBar.scss'
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, Header, Heading, Row, Words } from 'arwes'
 import { Link } from 'react-router-dom'
 
-function mobileMenuClicked() {
-  const isActive = document.getElementById('navLinks').style.display
-  console.log("test",isActive)
-  if (isActive === 'none') {
-    isActive.style.display = 'block'
-  } else if (isActive === 'block') {
-    isActive.style.display = 'none'
-  } else {
-    isActive.style.display = 'block'
-  }
-}
-
 class NavBar extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      menuActive: false,
+    }
+  }
 
-  componentDidMount() {
-    console.log("fired")
-    console.log(document.getElementById('mobileMenu').onclick)
-    document.getElementById('mobileMenu').addEventListener('click', () => mobileMenuClicked())
-    console.log(document.getElementById('mobileMenu').onclick)
+  setMenuActive = (isActive) => {
+    this.setState(() => ({
+      menuActive: isActive,
+    }))
   }
 
   render() {
+    console.log(this.state)
+    function mobileMenuClicked(state, setMenuActive) {
+      console.log(state)
+      if (!state.menuActive) {
+        document.getElementById('navLinks').style.display = 'block'
+        setMenuActive(true)
+      } else {
+        document.getElementById('navLinks').style.display = 'none'
+        setMenuActive(false)
+      }
+    }
+
     const location = window.location.pathname
     if (location === '/') {
       this.props.state.showPage = 'home'
@@ -47,7 +54,14 @@ class NavBar extends React.Component {
           <nav className="container-fluid navbar">
             <Heading>
               Print2a
-              <li id="mobileMenu" class="fa fa-bars" title="Click me!"/>
+              <div
+                id="mobileMenu"
+                onClick={() =>
+                  mobileMenuClicked(this.state, this.setMenuActive)
+                }
+              >
+                <li className="fa fa-bars" title="Click me!" />
+              </div>
             </Heading>
             <Row className="row wrap mr-1" id="navLinks" col s={12}>
               <Link to="/">
