@@ -13,8 +13,8 @@ class ImagePopup extends React.Component {
       color: theme.color.primary.base,
       border: 'none',
       display: 'block',
-      overflow: 'hidden auto',
       width: '95vw',
+      overflow: 'hidden auto'
     }
     const overlayStyle = {
       background: 'rgba(0,0,0,0.5)',
@@ -33,8 +33,7 @@ class ImagePopup extends React.Component {
           show
           theme={theme}
           style={{
-            backgroundColor: theme.background.primary.level0,
-            padding: '1vh',
+            backgroundColor: theme.background.primary.level0
           }}
         >
           <div className="imageButtons">
@@ -61,12 +60,16 @@ class ImagePopup extends React.Component {
               Download
             </Button>
           </div>
+          <div className="image" style={
+            {display: 'block', position: 'inherit', height: 'fit-content', maxHeight: '85vh', textAlign: 'center'}
+          }>
           <img
             alt="Popup"
-            style={{ height: '85vh', display: 'block', margin: '0 auto' }}
+            style={{ maxHeight: '100%', maxWidth: '100%' }}
             className="popupImage"
             src={`data:image/${popupFile.ext};base64,${popupFile.data}`}
           />
+          </div>
         </Frame>
       </Popup>
     )
