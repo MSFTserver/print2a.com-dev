@@ -24,7 +24,6 @@
     margin:0;
   }
   .navbar {
-      width: fit-content;
       height: auto;
       display: block;
   }
@@ -35,7 +34,7 @@
   }
   #mobileMenu {
     display: block;
-    position: fixed;
+    position: absolute;
     top: 5px;
     right: 5px;
   }

@@ -2,14 +2,16 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/prefer-stateless-function */
 import './NavBar.scss'
-import React, { useState } from 'react'
+import React from 'react'
 import { Button, Header, Heading, Row, Words } from 'arwes'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 class NavBar extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      ...this.props.state,
       menuActive: false,
     }
   }
@@ -20,46 +22,43 @@ class NavBar extends React.Component {
     }))
   }
 
-  render() {
-    console.log(this.state)
-    function mobileMenuClicked(state, setMenuActive) {
-      console.log(state)
-      if (!state.menuActive) {
-        document.getElementById('navLinks').style.display = 'block'
-        setMenuActive(true)
-      } else {
-        document.getElementById('navLinks').style.display = 'none'
-        setMenuActive(false)
-      }
+  mobileMenuClicked = () => {
+    if (!this.state.menuActive) {
+      document.getElementById('navLinks').style.display = 'block'
+      this.setMenuActive(true)
+    } else {
+      document.getElementById('navLinks').style.display = 'none'
+      this.setMenuActive(false)
     }
+  }
+
+  render() {
+    const { props, mobileMenuClicked } = this
+    const { state, setShowPage, sounds, anim } = props
+    let { showPage } = state
 
     const location = window.location.pathname
     if (location === '/') {
-      this.props.state.showPage = 'home'
+      showPage = 'home'
     } else if (location === '/latest') {
-      this.props.state.showPage = 'latest'
+      showPage = 'latest'
     } else if (location === '/links') {
-      this.props.state.showPage = 'links'
+      showPage = 'links'
     } else if (location === '/browse') {
-      this.props.state.showPage = 'browse'
+      showPage = 'browse'
     } else if (location === '/modelViewer') {
-      this.props.state.showPage = 'modelViewer'
+      showPage = 'modelViewer'
     } else {
-      this.props.state.showPage = 'home'
+      showPage = 'home'
     }
 
     return (
       <div className="NavBar">
-        <Header animate show={this.props.anim.entered}>
+        <Header animate show={anim.entered}>
           <nav className="container-fluid navbar">
             <Heading>
               Print2a
-              <div
-                id="mobileMenu"
-                onClick={() =>
-                  mobileMenuClicked(this.state, this.setMenuActive)
-                }
-              >
+              <div id="mobileMenu" onClick={mobileMenuClicked}>
                 <li className="fa fa-bars" title="Click me!" />
               </div>
             </Heading>
@@ -68,10 +67,10 @@ class NavBar extends React.Component {
                 <Button
                   className="navToButton"
                   animate
-                  disabled={this.props.state.showPage === 'home'}
-                  show={this.props.anim.entered}
-                  onClick={this.props.setShowPage}
-                  onMouseEnter={() => this.props.sounds.hover.play()}
+                  disabled={showPage === 'home'}
+                  show={anim.entered}
+                  onClick={setShowPage}
+                  onMouseEnter={() => sounds.hover.play()}
                 >
                   <Words className="navToText">Home</Words>
                 </Button>
@@ -80,10 +79,10 @@ class NavBar extends React.Component {
                 <Button
                   className="navToButton"
                   animate
-                  disabled={this.props.state.showPage === 'latest'}
-                  show={this.props.anim.entered}
-                  onClick={this.props.setShowPage}
-                  onMouseEnter={() => this.props.sounds.hover.play()}
+                  disabled={showPage === 'latest'}
+                  show={anim.entered}
+                  onClick={setShowPage}
+                  onMouseEnter={() => sounds.hover.play()}
                 >
                   <Words className="navToText">Latest</Words>
                 </Button>
@@ -92,10 +91,10 @@ class NavBar extends React.Component {
                 <Button
                   className="navToButton"
                   animate
-                  disabled={this.props.state.showPage === 'links'}
-                  show={this.props.anim.entered}
-                  onClick={this.props.setShowPage}
-                  onMouseEnter={() => this.props.sounds.hover.play()}
+                  disabled={showPage === 'links'}
+                  show={anim.entered}
+                  onClick={setShowPage}
+                  onMouseEnter={() => sounds.hover.play()}
                 >
                   <Words className="navToText">Links</Words>
                 </Button>
@@ -104,10 +103,10 @@ class NavBar extends React.Component {
                 <Button
                   className="navToButton"
                   animate
-                  disabled={this.props.state.showPage === 'browse'}
-                  show={this.props.anim.entered}
-                  onClick={this.props.setShowPage}
-                  onMouseEnter={() => this.props.sounds.hover.play()}
+                  disabled={showPage === 'browse'}
+                  show={anim.entered}
+                  onClick={setShowPage}
+                  onMouseEnter={() => sounds.hover.play()}
                 >
                   <Words className="navToText">Browse</Words>
                 </Button>
@@ -118,6 +117,13 @@ class NavBar extends React.Component {
       </div>
     )
   }
+}
+
+NavBar.propTypes = {
+  state: PropTypes.any.isRequired,
+  setShowPage: PropTypes.func.isRequired,
+  sounds: PropTypes.any.isRequired,
+  anim: PropTypes.any.isRequired,
 }
 
 export default NavBar

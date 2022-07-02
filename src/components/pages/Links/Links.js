@@ -94,11 +94,15 @@ class Links extends React.Component {
                   </Heading>
                   <Words>Red Hat based Linux systems:</Words>
                   <br />
-                  <Code language="bash">yum install rsync </Code>
+                  <Code language="bash" className="code">
+                    yum install rsync{' '}
+                  </Code>
                   <br />
                   <Words>Debian based Linux systems:</Words>
                   <br />
-                  <Code language="bash">apt-get install rsync </Code>
+                  <Code language="bash" className="code">
+                    apt-get install rsync{' '}
+                  </Code>
                 </div>
               </Frame>
               <br />
@@ -148,7 +152,7 @@ class Links extends React.Component {
                   <Heading node="h3">
                     <div className="h3">Copy Files:</div>
                   </Heading>
-                  <Code language="bash">
+                  <Code language="bash" className="code">
                     rsync -avzh rsync://print2a.com:1776/print2a
                     /Copy-To-This/Dir
                   </Code>

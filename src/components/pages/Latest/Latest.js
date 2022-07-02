@@ -17,7 +17,9 @@ class Latest extends React.Component {
         >
           <div className="latestBox">
             <Header style={{ paddingTop: 20 }} animate>
-              <Heading node="h1">Latest Projects</Heading>
+              <Heading node="h1">
+                <div className="h1">Latest Projects</div>
+              </Heading>
             </Header>
             <br />
             <GetLatest {...this.props} style={{ marginBottom: 20 }} />

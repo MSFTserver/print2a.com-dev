@@ -220,7 +220,7 @@ const GetLatest = (props) => {
           show={props.anim.entered}
         >
           <Heading style={{ paddingTop: 20 }} node="h2">
-            {stat.title}
+            <div className="h2">{stat.title}</div>
           </Heading>
           {details}
         </Frame>
@@ -255,7 +255,9 @@ const GetLatest = (props) => {
           >
             <Header>
               <Heading style={{ margin: 0 }} node="h3">
-                <Words className="project-title">{project.title}</Words>
+                <Words className="project-title">
+                  <div className="h3">{project.title}</div>
+                </Words>
               </Heading>
               <Words layer="primary">{project.created}</Words>
             </Header>
