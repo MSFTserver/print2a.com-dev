@@ -479,60 +479,63 @@ class ModelViewer extends React.Component {
             >
               <div id="calcContents">
                 <div className="calcButtons">
-                <Button
-                  buttonProps={buttonStyle}
-                  className="modelButtons"
-                  onClick={() => {
-                    const urlParams = new URLSearchParams(
-                      window.location.search,
-                    )
-                    let objParams = urlParams.get('fileLocation').split('/')
-                    objParams.pop()
-                    objParams = objParams.join('/')
-                    window.location.href = `/browse?folder=${objParams}`
-                  }}
-                >
-                  <i className="fa-solid fa-gun fa-flip-horizontal"></i>
-                  &nbsp;Back to Folder
-                </Button>
-                &nbsp;&nbsp;
-                <Button
-                  buttonProps={buttonStyle}
-                  className="modelButtons"
-                  onClick={() => {
-                    const urlParams = new URLSearchParams(
-                      window.location.search,
-                    )
-                    const filePath = urlParams.get('fileLocation')
+                  <Button
+                    buttonProps={buttonStyle}
+                    className="modelButtons"
+                    onClick={() => {
+                      const urlParams = new URLSearchParams(
+                        window.location.search,
+                      )
+                      let objParams = urlParams.get('fileLocation').split('/')
+                      objParams.pop()
+                      objParams = objParams.join('/')
+                      window.location.href = `/browse?folder=${objParams}`
+                    }}
+                  >
+                    <i className="fa-solid fa-gun fa-flip-horizontal"></i>
+                    &nbsp;Back to Folder
+                  </Button>
+                  &nbsp;&nbsp;
+                  <Button
+                    buttonProps={buttonStyle}
+                    className="modelButtons"
+                    onClick={() => {
+                      const urlParams = new URLSearchParams(
+                        window.location.search,
+                      )
+                      const filePath = urlParams.get('fileLocation')
 
-                    window.open(
-                      `https://print2a.com:5757/print2a/${filePath}`,
-                      '_blank',
-                    )
-                  }}
-                >
-                  <i className="fa-solid fa-circle-arrow-down"></i>
-                  &nbsp;Download
-                </Button>
-                &nbsp;&nbsp;
-                <Button
-                  buttonProps={{ style: { padding: '1vh' }, Id: 'calcButton' }}
-                  className="modelButtons"
-                  id="calcButton"
-                  onClick={() => {
-                    const calcContentsToggle =
-                      document.getElementById('calcContentsToggle')
-                    const isToggled = calcContentsToggle.style.display
-                    if (isToggled === 'none') {
-                      calcContentsToggle.style.display = 'inherit'
-                    } else {
-                      calcContentsToggle.style.display = 'none'
-                    }
-                  }}
-                >
-                  <i className="fa-solid fa-calculator"></i>
-                  &nbsp;Calc Menu
-                </Button>
+                      window.open(
+                        `https://print2a.com:5757/print2a/${filePath}`,
+                        '_blank',
+                      )
+                    }}
+                  >
+                    <i className="fa-solid fa-circle-arrow-down"></i>
+                    &nbsp;Download
+                  </Button>
+                  &nbsp;&nbsp;
+                  <Button
+                    buttonProps={{
+                      style: { padding: '1vh' },
+                      Id: 'calcButton',
+                    }}
+                    className="modelButtons"
+                    id="calcButton"
+                    onClick={() => {
+                      const calcContentsToggle =
+                        document.getElementById('calcContentsToggle')
+                      const isToggled = calcContentsToggle.style.display
+                      if (isToggled === 'none') {
+                        calcContentsToggle.style.display = 'inherit'
+                      } else {
+                        calcContentsToggle.style.display = 'none'
+                      }
+                    }}
+                  >
+                    <i className="fa-solid fa-calculator"></i>
+                    &nbsp;Calc Menu
+                  </Button>
                 </div>
                 <div style={{ display: 'none' }} id="calcContentsToggle">
                   <Line animate className="separator" />
