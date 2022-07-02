@@ -3,7 +3,7 @@
 }	
 .ModelViewer {
 
-position: fixed;
+	margin: auto;
 
 .content
 	{
@@ -27,16 +27,14 @@ position: fixed;
 	}
 #calcContainer
 	{
-		position: absolute;
 		text-align: left;
-		left: 5px;
-		top: 8px;
-		margin-left: 5px;
-		width: max-content;
+		height: 80vh;
+		width: fit-content;
+		margin: auto;
+		padding-top: 5px;
 	}
 #calcContents 
 	{
-		padding: 1em;
 		display: block;
 		position: inherit;
 	#densityValue, #costKilogramValue, #diameterValue, #printSpeedValue
@@ -46,6 +44,10 @@ position: fixed;
 		color: #ff0000;
 		}
 	}
+.calcButtons {
+	text-align: center;
+	margin: 5px;
+ }
 .leftitem
 	{
 	float:left;
@@ -53,12 +55,12 @@ position: fixed;
 	}
 .buttonChanger
 	{
-	font-size:13px;
-	font-family:Arial;
-	line-height:13px;
-	color:black;
-	text-align:left;
+	margin: 1px;
 	}
+.modelButtons
+	{
+		margin: 5px 0;
+	  }
 .separator
 	{
 	margin-top: 20px;
@@ -102,5 +104,24 @@ position: fixed;
 .lds-spinner div:nth-child(11){transform:rotate(300deg);animation-delay:-0.1s;}
 .lds-spinner div:nth-child(12){transform:rotate(330deg);animation-delay:0s;}
 @keyframes lds-spinner{0%{opacity:1;}100%{opacity:0;}}
+
+@media only screen and (max-width: 700px) {
+    font-size: 12px;
+	#calcContainer {
+			width: 80vw;
+	  }
+    .h4 {
+      font-size: 14px;
+    }
+    .h3 {
+      font-size: 16px;
+    }
+    .h2 {
+      font-size: 18px;
+    }
+    .h1 {
+      font-size: 20px;
+    }
+  }
 
 }

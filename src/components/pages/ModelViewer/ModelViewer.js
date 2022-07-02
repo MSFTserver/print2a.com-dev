@@ -472,15 +472,16 @@ class ModelViewer extends React.Component {
           <div id="calcContainer">
             <Frame
               animate
-              level={3}
+              level={0}
               corners={6}
               layer="primary"
               show={this.props.anim.entered}
             >
               <div id="calcContents">
+                <div className="calcButtons">
                 <Button
                   buttonProps={buttonStyle}
-                  className="buttonChanger"
+                  className="modelButtons"
                   onClick={() => {
                     const urlParams = new URLSearchParams(
                       window.location.search,
@@ -497,7 +498,7 @@ class ModelViewer extends React.Component {
                 &nbsp;&nbsp;
                 <Button
                   buttonProps={buttonStyle}
-                  className="buttonChanger"
+                  className="modelButtons"
                   onClick={() => {
                     const urlParams = new URLSearchParams(
                       window.location.search,
@@ -515,8 +516,9 @@ class ModelViewer extends React.Component {
                 </Button>
                 &nbsp;&nbsp;
                 <Button
-                  buttonProps={buttonStyle}
-                  className="buttonChanger"
+                  buttonProps={{ style: { padding: '1vh' }, Id: 'calcButton' }}
+                  className="modelButtons"
+                  id="calcButton"
                   onClick={() => {
                     const calcContentsToggle =
                       document.getElementById('calcContentsToggle')
@@ -531,6 +533,7 @@ class ModelViewer extends React.Component {
                   <i className="fa-solid fa-calculator"></i>
                   &nbsp;Calc Menu
                 </Button>
+                </div>
                 <div style={{ display: 'none' }} id="calcContentsToggle">
                   <Line animate className="separator" />
                   <label htmlFor="densityValue">
