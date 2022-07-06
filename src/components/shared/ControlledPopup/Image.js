@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Frame } from 'arwes'
 import Popup from 'reactjs-popup'
-import 'reactjs-popup/dist/index.css'
+import './ControlledPopup.scss'
 
 // eslint-disable-next-line react/prefer-stateless-function
 class ImagePopup extends React.Component {

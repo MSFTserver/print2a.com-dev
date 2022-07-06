@@ -1,6 +1,6 @@
 import React from 'react'
 import Popup from 'reactjs-popup'
-import 'reactjs-popup/dist/index.css'
+import './ControlledPopup.scss'
 import { Button, Frame } from 'arwes'
 import TextPopup from './Text'
 import ImagePopup from './Image'

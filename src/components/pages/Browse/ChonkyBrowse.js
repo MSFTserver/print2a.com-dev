@@ -48,7 +48,7 @@ function ChonkyBrowse(props) {
       fileName = folder.id.replace(/^.*[\\/]/, '')
       const fileExt = fileName.split('.').pop()
       let data
-      toast(`Opening file: \n ${fileName}`)
+      toast(`Opening file: \n ${fileName}`, { duration: 300000 })
       if (['md', 'txt', 'pdf', 'png', 'jpg'].includes(fileExt.toLowerCase())) {
         data = await fetch(
           `${print2aApiEndpoint}/GetFile?fileLocation=${folder.id}`,
