@@ -48,7 +48,13 @@ function ChonkyBrowse(props) {
       fileName = folder.id.replace(/^.*[\\/]/, '')
       const fileExt = fileName.split('.').pop()
       let data
-      toast(`Opening file: \n ${fileName}`, { duration: 300000 })
+      toast(`Opening file: \n ${fileName}`, {
+        ariaProps: {
+          role: 'status',
+          'aria-live': 'polite',
+          style: { display: 'block' },
+        },
+      })
       if (['md', 'txt', 'pdf', 'png', 'jpg'].includes(fileExt.toLowerCase())) {
         data = await fetch(
           `${print2aApiEndpoint}/GetFile?fileLocation=${folder.id}`,
@@ -71,10 +77,14 @@ function ChonkyBrowse(props) {
     ) {
       const folder = node.state.selectedFiles[0]
       toast(
-        `Getting Compressed Files/Folders: ${folder.id.replace(
-          /\//g,
-          '+',
-        )}\nPlease be patient and remain on the browse page`,
+        `Compressing Files...\nPlease be patient and remain on the browse page`,
+        {
+          ariaProps: {
+            role: 'status',
+            'aria-live': 'polite',
+            style: { display: 'block' },
+          },
+        },
       )
       setCurrentPath(`CREATEZIP/${print2aApiEndpoint}/${folder.id}`)
       setCurrentPath(
@@ -88,7 +98,13 @@ function ChonkyBrowse(props) {
       !node.state.selectedFiles[0].isDir
     ) {
       const folder = node.state.selectedFiles[0]
-      toast(`Sending file:\n ${folder.id.replace(/^.*[\\/]/, '')}`)
+      toast(`Sending file:\n ${folder.id.replace(/^.*[\\/]/, '')}`, {
+        ariaProps: {
+          role: 'status',
+          'aria-live': 'polite',
+          style: { display: 'block' },
+        },
+      })
       window.open(`${print2aApiEndpoint}/${folder.id}`, '_blank')
     }
   }
@@ -151,7 +167,13 @@ function ChonkyBrowse(props) {
             },
             (error) => {
               console.log(error)
-              toast(error.message)
+              toast(error.message, {
+                ariaProps: {
+                  role: 'status',
+                  'aria-live': 'polite',
+                  style: { display: 'block' },
+                },
+              })
             },
           )
       } else {
@@ -163,18 +185,36 @@ function ChonkyBrowse(props) {
             (response) => {
               if (response.status === 'COMPLETE') {
                 toast(
-                  `Completed\nif a window does not automatically open you can find the file available for 4 hours here:\n\n ${response.link}`,
-                  { duration: 300000 },
+                  `${response.status}\nif a window does not automatically open you can find the file available for 4 hours clicking this message`,
+                  {
+                    ariaProps: {
+                      role: 'status',
+                      'aria-live': 'polite',
+                      style: { display: 'block' },
+                    },
+                  },
                 )
                 window.open(`${response.link}`, '_blank')
               } else {
-                toast(`Error Compressing Files/Folders see console`)
+                toast(`Error Compressing Files/Folders see console`, {
+                  ariaProps: {
+                    role: 'status',
+                    'aria-live': 'polite',
+                    style: { display: 'block' },
+                  },
+                })
                 console.error(response.msg)
               }
             },
             (error) => {
               console.log(error)
-              toast(error.message)
+              toast(error.message, {
+                ariaProps: {
+                  role: 'status',
+                  'aria-live': 'polite',
+                  style: { display: 'block' },
+                },
+              })
             },
           )
       }

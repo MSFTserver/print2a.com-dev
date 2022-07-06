@@ -100,19 +100,16 @@ class App extends React.Component {
             {(anim) => (
               <div className="App">
                 <Toaster
-                  containerStyle={{
-                    top: '10vh',
-                  }}
                   position="top-right"
                   reverseOrder
                   toastOptions={{
                     className: 'toast-note',
                     duration: 10000,
                     style: {
-                      maxWidth: 'none',
                       borderRadius: '10px',
                       background: 'rgba(216, 42, 42, 0.8)',
                       color: '#000',
+                      display: 'block',
                     },
                   }}
                 />

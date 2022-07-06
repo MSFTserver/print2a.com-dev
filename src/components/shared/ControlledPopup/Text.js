@@ -24,9 +24,13 @@ class TextPopup extends React.Component {
     let fileToRender
     let pdfButtons
     if (popupFile.ext === 'md') {
-      fileToRender = <Markdown value={popupFile.data} gfm />
+      fileToRender = (
+        <div className="textContainer">
+          <Markdown value={popupFile.data} gfm />
+        </div>
+      )
     } else if (popupFile.ext === 'txt') {
-      fileToRender = <div className="test">{popupFile.data}</div>
+      fileToRender = <div className="textContainer">{popupFile.data}</div>
     } else {
       fileToRender = (
         <Document file={`data:application/pdf;base64,${popupFile.data}`}>
