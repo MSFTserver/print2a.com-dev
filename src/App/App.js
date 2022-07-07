@@ -99,20 +99,7 @@ class App extends React.Component {
           >
             {(anim) => (
               <div className="App">
-                <Toaster
-                  position="top-right"
-                  reverseOrder
-                  toastOptions={{
-                    className: 'toast-note',
-                    duration: 10000,
-                    style: {
-                      borderRadius: '10px',
-                      background: 'rgba(216, 42, 42, 0.8)',
-                      color: '#000',
-                      display: 'block',
-                    },
-                  }}
-                />
+                <Toaster position="bottom-right" reverseOrder gutter={16} />
                 <Router>
                   <MyNav
                     anim={anim}

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 
 import toast from 'react-hot-toast'
 
+import { Words, Button, Frame } from 'arwes'
+
 // Import Chonky
 import {
   setChonkyDefaults,
@@ -13,6 +15,7 @@ import {
   ChonkyActions,
 } from 'chonky'
 import { ChonkyIconFA } from 'chonky-icon-fontawesome'
+import { NoToneMapping } from 'three'
 import ControlledPopup from '../../shared/ControlledPopup/ControlledPopup'
 setChonkyDefaults({ iconComponent: ChonkyIconFA })
 
@@ -76,16 +79,6 @@ function ChonkyBrowse(props) {
       node.state.selectedFiles[0].isDir
     ) {
       const folder = node.state.selectedFiles[0]
-      toast(
-        `Compressing Files...\nPlease be patient and remain on the browse page`,
-        {
-          ariaProps: {
-            role: 'status',
-            'aria-live': 'polite',
-            style: { display: 'block' },
-          },
-        },
-      )
       setCurrentPath(`CREATEZIP/${print2aApiEndpoint}/${folder.id}`)
       setCurrentPath(
         `${print2aApiEndpoint}/${folder.id
@@ -98,14 +91,118 @@ function ChonkyBrowse(props) {
       !node.state.selectedFiles[0].isDir
     ) {
       const folder = node.state.selectedFiles[0]
-      toast(`Sending file:\n ${folder.id.replace(/^.*[\\/]/, '')}`, {
-        ariaProps: {
-          role: 'status',
-          'aria-live': 'polite',
-          style: { display: 'block' },
+      const sendToastId = toast.custom(
+        (t) => (
+          <Frame
+            animate
+            level={3}
+            corners={3}
+            layer="alert"
+            style={{ background: '#000' }}
+            show
+          >
+            <div className="frame-content">
+              <Words>Sending File... </Words>
+              <br />
+              <Words>this could take a while</Words>
+              <div id="dl-buttons" style={{}}>
+                <Button
+                  layer="primary"
+                  onClick={() => {
+                    toast.dismiss(t.id)
+                  }}
+                >
+                  Dismiss
+                </Button>
+              </div>
+            </div>
+          </Frame>
+        ),
+        {
+          duration: Infinity,
+          ariaProps: {
+            role: 'status',
+            'aria-live': 'polite',
+          },
         },
-      })
+      )
       window.open(`${print2aApiEndpoint}/${folder.id}`, '_blank')
+      toast.custom(
+        (t) => {
+          const divID = `download-link-${t.id}`
+          const clipboardID = `clipboard-${t.id}`
+          return (
+            <Frame
+              animate
+              level={3}
+              corners={3}
+              layer="alert"
+              show
+              style={{ background: '#000' }}
+            >
+              <div className="frame-content">
+                <Words>
+                  if a tab does not open,
+                  <br /> the file is available below
+                </Words>
+                <div id={divID} style={{ display: 'none' }}>
+                  {`${print2aApiEndpoint}/${folder.id}`}
+                </div>
+                <input
+                  id={clipboardID}
+                  style={{
+                    position: 'fixed',
+                    bottom: '0',
+                    right: '0',
+                    pointerEvents: 'none',
+                    opacity: '0',
+                    transform: 'scale(0)',
+                  }}
+                />
+                <div id="dl-buttons">
+                  <Button
+                    layer="primary"
+                    onClick={() =>
+                      window.open(
+                        `${print2aApiEndpoint}/${folder.id}`,
+                        '_blank',
+                      )
+                    }
+                  >
+                    Download
+                  </Button>
+                  &nbsp;&nbsp;
+                  <Button
+                    layer="primary"
+                    onClick={() => {
+                      const downloadLink = document.getElementById(divID)
+                      const clipboard = document.getElementById(clipboardID)
+                      clipboard.value = downloadLink.innerHTML
+                      clipboard.select()
+                      document.execCommand('copy')
+                    }}
+                  >
+                    Copy URL
+                  </Button>
+                  &nbsp;&nbsp;
+                  <Button
+                    layer="primary"
+                    onClick={() => {
+                      toast.dismiss(t.id)
+                    }}
+                  >
+                    Dismiss
+                  </Button>
+                </div>
+              </div>
+            </Frame>
+          )
+        },
+        {
+          id: sendToastId,
+          duration: 60000,
+        },
+      )
     }
   }
 
@@ -171,12 +268,46 @@ function ChonkyBrowse(props) {
                 ariaProps: {
                   role: 'status',
                   'aria-live': 'polite',
-                  style: { display: 'block' },
                 },
               })
             },
           )
       } else {
+        const compressToastId = toast.custom(
+          (t) => (
+            <Frame
+              animate
+              level={3}
+              corners={3}
+              layer="alert"
+              style={{ background: '#000' }}
+              show
+            >
+              <div className="frame-content">
+                <Words>Compressing Files... </Words>
+                <br />
+                <Words>this could take a while</Words>
+                <div id="dl-buttons" style={{}}>
+                  <Button
+                    layer="primary"
+                    onClick={() => {
+                      toast.dismiss(t.id)
+                    }}
+                  >
+                    Dismiss
+                  </Button>
+                </div>
+              </div>
+            </Frame>
+          ),
+          {
+            duration: Infinity,
+            ariaProps: {
+              role: 'status',
+              'aria-live': 'polite',
+            },
+          },
+        )
         fetch(currentPath.replace('CREATEZIP/', ''), {
           headers: { request: true },
         })
@@ -184,36 +315,87 @@ function ChonkyBrowse(props) {
           .then(
             (response) => {
               if (response.status === 'COMPLETE') {
-                toast(
-                  `${response.status}\nif a window does not automatically open you can find the file available for 4 hours clicking this message`,
+                toast.custom(
+                  (t) => (
+                    <Frame
+                      animate
+                      level={3}
+                      corners={3}
+                      layer="alert"
+                      show
+                      style={{ background: '#000' }}
+                    >
+                      <div className="frame-content">
+                        <Words>
+                          if a tab does not open,
+                          <br /> the file is available for 4 hours below
+                        </Words>
+                        <div id="download-link" style={{ display: 'none' }}>
+                          {response.link}
+                        </div>
+                        <input
+                          id="clipboard"
+                          style={{
+                            position: 'fixed',
+                            bottom: '0',
+                            right: '0',
+                            pointerEvents: 'none',
+                            opacity: '0',
+                            transform: 'scale(0)',
+                          }}
+                        />
+                        <div id="dl-buttons" style={{}}>
+                          <Button
+                            layer="primary"
+                            onClick={() => window.open(response.link, '_blank')}
+                          >
+                            Download
+                          </Button>
+                          &nbsp;&nbsp;
+                          <Button
+                            layer="primary"
+                            onClick={() => {
+                              const downloadLink =
+                                document.getElementById('download-link')
+                              const clipboard =
+                                document.getElementById('clipboard')
+                              clipboard.value = downloadLink.innerHTML
+                              clipboard.select()
+                              document.execCommand('copy')
+                            }}
+                          >
+                            Copy URL
+                          </Button>
+                          &nbsp;&nbsp;
+                          <Button
+                            layer="primary"
+                            onClick={() => {
+                              toast.dismiss(t.id)
+                            }}
+                          >
+                            Dismiss
+                          </Button>
+                        </div>
+                      </div>
+                    </Frame>
+                  ),
                   {
-                    ariaProps: {
-                      role: 'status',
-                      'aria-live': 'polite',
-                      style: { display: 'block' },
-                    },
+                    id: compressToastId,
+                    duration: 60000,
                   },
                 )
-                window.open(`${response.link}`, '_blank')
+                window.open(response.link, '_blank')
               } else {
-                toast(`Error Compressing Files/Folders see console`, {
-                  ariaProps: {
-                    role: 'status',
-                    'aria-live': 'polite',
-                    style: { display: 'block' },
-                  },
+                toast.error(`Error Compressing Files/Folders see console`, {
+                  id: compressToastId,
                 })
                 console.error(response.msg)
               }
             },
             (error) => {
               console.log(error)
-              toast(error.message, {
-                ariaProps: {
-                  role: 'status',
-                  'aria-live': 'polite',
-                  style: { display: 'block' },
-                },
+              toast.error(error.message, {
+                id: compressToastId,
               })
             },
           )
