@@ -121,7 +121,7 @@ class App extends React.Component {
                         element={<Links {...props} anim={anim} />}
                       />
                       <Route
-                        path="/browse"
+                        path="/browse/*"
                         element={
                           <Browse
                             {...props}

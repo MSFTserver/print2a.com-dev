@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams, useLocation } from 'react-router-dom'
 
 import toast from 'react-hot-toast'
 
@@ -26,9 +26,11 @@ const print2aApiEndpoint = `${print2aApiHost}:${print2aApiPort}`
 
 // Render the file browser
 function ChonkyBrowse(props) {
-  const [searchParams] = useSearchParams()
-  const [prevSearchParams] = useState(searchParams)
-  const history = useNavigate()
+  const navigate = useNavigate()
+  const location = useLocation()
+  const [prevURL, setPrevURL] = useState([
+    location.pathname.replace('/browse/', ''),
+  ])
 
   let newPath = `${print2aApiEndpoint}/print2a`
   let fileName = null
@@ -38,10 +40,12 @@ function ChonkyBrowse(props) {
     isDir: true,
   }
 
-  if (searchParams.get('folder')) {
-    console.log('settingpath...')
-    newPath = `${print2aApiEndpoint}/print2a/${searchParams.get('folder')}`
+  let path = location.pathname
+  if (path.split('/browse/').length > 1) {
+    path = path.replace('/browse/', '')
+    newPath = `${print2aApiEndpoint}/print2a/${path}`
   }
+
   const [currentNodes, setCurrentNodes] = useState([])
   const [currentPath, setCurrentPath] = useState(newPath)
   const [folderChain, setFolderChain] = useState([newChain])
@@ -242,6 +246,24 @@ function ChonkyBrowse(props) {
   useEffect(() => {
     const getData = async () => {
       if (!currentPath.startsWith('CREATEZIP')) {
+        const navigateURL = currentPath
+          .replace(print2aApiEndpoint, '')
+          .replace('/print2a/', '')
+          .replace('/print2a', '')
+        const newURL = [...prevURL]
+        newPath = navigateURL
+        if (newPath === '') {
+          newPath = '/browse'
+        }
+        if (navigateURL) {
+          if (newURL.pop() !== navigateURL) {
+            setPrevURL([...prevURL, newPath])
+            navigate(`/browse/${navigateURL}`)
+          }
+        } else if (newURL.pop() !== '/browse') {
+          setPrevURL([...prevURL, newPath])
+          navigate('/browse')
+        }
         fetch(currentPath)
           .then((response) => response.json())
           .then(
@@ -270,12 +292,6 @@ function ChonkyBrowse(props) {
                   isDir: true,
                 })
               }
-              const historyURL = currentPath
-                .replace(print2aApiEndpoint, '')
-                .replace('/print2a/', '')
-                .replace('/print2a', '')
-
-              history(`/browse?folder=${historyURL}`)
               setFolderChain(
                 folderChainArray.filter(
                   (v, i, a) => a.findIndex((t) => t.id === v.id) === i,
@@ -422,7 +438,7 @@ function ChonkyBrowse(props) {
       }
     }
     getData()
-  }, [currentPath])
+  }, [currentPath, prevURL, window.onpopstate])
   // Chonky file browser docs: https://timbokz.github.io/Chonky/
   return (
     <FileBrowser
