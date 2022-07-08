@@ -67,7 +67,7 @@ class App extends React.Component {
   }
 
   setPopupFile = (fileName, filePath, fileExt, fileData) => {
-    this.setState((prev) => ({
+    this.setState(() => ({
       popupFile: {
         path: filePath,
         name: fileName,
@@ -99,7 +99,7 @@ class App extends React.Component {
           >
             {(anim) => (
               <div className="App">
-                <Toaster position="bottom-right" reverseOrder gutter={16} />
+                <Toaster position="bottom-right" gutter={16} />
                 <Router>
                   <MyNav
                     anim={anim}
@@ -110,22 +110,18 @@ class App extends React.Component {
                     <Routes>
                       <Route
                         path="/"
-                        exact
                         element={<HomePage {...props} anim={anim} />}
                       />
                       <Route
                         path="/latest"
-                        exact
                         element={<Latest {...props} anim={anim} />}
                       />
                       <Route
                         path="/links"
-                        exact
                         element={<Links {...props} anim={anim} />}
                       />
                       <Route
                         path="/browse"
-                        exact
                         element={
                           <Browse
                             {...props}
@@ -141,7 +137,6 @@ class App extends React.Component {
                       />
                       <Route
                         path="/modelViewer"
-                        exact
                         element={<ModelViewer {...props} anim={anim} />}
                       />
                     </Routes>
