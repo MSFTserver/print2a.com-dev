@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 
 import toast from 'react-hot-toast'
 
@@ -25,6 +26,7 @@ const print2aApiEndpoint = `${print2aApiHost}:${print2aApiPort}`
 
 // Render the file browser
 function ChonkyBrowse(props) {
+  const [searchParams, setSearchParams] = useSearchParams()
   let newPath = `${print2aApiEndpoint}/print2a`
   let fileName = null
   const newChain = {
@@ -34,13 +36,14 @@ function ChonkyBrowse(props) {
   }
   if (typeof window !== 'undefined') {
     if (window.location.search) {
-      const urlParams = new URLSearchParams(window.location.search)
+      const urlParams = searchParams
       newPath = `${print2aApiEndpoint}/print2a/${urlParams.get('folder')}`
     }
   }
   const [currentNodes, setCurrentNodes] = useState([])
   const [currentPath, setCurrentPath] = useState(newPath)
   const [folderChain, setFolderChain] = useState([newChain])
+
   // Define a handler for "open file" action
   const handleFileOpen = async (node) => {
     if (node.id === 'open_files' && node.payload.files[0].isDir) {
@@ -51,13 +54,30 @@ function ChonkyBrowse(props) {
       fileName = folder.id.replace(/^.*[\\/]/, '')
       const fileExt = fileName.split('.').pop()
       let data
-      toast(`Opening file: \n ${fileName}`, {
-        ariaProps: {
-          role: 'status',
-          'aria-live': 'polite',
-          style: { display: 'block' },
+      toast.custom(
+        (t) => (
+          <Frame
+            animate
+            level={3}
+            corners={3}
+            layer="alert"
+            show
+            style={{ background: '#000' }}
+          >
+            <div className="frame-content">
+              <Words> Opening File... </Words>
+              <br />
+              <Words> {fileName} </Words>
+            </div>
+          </Frame>
+        ),
+        {
+          ariaProps: {
+            role: 'status',
+            'aria-live': 'polite',
+          },
         },
-      })
+      )
       if (['md', 'txt', 'pdf', 'png', 'jpg'].includes(fileExt.toLowerCase())) {
         data = await fetch(
           `${print2aApiEndpoint}/GetFile?fileLocation=${folder.id}`,
@@ -248,14 +268,16 @@ function ChonkyBrowse(props) {
                   isDir: true,
                 })
               }
-              window.history.pushState(
-                'NewPage',
-                'Title',
-                `/browse?folder=${currentPath
-                  .replace(print2aApiEndpoint, '')
-                  .replace('/print2a/', '')
-                  .replace('/print2a', '')}`,
-              )
+              const urlParams = {
+                folder: decodeURI(
+                  currentPath
+                    .replace(print2aApiEndpoint, '')
+                    .replace('/print2a/', '')
+                    .replace('/print2a', ''),
+                ),
+              }
+              console.log(urlParams)
+              setSearchParams(urlParams)
               setFolderChain(
                 folderChainArray.filter(
                   (v, i, a) => a.findIndex((t) => t.id === v.id) === i,
