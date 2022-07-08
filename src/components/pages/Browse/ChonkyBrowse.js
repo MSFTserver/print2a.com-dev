@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
 import toast from 'react-hot-toast'
 
@@ -26,7 +26,10 @@ const print2aApiEndpoint = `${print2aApiHost}:${print2aApiPort}`
 
 // Render the file browser
 function ChonkyBrowse(props) {
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams] = useSearchParams()
+  const [prevSearchParams] = useState(searchParams)
+  const history = useNavigate()
+
   let newPath = `${print2aApiEndpoint}/print2a`
   let fileName = null
   const newChain = {
@@ -34,11 +37,10 @@ function ChonkyBrowse(props) {
     name: 'print2a',
     isDir: true,
   }
-  if (typeof window !== 'undefined') {
-    if (window.location.search) {
-      const urlParams = searchParams
-      newPath = `${print2aApiEndpoint}/print2a/${urlParams.get('folder')}`
-    }
+
+  if (searchParams.get('folder')) {
+    console.log('settingpath...')
+    newPath = `${print2aApiEndpoint}/print2a/${searchParams.get('folder')}`
   }
   const [currentNodes, setCurrentNodes] = useState([])
   const [currentPath, setCurrentPath] = useState(newPath)
@@ -268,16 +270,12 @@ function ChonkyBrowse(props) {
                   isDir: true,
                 })
               }
-              const urlParams = {
-                folder: decodeURI(
-                  currentPath
-                    .replace(print2aApiEndpoint, '')
-                    .replace('/print2a/', '')
-                    .replace('/print2a', ''),
-                ),
-              }
-              console.log(urlParams)
-              setSearchParams(urlParams)
+              const historyURL = currentPath
+                .replace(print2aApiEndpoint, '')
+                .replace('/print2a/', '')
+                .replace('/print2a', '')
+
+              history(`/browse?folder=${historyURL}`)
               setFolderChain(
                 folderChainArray.filter(
                   (v, i, a) => a.findIndex((t) => t.id === v.id) === i,
