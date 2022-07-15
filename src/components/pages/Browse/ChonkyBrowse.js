@@ -246,10 +246,20 @@ function ChonkyBrowse(props) {
   useEffect(() => {
     const getData = async () => {
       if (!currentPath.startsWith('CREATEZIP')) {
-        const navigateURL = currentPath
+        let navigateURL = currentPath
           .replace(print2aApiEndpoint, '')
           .replace('/print2a/', '')
           .replace('/print2a', '')
+        const checkLocation = location.pathname.replace('/browse/', '')
+        console.log("navigateURL",navigateURL)
+        const lastPrevURL = prevURL.at(-1)
+        console.log("checkLocation",checkLocation)
+        console.log("lastPrevURL",lastPrevURL)
+        if (checkLocation !== lastPrevURL) {
+          console.log("fired!")
+          navigateURL = checkLocation
+        }
+        console.log("navigateURL2",navigateURL)
         const newURL = [...prevURL]
         newPath = navigateURL
         if (newPath === '') {
@@ -438,7 +448,7 @@ function ChonkyBrowse(props) {
       }
     }
     getData()
-  }, [currentPath, prevURL, window.onpopstate])
+  }, [currentPath, location])
   // Chonky file browser docs: https://timbokz.github.io/Chonky/
   return (
     <FileBrowser
