@@ -278,6 +278,9 @@ const GetLatest = (props) => {
             <Col s={12} m={12} l={12} xl={12}>
               <Words layer="primary">Project Size: {project.size}</Words>
             </Col>
+            <Col s={12} m={12} l={12} xl={12}>
+              <Words layer="primary">Tags: {project.tags}</Words>
+            </Col>
           </Frame>
         </Col>
       </Link>
