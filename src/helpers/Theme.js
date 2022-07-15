@@ -1,4 +1,5 @@
 import { darken, lighten } from 'polished'
+const colors = require('./colors.json')
 
 const accent = 0.2
 const generateColor = (color) => ({
@@ -31,25 +32,25 @@ export default {
 
   // Every color has a `base`, `light` and `dark` variation.
   color: {
-    primary: generateColor('#2a9d00'),
-    secondary: generateColor('#29a86d'),
-    header: generateColor('#18d736'),
-    control: generateColor('#18d736'),
-    success: generateColor('#00ff00'),
-    alert: generateColor('#ff0000'),
-    disabled: generateColor('#808080'),
+    primary: generateColor(colors.grassGreen),
+    secondary: generateColor(colors.jade),
+    header: generateColor(colors.malachite),
+    control: generateColor(colors.malachite),
+    success: generateColor(colors.lime),
+    alert: generateColor(colors.red),
+    disabled: generateColor(colors.granite),
   },
 
   // Every background color has level colors from 0 until 3
   // as `level0`, `level1`...
   background: {
-    primary: generateBackground('#000000'),
-    secondary: generateBackground('#180f02'),
-    header: generateBackground('#032026'),
-    control: generateBackground('#000000'),
-    success: generateBackground('#081402'),
-    alert: generateBackground('#140202'),
-    disabled: generateBackground('#7f0000'),
+    primary: generateBackground(colors.black),
+    secondary: generateBackground(colors.acadia),
+    header: generateBackground(colors.blackPearl),
+    control: generateBackground(colors.black),
+    success: generateBackground(colors.blackForest),
+    alert: generateBackground(colors.diesel),
+    disabled: generateBackground(colors.darkRed),
   },
 
   typography: {
@@ -71,15 +72,15 @@ export default {
     fontSize: 14,
     fontFamily:
       'Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace',
-    background: '#000000',
-    color: '#3aafff',
-    comment: '#4a5f78',
-    keyword: '#bB7Dbf',
-    operator: '#0075e8',
-    function: '#8b6ccf',
-    variable: '#3aafff',
-    selector: '#3aafff',
-    value: '#05d48e',
+    background: colors.black,
+    color: colors.butterflyBlue,
+    comment: colors.blueBayoux,
+    keyword: colors.wisteria,
+    operator: colors.brandeisBlue,
+    function: colors.mediumPurple,
+    variable: colors.butterflyBlue,
+    selector: colors.butterflyBlue,
+    value: colors.caribbeanGreen,
   },
 
   // Number of columns inside a row
