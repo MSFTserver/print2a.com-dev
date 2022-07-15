@@ -251,15 +251,10 @@ function ChonkyBrowse(props) {
           .replace('/print2a/', '')
           .replace('/print2a', '')
         const checkLocation = location.pathname.replace('/browse/', '')
-        console.log('navigateURL', navigateURL)
         const lastPrevURL = prevURL.at(-1)
-        console.log('checkLocation', checkLocation)
-        console.log('lastPrevURL', lastPrevURL)
         if (checkLocation !== lastPrevURL) {
-          console.log('fired!')
           navigateURL = checkLocation
         }
-        console.log('navigateURL2', navigateURL)
         const newURL = [...prevURL]
         newPath = navigateURL
         if (newPath === '') {
@@ -268,11 +263,20 @@ function ChonkyBrowse(props) {
         if (navigateURL) {
           if (newURL.pop() !== navigateURL) {
             setPrevURL([...prevURL, newPath])
-            navigate(`/browse/${navigateURL}`)
+            if (navigateURL === '/browse') {
+              setCurrentPath(`${print2aApiEndpoint}/print2a`)
+              location.pathname = `/browse`
+              window.history.pushState(``, ``, `/browse`)
+            } else {
+              setCurrentPath(`${print2aApiEndpoint}/print2a/${navigateURL}`)
+              location.pathname = `/browse/${navigateURL}`
+              window.history.pushState(``, ``, `/browse/${navigateURL}`)
+            }
           }
         } else if (newURL.pop() !== '/browse') {
           setPrevURL([...prevURL, newPath])
-          navigate('/browse')
+          location.pathname = `/browse`
+          window.history.pushState(``, ``, `/browse`)
         }
         fetch(currentPath)
           .then((response) => response.json())
