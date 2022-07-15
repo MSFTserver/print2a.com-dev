@@ -251,15 +251,15 @@ function ChonkyBrowse(props) {
           .replace('/print2a/', '')
           .replace('/print2a', '')
         const checkLocation = location.pathname.replace('/browse/', '')
-        console.log("navigateURL",navigateURL)
+        console.log('navigateURL', navigateURL)
         const lastPrevURL = prevURL.at(-1)
-        console.log("checkLocation",checkLocation)
-        console.log("lastPrevURL",lastPrevURL)
+        console.log('checkLocation', checkLocation)
+        console.log('lastPrevURL', lastPrevURL)
         if (checkLocation !== lastPrevURL) {
-          console.log("fired!")
+          console.log('fired!')
           navigateURL = checkLocation
         }
-        console.log("navigateURL2",navigateURL)
+        console.log('navigateURL2', navigateURL)
         const newURL = [...prevURL]
         newPath = navigateURL
         if (newPath === '') {
