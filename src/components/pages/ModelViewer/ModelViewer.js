@@ -1,7 +1,7 @@
 /* eslint-disable react/prefer-stateless-function */
 import './ModelViewer.scss'
 import React from 'react'
-import { Frame, Heading, Line, Words, Button } from 'arwes'
+import { Frame, Line, Words, Button } from 'arwes'
 import * as THREE from 'three'
 import {
   OrbitControls,

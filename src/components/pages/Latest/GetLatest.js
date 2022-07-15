@@ -169,7 +169,6 @@ const print2aApiPort = '5757'
 const print2aApiEndpoint = `${print2aApiHost}:${print2aApiPort}`
 
 const GetLatest = (props) => {
-  // console.log(props)
   const [latest, setLatest] = useState([
     { title: 'LOADING...', tags: 'LOADING...', link: '#' },
   ])
@@ -243,7 +242,6 @@ const GetLatest = (props) => {
   ))
   if (/* apiResponse.length */ testData.length) {
     latestProjects = testData.map((project) => (
-      // console.log(project)
       <Link href={project.link}>
         <Col s={12} m={12} l={6} xl={4} style={props.style}>
           <Frame
@@ -285,8 +283,6 @@ const GetLatest = (props) => {
       </Link>
     ))
   }
-
-  // console.log(latestProjects)
 
   return [...stats, ...latestProjects]
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useSearchParams, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
 import toast from 'react-hot-toast'
 
@@ -25,7 +25,6 @@ const print2aApiEndpoint = `${print2aApiHost}:${print2aApiPort}`
 
 // Render the file browser
 function ChonkyBrowse(props) {
-  const navigate = useNavigate()
   const location = useLocation()
   const [prevURL, setPrevURL] = useState([
     location.pathname.replace('/browse/', ''),
