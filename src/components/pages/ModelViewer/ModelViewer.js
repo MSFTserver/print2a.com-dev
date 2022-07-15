@@ -7,7 +7,6 @@ import {
   OrbitControls,
   STLExporter,
   STLLoader,
-  TDSLoader,
   OBJLoader,
   signedVolumeOfTriangle,
 } from './three'
@@ -234,9 +233,6 @@ function init(fileExt, fileData) {
   if (fileExt === 'stl') {
     // SHOWING THE LOADING SPLASH
     document.getElementById('loading').style.display = 'block'
-  } else if (fileExt === '3ds') {
-    // SHOWING THE LOADING SPLASH
-    document.getElementById('loading').style.display = 'block'
   } else if (fileExt === 'obj') {
     // SHOWING THE LOADING SPLASH
     document.getElementById('loading').style.display = 'block'
@@ -251,10 +247,6 @@ function init(fileExt, fileData) {
   if (fileExt === 'obj') {
     const object = new OBJLoader().parse(fileData)
     sceneConverter.add(object)
-    fileData = exporter.parse(sceneConverter)
-  } else if (fileExt === '3ds') {
-    const object3ds = new TDSLoader().parse(fileData)
-    sceneConverter.add(object3ds)
     fileData = exporter.parse(sceneConverter)
   }
 
@@ -416,7 +408,12 @@ class ModelViewer extends React.Component {
     const data = await fetch(
       `${print2aApiEndpoint}/GetFile?fileLocation=print2a/${filePath}`,
     )
-    const fileData = await data.arrayBuffer()
+    let fileData = null
+    if (fileExt.toLowerCase() === 'obj') {
+      fileData = await data.text()
+    } else {
+      fileData = await data.arrayBuffer()
+    }
 
     const densityInput = document.getElementById('densityValue')
     densityInput.addEventListener('input', () =>

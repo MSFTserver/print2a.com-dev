@@ -16,7 +16,6 @@ import {
   ChonkyActions,
 } from 'chonky'
 import { ChonkyIconFA } from 'chonky-icon-fontawesome'
-import { NoToneMapping } from 'three'
 import ControlledPopup from '../../shared/ControlledPopup/ControlledPopup'
 setChonkyDefaults({ iconComponent: ChonkyIconFA })
 
@@ -91,7 +90,7 @@ function ChonkyBrowse(props) {
         data = await data.text()
         props.setPopupFile(fileName, folder.id, fileExt, data)
         props.setShowPopup()
-      } else if (['stl'].includes(fileExt.toLowerCase())) {
+      } else if (['stl', 'obj'].includes(fileExt.toLowerCase())) {
         window.location.href = `/modelViewer?fileLocation=${folder.id.replace(
           'print2a/',
           '',
