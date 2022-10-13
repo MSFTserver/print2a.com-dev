@@ -1,4 +1,4 @@
-<img width="550" src="https://raw.githubusercontent.com/MSFTserver/print2a.com/main/src/images/NotFound.gif" alt="print2a">
+<img width="550" src="./src/images/NotFound.gif" alt="print2a">
 
 # [print2a.com](https://print2a.com)
 
@@ -10,13 +10,10 @@
 
 <a href="https://www.npmjs.com/package/react"><img src="https://img.shields.io/github/package-json/dependency-version/MSFTserver/print2a.com-dev/react?color=blue" alt="Package - react"></a><a href="https://www.npmjs.com/package/sass"><img src="https://img.shields.io/github/package-json/dependency-version/MSFTserver/print2a.com-dev/sass?color=blue" alt="Package - sass"></a><a href="https://www.npmjs.com/package/prettier"><img src="https://img.shields.io/github/package-json/dependency-version/MSFTserver/print2a.com-dev/dev/prettier?color=blue" alt="Package - prettier"></a><a href="https://www.npmjs.com/package/eslint"><img src="https://img.shields.io/github/package-json/dependency-version/MSFTserver/print2a.com-dev/dev/eslint?color=blue" alt="Package - eslint"></a><a href="https://www.npmjs.com/package/arwes"><img src="https://img.shields.io/github/package-json/dependency-version/MSFTserver/print2a.com-dev/arwes?color=blue" alt="Package - arwes"></a>
 
-# Dev site for the print2a repo
-
-## Contributing
-
-this repo is for development of the main [print2a.com](https://github.com/MSFTserver/print2a.com) site
+Main site for the print2a repo
 
 Setup:
+node v16
 
 1. `npm i`
 2. `npm run getdep`
